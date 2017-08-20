@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="./css/favicon-96x96.png">
+<link rel="shortcut icon" href="./image/favicon-96x96.png">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>영웅펜션 - 실시간 최저가 예약 사이트</title>
@@ -22,19 +22,18 @@
 
 <h1 style="align:center">
 <!-- 스파이더맨 이미지 -->
-<img src="https://img.1300k.com/goods/215023/81/215023817209_4.jpg" width="100" height="100">
+<img src="./image/spiderman.jpg" width="100" height="100">
 HERO Pension
 <!-- 아이언맨 이미지 -->
-<img src="https://img.1300k.com/goods/215023/79/215023797435_5.jpg" width="100" height="100">
+<img src="./image/ironman.jpg" width="100" height="100">
 
 </h1>
-<!-- Font awesone 아이콘 example -->
+<!-- Font Awesone(fa) 아이콘 example -->
 <h2>
 	<i class="fa fa-cog fa-spin"></i>
 	영업준비중
 	<i class="fa fa-spinner fa-pulse"></i>
 </h2>
-<!-- 기본 검색 창 -->
 <div style="width:700px; margin: 0 auto">
 	<div class="form-group">
 	<div class="input-group input-group-lg">
@@ -45,6 +44,8 @@ HERO Pension
 	</div>
 	</div>
 </div>
+<script>
 
+</script>
 </body>
 </html>
