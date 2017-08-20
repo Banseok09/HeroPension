@@ -19,7 +19,7 @@
 .gnb_menu ul {margin-left: 40px; list-style:none;}
 .gnb_menu li {float:left; padding:17px 85px 17px 0; position:relative;}
 .gnb_menu li.last {padding-right: 0px;}
-.gnb_menu li a {display:inline; font-size:16px; font-weight:bold; line-height:16px; color:#ffffff;}
+.gnb_menu li a {display:inline; font-size:16px; font-weight:bold; line-height:16px; color:white;}
 .gnb_menu li a:hover {text-decoration: none;}
 </style>
 
@@ -57,13 +57,13 @@ HERO Pension
 <div class="gnb_menu">
 	<div class="inner">
 		<ul>
-			<li class="top_gnb_menu first" index="0"><a href="/local/tobe_sub_main.asp?sidoCode=01&amp;sido_kind=1&amp;gugun_code=02" class="menu1">지역별펜션</a></li>
-			<li class="top_gnb_menu" index="1"><a href="/search/reserve_search.asp" class="menu2">빈방검색</a></li>
-			<li class="top_gnb_menu" index="2"><a href="/spa/spa_main.asp" class="menu3">스파펜션</a></li>
-     	<li class="top_gnb_menu" index="11"><a href="/poolvilla/poolvilla_main.asp" class="menu11">풀빌라펜션</a></li>
-			<li class="top_gnb_menu" index="4"><a href="/resort/tobe_mt.asp" class="menu5">워크샵/MT펜션</a></li>
-     	<li class="top_gnb_menu" index="3"><a href="/pool/pool_main.asp" class="menu4">수영장펜션</a></li>
-			<li class="top_gnb_menu last" index="8"><a href="/event/event_detail_list.asp" class="menu7">기획전</a></li>
+			<li class="top_gnb_menu first"><a href="/local/tobe_sub_main.asp?sidoCode=01&amp;sido_kind=1&amp;gugun_code=02" class="menu1">지역별펜션</a></li>
+			<li class="top_gnb_menu"><a href="/search/reserve_search.asp" class="menu2">빈방검색</a></li>
+			<li class="top_gnb_menu"><a href="/spa/spa_main.asp" class="menu3">스파펜션</a></li>
+     		<li class="top_gnb_menu"><a href="/poolvilla/poolvilla_main.asp" class="menu11">풀빌라펜션</a></li>
+			<li class="top_gnb_menu"><a href="/resort/tobe_mt.asp" class="menu5">워크샵/MT펜션</a></li>
+     		<li class="top_gnb_menu"><a href="/pool/pool_main.asp" class="menu4">수영장펜션</a></li>
+			<li class="top_gnb_menu last"><a href="/event/event_detail_list.asp" class="menu7">기획전</a></li>
 		</ul>
 	</div>
 </div>

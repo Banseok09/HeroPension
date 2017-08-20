@@ -5,7 +5,11 @@ var name_checked = false;
 var email_checked = false;
 var phone_checked = false;
 function allChecked(){
-	return id_checked && pw_checked && pw_same_checked && email_checked && phone_checked;
+	return id_checked
+	    && pw_checked
+	    && pw_same_checked
+	    && email_checked
+	    && phone_checked;
 }
 
 $(document).ready(function(){
@@ -45,11 +49,12 @@ $(document).ready(function(){
 		}
 		
 		// 영대소문자, 숫자, 특수문자 포함 8~15자리
-		var regExp  = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+		/*var regExp  = /^.*(?=^[a-zA-Z\d!@#$%^&+=]{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;*/
+		var regExp  = /^.*(?=^.{8,15}$)(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[~`!@#$%^&\*\+=\-\|\\_\{\}\[\]:;'"<>\,\.\?\/]).*$/;
 		if(regExp.test(pwText)){
 			$("#_pwd").css("border","2px solid #4CAF50");
 			$("#pw_check_text").css("font-size","10px").css("color","#4CAF50");
-			$("#pw_check_text").text("좋은 비밀번호입니다.!");
+			$("#pw_check_text").text("좋은 비밀번호입니다!");
 			pw_checked = true;
 		}else{
 			$("#_pwd").css("border","2px solid red");
@@ -119,7 +124,7 @@ $(document).ready(function(){
 			return;
 		}
 		
-		var regExp  = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		var regExp  = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]){2,20}@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]){2,20}\.[a-zA-Z]{2,3}$/;
 		if(regExp.test(emailText)){
 			$("#_email").css("border","2px solid #4CAF50");
 			$("#email_check_text").css("font-size","10px").css("color","#4CAF50");
@@ -142,7 +147,7 @@ $(document).ready(function(){
 			return;
 		}
 		
-		var regExp = /^0\d{2}-\d{3,4}-\d{4}$/;
+		var regExp = /^0[0-9]{2}-[0-9]{3,4}-[0-9]{4}$/;
 		if(regExp.test(phoneText)){
 			$("#_phone").css("border","2px solid #4CAF50");
 			$("#phone_check_text").css("font-size","10px").css("color","#4CAF50");

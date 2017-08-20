@@ -24,7 +24,7 @@ case "loginAf" :
 	<%
 	break; 
 
-case "regi" :  response.sendRedirect("./regi.jsp"); break; 
+case "regi" : response.sendRedirect("./regi.jsp"); break; 
 	
 case "regiAf" : 
 	id = request.getParameter("id");
