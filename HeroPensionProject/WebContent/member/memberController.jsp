@@ -19,17 +19,17 @@ case "login" : response.sendRedirect("./login.jsp"); break;
 	
 case "loginAf" : 
 	String id = request.getParameter("id");
-	String pw = request.getParameter("pwd");
+	String pw = request.getParameter("pwd");	
+	System.out.println("id"+id);
+	System.out.println("pw"+pw);
 	
-			
-//	IMemberDao dao = MemberDao.getInstance();
-
-	MemberDTO dto = dao.login(id, pw);
-	
-//	System.out.println("dto.id : " + dto.getId());
-	
+	MemberDTO dto = dao.login(id, pw);		
+	System.out.println("dtoid"+dto.getId());
+	System.out.println("dtopw"+dto.getPw());
 	
 	if(id.equals(dto.getId()) && pw.equals(dto.getPw())){
+		session.setAttribute("login", dto);
+		session.setMaxInactiveInterval(30 * 60);
 		%>
 		<script type="text/javascript">
 		alert("로그인");
@@ -66,13 +66,13 @@ case "regiAf" :
 		<script type="text/javascript">
 		alert("회원가입");
 		location.href = "../index.jsp";
-	</script>
+		</script>
 		<%
 	}else{
 		%>
 		<script type="text/javascript">
 		alert("회원가입 실패");
-		location.href = "../index.jsp";
+		location.href = "./regi.jsp";
 		</script>
 		<%
 	}
@@ -80,7 +80,40 @@ case "regiAf" :
 	
 	<%		
 	break; 
+	
+case "update":
+	response.sendRedirect("./memberDetail.jsp");	
+	break;
+
+case "updateAf":
+	id = request.getParameter("id");
+	pw = request.getParameter("pwd");
+ 	name = request.getParameter("name");
+	email = request.getParameter("email");
+	phone = request.getParameter("phone");
+	
+	isS = dao.updateMem(id, pw, name, phone, email);
+	if(isS){
+		%>
+		<script type="text/javascript">
+		alert("수정 성공");
+		location.href = "../index.jsp";
+		</script>
+		<%
+	}else{
+		%>
+		<script type="text/javascript">
+		alert("수정 실패");
+		location.href = "./memberDetail.jsp";
+		</script>
+		<%
+	}
+	
+	break;
+	
 }
+
+
 %>
 </body>
 </html>
