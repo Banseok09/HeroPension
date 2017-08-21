@@ -16,6 +16,7 @@
 </head>
 <body style="margin: 0 auto; text-align:center " >
 <div style="text-align:right">
+<a href="./member/reviewBBSController.jsp?command=write">회원가입</a>
 <a href="./member/memberController.jsp?command=login">로그인</a>
 <a href="./member/memberController.jsp?command=regi">회원가입</a>
 </div>
