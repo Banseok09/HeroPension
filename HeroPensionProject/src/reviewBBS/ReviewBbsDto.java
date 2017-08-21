@@ -15,8 +15,9 @@ public class ReviewBbsDto implements Serializable{
 	private int room_seq;
 	private String wdate;
 	private int del;
+	private int readcount;
 	public ReviewBbsDto(int review_seq, String id, String title, String content, int rate, int ref, int step,
-			int depth, int room_seq, String wdate, int del) {
+			int depth, int room_seq, String wdate, int del, int readcount) {
 		super();
 		this.review_seq = review_seq;
 		this.id = id;
@@ -28,7 +29,8 @@ public class ReviewBbsDto implements Serializable{
 		this.depth = depth;
 		this.room_seq = room_seq;
 		this.wdate = wdate;
-		this.setDel(del);
+		this.del = del;
+		this.readcount = readcount;
 	}
 	public int getReview_seq() {  return review_seq; }
 	public String getId() {  return id;  }
@@ -41,7 +43,7 @@ public class ReviewBbsDto implements Serializable{
 	public int getRoom_seq() {  return room_seq;  }
 	public String getWdate() {  return wdate;  }
 	public int getDel() {  return del;  }
-	
+	public int getReadcount() {  return readcount;  }
 	public void setReview_seq(int review_seq) {  this.review_seq = review_seq;  }
 	public void setId(String id) {  this.id = id;  }
 	public void setTitle(String title) {  this.title = title;  }
@@ -53,11 +55,14 @@ public class ReviewBbsDto implements Serializable{
 	public void setRoom_seq(int room_seq) {  this.room_seq = room_seq;  }
 	public void setWdate(String wdate) {  this.wdate = wdate; }
 	public void setDel(int del) {  this.del = del; }
+	public void setReadcount(int readcount) { this.readcount = readcount; }
 	@Override public String toString() {
-		return "ReviewBbsDto [pension_seq=" + review_seq + ", id=" + id + ", title=" + title + ", content=" + content
+		return "ReviewBbsDto [review_seq=" + review_seq + ", id=" + id + ", title=" + title + ", content=" + content
 				+ ", rate=" + rate + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", room_seq=" + room_seq
-				+ ", wdate=" + wdate +", del=" + del + "]";
+				+ ", wdate=" + wdate +", del=" + del + ", readcount=" + readcount + "]";
 	}
+	
+	
 	
 	
 	

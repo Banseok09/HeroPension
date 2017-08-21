@@ -68,9 +68,9 @@ public class ReviewBbsDao implements IReviewBbsDao{
 
 		try {
 			conn = DBConn.getConnection();
-			log("1/6 S getBbsPagingList");
+			log("1/6 S getReviewBbsList");
 			
-			String totalSql = " SELECT COUNT(SEQ) FROM BBS ";			
+			String totalSql = " SELECT COUNT(REVIEW_SEQ) FROM REVIEWBBS ";			
 			psmt = conn.prepareStatement(totalSql);
 			rs = psmt.executeQuery();
 			
@@ -80,13 +80,14 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			totalCount = rs.getInt(1);
 			paging.setTotalCount(totalCount);
 			paging = PagingUtil.setPagingInfo(paging, 10, 10);
-			log("1.5/6 S getBbsPagingList");
+			
+			log("1.5/6 S getReviewBbsList");
 			
 			psmt.close();
 			rs.close();
 			
 			String sql = " SELECT * FROM "
-					   + " (SELECT * FROM (SELECT * FROM BBS ORDER BY REF ASC, STEP DESC) "
+					   + " (SELECT * FROM (SELECT * FROM REVIEWBBS ORDER BY REF ASC, STEP DESC) "
 					   + " WHERE ROWNUM <= " + paging.getStartNum() + " ORDER BY REF DESC, STEP ASC) "
 					   + " WHERE ROWNUM <= " + paging.getCountPerPage();
 			
@@ -94,14 +95,14 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			System.out.println("paging.getCountPerPage():" + paging.getCountPerPage());
 			
 			psmt = conn.prepareStatement(sql);
-			log("2/6 S getBbsPagingList");
+			log("2/6 S getReviewBbsList");
 			
 			rs = psmt.executeQuery();
-			log("3/6 S getBbsPagingList");
+			log("3/6 S getReviewBbsList");
 
 			while(rs.next()) {
 				ReviewBbsDto dto = new ReviewBbsDto(
-						rs.getInt("PENSION_SEQ"),
+						rs.getInt("REVIEW_SEQ"),
 						rs.getString("ID"),
 						rs.getString("TITLE"),
 						rs.getString("CONTENT"),
@@ -111,16 +112,17 @@ public class ReviewBbsDao implements IReviewBbsDao{
 						rs.getInt("DEPTH"),
 						rs.getInt("ROOM_SEQ"),  
 						rs.getString("WDATE"),
-						rs.getInt("DEL")
+						rs.getInt("DEL"),
+						rs.getInt("READCOUNT")
 						);
 				list.add(dto);
 			}
-			log("4/6 S getBbsPagingList");
+			log("4/6 S getReviewBbsList");
 		}catch (SQLException e) {
-			log("SQL F getBbsPagingList", e);
+			log("SQL F getReviewBbsList", e);
 		}finally {
 			DBConn.close(rs, psmt, conn);
-			log("5/6 S getBbsPagingList");
+			log("5/6 S getReviewBbsList");
 		}
 		return list;
 	}

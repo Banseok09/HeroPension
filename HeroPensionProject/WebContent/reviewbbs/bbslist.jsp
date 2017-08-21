@@ -74,6 +74,7 @@ if(search_key==null) search_key="";
 
 IReviewBbsDao dao = ReviewBbsDao.getInstance();
 List<ReviewBbsDto> bbslist = dao.getReviewBbsList(paging);
+System.out.println("bbslist" + bbslist.toString());
 
 %>
 <div class="center">
