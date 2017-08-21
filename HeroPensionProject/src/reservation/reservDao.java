@@ -6,7 +6,7 @@ public class reservDao implements IreservDao {
 	
 	public reservDao() {}
 	
-	// singleton »ı¼º
+	// singleton ìƒì„±
 	public static reservDao getInstance() {
 		if (resDao == null) {
 			resDao = new reservDao();
