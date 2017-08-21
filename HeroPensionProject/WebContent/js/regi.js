@@ -167,6 +167,7 @@ $(document).ready(function(){
 		}else{
 			$("#_regiForm").attr("action", "./memberController.jsp").submit();
 		}
+		
 	});
 });
 
