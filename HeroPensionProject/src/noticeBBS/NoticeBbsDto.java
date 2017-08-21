@@ -49,7 +49,7 @@ public class NoticeBbsDto implements Serializable{
 	public void setDel(int del) {  this.del = del; }
 	public void setReadcount(int readcount) { this.readcount = readcount; }
 	@Override public String toString() {
-		return "ReviewBbsDto [review_seq=" + review_seq + ", id=" + id + ", title=" + title + ", content=" + content
+		return "ReviewBbsDto [notice_seq=" + notice_seq + ", id=" + id + ", title=" + title + ", content=" + content
 				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth
 				+ ", wdate=" + wdate +", del=" + del + ", readcount=" + readcount + "]";
 	}
