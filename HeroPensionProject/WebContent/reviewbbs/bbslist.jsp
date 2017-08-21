@@ -73,19 +73,19 @@ if(search_type==null) search_type="";
 if(search_key==null) search_key=""; 
 
 IReviewBbsDao dao = ReviewBbsDao.getInstance();
-List<ReviewBbsDto> bbslist = dao.getReviewBbsList(paging);
+List<ReviewBbsDto> bbslist = dao.getBbsList(paging);
 System.out.println("bbslist" + bbslist.toString());
 
 %>
 <div class="center">
-<h1>게시판</h1>
+<h1>리뷰 게시판</h1>
 <a href="bbswrite.jsp">글쓰기</a>
 
 <table class="table table-striped table-bordered">
-<col width="50"><col width="400"><col width="50"><col width="50">
+<col width="50"><col width="400"><col width="50"><col width="50"><col width="50">
 <thead>
 <tr>
-<th>번호</th><th class="title">제목</th><th>작성자</th><th>조회수</th>
+<th>번호</th><th class="title">제목</th><th>작성자</th><th>평점</th><th>조회수</th>
 </tr>
 </thead>
 
@@ -98,12 +98,13 @@ System.out.println("bbslist" + bbslist.toString());
 		<td class="title">
 			<%=arrow(bbs.getDepth())%>
 			<% if(bbs.getDel()==0){ %>
-			<a href="bbsdetail.jsp?seq=<%=bbs.getReview_seq()%>"><%=bbs.getTitle() %> </a>
+			<a href="reviewBbsController.jsp?command=detail&seq=<%=bbs.getReview_seq()%>"><%=bbs.getTitle() %> </a>
 			<%} else { %>
 				삭제된 글입니다.
 			<%} %>
 		</td>
 		<td><%=bbs.getId() %></td>
+		<td><%=bbs.getRate() %></td>
 		<td><%=bbs.getReadcount() %></td>
 	</tr>
 <%} %>
@@ -122,6 +123,7 @@ System.out.println("bbslist" + bbslist.toString());
 </tbody>
 
 </table>
+
 
 <form action="bbslist.jsp" style="text-align: center" class="form-group">
 		<div class="form-inline">

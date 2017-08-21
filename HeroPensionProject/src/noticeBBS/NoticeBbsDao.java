@@ -1,4 +1,4 @@
-package reviewBBS;
+package noticeBBS;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,13 +9,13 @@ import java.util.List;
 
 import jdbc.DBConn;
 
-public class ReviewBbsDao implements IReviewBbsDao{
+public class NoticeBbsDao implements INoticeBbsDao{
 	private boolean isS = true;
-	private static ReviewBbsDao reviewDao = null;
-	private ReviewBbsDao() {DBConn.initConnect();}
-	public static ReviewBbsDao getInstance() {
-		if(reviewDao==null) reviewDao = new ReviewBbsDao();
-		return reviewDao;
+	private static NoticeBbsDao noticeDao = null;
+	private NoticeBbsDao() {DBConn.initConnect();}
+	public static NoticeBbsDao getInstance() {
+		if(noticeDao==null) noticeDao = new NoticeBbsDao();
+		return noticeDao;
 	}
 	public void log(String msg) {
 		if(isS) System.out.println(getClass() + ": " + msg);
@@ -23,18 +23,18 @@ public class ReviewBbsDao implements IReviewBbsDao{
 	public void log(String msg, Exception e) {
 		if(isS) System.out.println(e + ": " +getClass() + ": " + msg);
 	}
-	@Override public List<ReviewBbsDto> getBbsList(PagingBean paging) {
+	@Override public List<NoticeBbsDto> getBbsList(PagingBean paging) {
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 
-		List<ReviewBbsDto> list = new ArrayList<ReviewBbsDto>();
+		List<NoticeBbsDto> list = new ArrayList<NoticeBbsDto>();
 
 		try {
 			conn = DBConn.getConnection();
-			log("1/6 S getReviewBbsList");
+			log("1/6 S getBbsList");
 			
-			String totalSql = " SELECT COUNT(REVIEW_SEQ) FROM REVIEWBBS ";			
+			String totalSql = " SELECT COUNT(NOTICE_SEQ) FROM NOTICEBBS ";			
 			psmt = conn.prepareStatement(totalSql);
 			rs = psmt.executeQuery();
 			
@@ -45,7 +45,7 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			paging.setTotalCount(totalCount);
 			paging = PagingUtil.setPagingInfo(paging, 10, 10);
 			
-			log("1.5/6 S getReviewBbsList");
+			log("1.5/6 S getBbsList");
 			
 			psmt.close();
 			rs.close();
@@ -59,44 +59,42 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			System.out.println("paging.getCountPerPage():" + paging.getCountPerPage());
 			
 			psmt = conn.prepareStatement(sql);
-			log("2/6 S getReviewBbsList");
+			log("2/6 S getBbsList");
 			
 			rs = psmt.executeQuery();
-			log("3/6 S getReviewBbsList");
+			log("3/6 S getBbsList");
 
 			while(rs.next()) {
-				ReviewBbsDto dto = new ReviewBbsDto(
-						rs.getInt("REVIEW_SEQ"),
+				NoticeBbsDto dto = new NoticeBbsDto(
+						rs.getInt("NOTICE_SEQ"),
 						rs.getString("ID"),
 						rs.getString("TITLE"),
 						rs.getString("CONTENT"),
-						rs.getInt("RATE"),
 						rs.getInt("REF"),
 						rs.getInt("STEP"),
-						rs.getInt("DEPTH"),
-						rs.getInt("ROOM_SEQ"),  
+						rs.getInt("DEPTH"), 
 						rs.getString("WDATE"),
 						rs.getInt("DEL"),
 						rs.getInt("READCOUNT")
 						);
 				list.add(dto);
 			}
-			log("4/6 S getReviewBbsList");
+			log("4/6 S getBbsList");
 		}catch (SQLException e) {
-			log("SQL F getReviewBbsList", e);
+			log("SQL F getBbsList", e);
 		}finally {
 			DBConn.close(rs, psmt, conn);
-			log("5/6 S getReviewBbsList");
+			log("5/6 S getBbsList");
 		}
 		return list;
 	}
-	@Override public boolean writeBbs(ReviewBbsDto bbs) {
-		String sql = " INSERT INTO REVIEWBBS "
-				+ " (REVIEWBBS_SEQ, ID, TITLE, CONTENT, RATE, "
-				+ " REF, STEP, DEPTH, ROOM_SEQ, WDATE)"
-				+ " VALUES(REVIEWBBS_SEQ.NEXTVAL, ?, ?, ?, ? "	   // SEQ, ID, TITLE, CONTENT, RATE
+	@Override public boolean writeBbs(NoticeBbsDto bbs) {
+		String sql = " INSERT INTO NOTICEBBS "
+				+ " (NOTICE_SEQ, ID, TITLE, CONTENT, "
+				+ " REF, STEP, DEPTH, WDATE)"
+				+ " VALUES(REVIEW_SEQ.NEXTVAL, ?, ?, ?, "	   // SEQ, ID, TITLE, CONTENT,
 				+ " (SELECT NVL(MAX(REF), 0)+1 FROM BBS), 0, 0, "  // REF, STEP, DEPTH,
-				+ " ?, SYSDATE) ";	//  ROOM_SEQ, WDATE
+				+ " SYSDATE, 0, 0) ";	// WDATE, DEL, READCOUNT
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -111,8 +109,6 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			psmt.setString(1, bbs.getId());
 			psmt.setString(2, bbs.getTitle());
 			psmt.setString(3, bbs.getContent());
-			psmt.setInt(4, bbs.getRate());
-			psmt.setInt(5, bbs.getRoom_seq());
 			log("2/5 S psmt set writeBbs");
 
 			count = psmt.executeUpdate();
@@ -126,19 +122,19 @@ public class ReviewBbsDao implements IReviewBbsDao{
 		}
 		return count>0?true:false;
 	}
-	@Override public ReviewBbsDto getBbs(int seq) {
+	@Override public NoticeBbsDto getBbs(int seq) {
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
 
-		ReviewBbsDto dto = null;
+		NoticeBbsDto dto = null;
 
 		try {
 			conn = DBConn.getConnection();
 			log("1/6 S getBbs");
 			
-			String sql = " SELECT * FROM REVIEWBBS "
-					   + " WHERE REVIEW_SEQ=? ";
+			String sql = " SELECT * FROM NOTICEBBS "
+					   + " WHERE NOTICE_SEQ=? ";
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, seq);
@@ -148,16 +144,14 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			log("3/6 S getBbs");
 
 			if(rs.next()) {
-				dto = new ReviewBbsDto(
-						rs.getInt("REVIEW_SEQ"),
+				dto = new NoticeBbsDto(
+						rs.getInt("NOTICE_SEQ"),
 						rs.getString("ID"),
 						rs.getString("TITLE"),
 						rs.getString("CONTENT"),
-						rs.getInt("RATE"),
 						rs.getInt("REF"),
 						rs.getInt("STEP"),
-						rs.getInt("DEPTH"),
-						rs.getInt("ROOM_SEQ"),  
+						rs.getInt("DEPTH"), 
 						rs.getString("WDATE"),
 						rs.getInt("DEL"),
 						rs.getInt("READCOUNT")
@@ -197,9 +191,9 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			log("6/6 S addReadcount");
 		}
 	}
-	@Override public boolean updateBbs(ReviewBbsDto bbs, int seq) {
+	@Override public boolean updateBbs(NoticeBbsDto bbs, int seq) {
 		String sql = " UPDATE BBS SET TITLE=?, CONTENT=?"
-				   + " WHERE REVIEW_SEQ=? ";
+				   + " WHERE NOTICE_SEQ=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

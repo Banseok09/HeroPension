@@ -1,4 +1,7 @@
 
+<%@page import="reviewBBS.ReviewBbsDto"%>
+<%@page import="reviewBBS.ReviewBbsDao"%>
+<%@page import="reviewBBS.IReviewBbsDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,8 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>bbsDetail</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 .center{
 	margin: auto;
@@ -26,8 +29,8 @@ table{
 String seqStr = request.getParameter("seq");
 int seq = Integer.parseInt(seqStr.trim());
 
-iBbsDao dao = BbsDao.getInstance();
-BbsDto bbs = dao.getBbs(seq);
+IReviewBbsDao dao = ReviewBbsDao.getInstance();
+ReviewBbsDto bbs = dao.getBbs(seq);
 if(bbs==null){
 	%>
 	<script type="text/javascript">
@@ -50,7 +53,7 @@ dao.addReadcount(seq); // 조회수 증가
 %>
 
 <div class="center">
-<h1>글 세부 정보</h1>
+<h1>리뷰</h1>
 
 <table class="table table-bordered">
 <col width="100"> <col width="500">
@@ -67,16 +70,17 @@ dao.addReadcount(seq); // 조회수 증가
 	<td>조회수</td><td><%=bbs.getReadcount() %></td>
 </tr>
 <tr>
-	<td>정보</td><td><%=bbs.getRef()%>-<%=bbs.getStep()%>-<%=bbs.getDepth()%></td>
+	<td>평점</td><td><%=bbs.getRate()%></td>
+</tr>
+<tr>
+	<td>조회수</td><td><%=bbs.getReadcount() %></td>
 </tr>
 <tr>
 	<td>내용</td>
 	<td><textarea rows="10" cols="50" name="content" 
 	readonly="readonly" class="form-control" style="background: white"><%=bbs.getContent() %></textarea></td>
 </tr>
-<tr>
-	<td>작성일</td><td><%=bbs.getWdate() %></td>
-</tr>
+
 
 </table>
 
@@ -87,7 +91,7 @@ dao.addReadcount(seq); // 조회수 증가
 
 <br>
 <a href="bbslist.jsp" class="btn btn-link">글목록</a>
-<%
+<%-- <%
 Object ologin = (Object)session.getAttribute("login");
 MemberDto ldto = (MemberDto)ologin;
 if(bbs.getId().equals(ldto.getId())){
@@ -96,7 +100,7 @@ if(bbs.getId().equals(ldto.getId())){
 	<a class="btn btn-link" href="bbsdelete.jsp?seq=<%=bbs.getSeq() %>">글삭제</a>
 	<%
 }
-%>
+%> --%>
 
 
 </div>
