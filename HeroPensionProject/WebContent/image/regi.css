@@ -2,7 +2,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 body {
 	/* background-color: #f4cccc;핑크 */
- 	/* background-image :url("https://alice9999999.files.wordpress.com/2013/11/ed8cacec8598-10001_1.jpg"); */
  	background-image :url("../image/loginBackground.jpg");
  	background-size:  cover;
  	font-family: "Roboto", sans-serif;
@@ -35,7 +34,7 @@ input[type=checkbox] + label{
     vertical-align: middle;
 }
 
-input[type=checkbox]+ label:before {     
+input[type=checkbox] + label:before {     
 	font-family: FontAwesome;
     content: "\f1db";  
   

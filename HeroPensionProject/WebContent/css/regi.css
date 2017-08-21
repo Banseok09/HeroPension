@@ -2,8 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 body {
 	/* background-color: #f4cccc;핑크 */
- 	/* background-image :url("https://alice9999999.files.wordpress.com/2013/11/ed8cacec8598-10001_1.jpg"); */
- 	background-image :url("../image/loginBackground.jpg");
+ 	background-image :url("https://alice9999999.files.wordpress.com/2013/11/ed8cacec8598-10001_1.jpg");
  	background-size:  cover;
  	font-family: "Roboto", sans-serif;
 }
@@ -19,46 +18,46 @@ body {
 }
 input{
 	margin-top: 10px;
-	border-radius: 0px !important; 
+	border-radius: 0px !important;
 }
 
-input[type=checkbox] {  
-    display: none;  
+input[type=checkbox] {
+    display: none;
 }
 
 input[type=checkbox] + label{
-    display: inline-block;  
-    position: relative;  
+    display: inline-block;
+    position: relative;
     padding-top: 10px;
-    color: gray; 
+    color: gray;
     font-size: 15px;
     vertical-align: middle;
 }
 
-input[type=checkbox]+ label:before {     
+input[type=checkbox]+ label:before {
 	font-family: FontAwesome;
-    content: "\f1db";  
-  
-    width: 20px;  
-    height: 25px;  
-  
-    font-size: 20px; 
-    font-weight:800; 
-    color: gray;  
-    text-align: center;  
-    line-height: 18px;  
+    content: "\f1db";
+
+    width: 20px;
+    height: 25px;
+
+    font-size: 20px;
+    font-weight:800;
+    color: gray;
+    text-align: center;
+    line-height: 18px;
 }
-input[type=checkbox]:checked + label:before { 
+input[type=checkbox]:checked + label:before {
 	font-family: FontAwesome;  /* Font Awesome 아이콘 사용 */
     content: "\f058";          /* 체크 아이콘 */
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
-    
-    width: 20px;  
-    height: 25px;  
-    
-    font-size: 20px; 
-    font-weight:800; 
-    color: gray;  
-    text-align: center;  
-    line-height: 18px;  
-} 
+
+    width: 20px;
+    height: 25px;
+
+    font-size: 20px;
+    font-weight:800;
+    color: gray;
+    text-align: center;
+    line-height: 18px;
+}
