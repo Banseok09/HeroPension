@@ -58,6 +58,8 @@ String test=  "tEST입니다.";
 </div>
 
 
-<script type="text/javascript" src="../js/regi.js" ></script>
+
+<script type="text/javascript" src="../js/regi.js" ></script> 
+
 </body>    
 </html>
