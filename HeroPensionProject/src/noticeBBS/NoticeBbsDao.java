@@ -34,7 +34,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 			conn = DBConn.getConnection();
 			log("1/6 S getBbsList");
 			
-			String totalSql = " SELECT COUNT(REVIEW_SEQ) FROM REVIEWBBS ";			
+			String totalSql = " SELECT COUNT(NOTICE_SEQ) FROM NOTICEBBS ";			
 			psmt = conn.prepareStatement(totalSql);
 			rs = psmt.executeQuery();
 			
