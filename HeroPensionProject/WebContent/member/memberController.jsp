@@ -10,14 +10,12 @@
 <%
 String command = request.getParameter("command");
 switch(command){
-case "login" :
-	response.sendRedirect("./login.jsp");
-	break; 
+case "login" : response.sendRedirect("./login.jsp"); break; 
 	
 case "loginAf" : 
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
-	/* dao 불러와서 로그인 처리*/
+	/* dao생성 로그인 처리*/
 	%>
 	<script type="text/javascript">
 		alert("로그인");
@@ -26,15 +24,18 @@ case "loginAf" :
 	<%
 	break; 
 
-case "regi" : 
-	response.sendRedirect("./regi.jsp");
-	break; 
+case "regi" : response.sendRedirect("./regi.jsp"); break; 
 	
 case "regiAf" : 
 	id = request.getParameter("id");
 	pw = request.getParameter("pw");
 	/* MemberDto mem = new MemberDto(id,pw, ... ) */
-			
+	%>
+	<script type="text/javascript">
+		alert("회원가입");
+		location.href = "../index.jsp";
+	</script>
+	<%		
 	break; 
 }
 %>

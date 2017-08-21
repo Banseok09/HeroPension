@@ -2,8 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 body {
 	/* background-color: #f4cccc;핑크 */
- 	/* background-image :url("https://alice9999999.files.wordpress.com/2013/11/ed8cacec8598-10001_1.jpg"); */
- 	background-image :url("../image/loginBackground.jpg");
+ 	background-image :url("https://alice9999999.files.wordpress.com/2013/11/ed8cacec8598-10001_1.jpg");
  	background-size:  cover;
  	font-family: "Roboto", sans-serif;
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="shortcut icon" href="./css/favicon-96x96.png">
+<link rel="shortcut icon" href="./image/favicon-96x96.png">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>영웅펜션 - 실시간 최저가 예약 사이트</title>
@@ -13,6 +13,16 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- font awesome icon -->
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<style>
+/*Gnb Menu*/
+.gnb_menu {width:1200px; height:50px; margin:0 auto; background-color: #00568c;}
+.gnb_menu ul {margin-left: 40px; list-style:none;}
+.gnb_menu li {float:left; padding:17px 85px 17px 0; position:relative;}
+.gnb_menu li.last {padding-right: 0px;}
+.gnb_menu li a {display:inline; font-size:16px; font-weight:bold; line-height:16px; color:white;}
+.gnb_menu li a:hover {text-decoration: none;}
+</style>
+
 </head>
 <body style="margin: 0 auto; text-align:center " >
 <div style="text-align:right">
@@ -23,20 +33,19 @@
 
 <h1 style="align:center">
 <!-- 스파이더맨 이미지 -->
-<img src="https://img.1300k.com/goods/215023/81/215023817209_4.jpg" width="100" height="100">
+<img src="./image/spiderman.jpg" width="100" height="100">
 HERO Pension
 <!-- 아이언맨 이미지 -->
-<img src="https://img.1300k.com/goods/215023/79/215023797435_5.jpg" width="100" height="100">
+<img src="./image/ironman.jpg" width="100" height="100">
 
 </h1>
-<!-- Font awesone 아이콘 example -->
+<!-- Font Awesone(fa) 아이콘 example -->
 <h2>
 	<i class="fa fa-cog fa-spin"></i>
 	영업준비중
 	<i class="fa fa-spinner fa-pulse"></i>
 </h2>
-<!-- 기본 검색 창 -->
-<div style="width:700px; margin: 0 auto">
+<div style="width:400px; margin: 0 auto">
 	<div class="form-group">
 	<div class="input-group input-group-lg">
 		<input type="text" class="form-control" placeholder="&#xf002; 검색" style="font-family: FontAwesome">
@@ -46,6 +55,18 @@ HERO Pension
 	</div>
 	</div>
 </div>
-
+<div class="gnb_menu">
+	<div class="inner">
+		<ul>
+			<li class="top_gnb_menu first"><a href="/local/tobe_sub_main.asp?sidoCode=01&amp;sido_kind=1&amp;gugun_code=02" class="menu1">지역별펜션</a></li>
+			<li class="top_gnb_menu"><a href="/search/reserve_search.asp" class="menu2">빈방검색</a></li>
+			<li class="top_gnb_menu"><a href="/spa/spa_main.asp" class="menu3">스파펜션</a></li>
+     		<li class="top_gnb_menu"><a href="/poolvilla/poolvilla_main.asp" class="menu11">풀빌라펜션</a></li>
+			<li class="top_gnb_menu"><a href="/resort/tobe_mt.asp" class="menu5">워크샵/MT펜션</a></li>
+     		<li class="top_gnb_menu"><a href="/pool/pool_main.asp" class="menu4">수영장펜션</a></li>
+			<li class="top_gnb_menu last"><a href="/event/event_detail_list.asp" class="menu7">기획전</a></li>
+		</ul>
+	</div>
+</div>
 </body>
 </html>
