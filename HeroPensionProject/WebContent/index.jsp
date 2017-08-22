@@ -1,4 +1,6 @@
+<%@page import="jdbc.DBConn"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% DBConn.initConnect(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,5 +73,7 @@ HERO Pension
 		</ul>
 	</div>
 </div>
+
+<a href="./room/roomController.jsp?command=roomInfo&seq_pen=4" >룸 정보 보기</a>
 </body>
 </html>
