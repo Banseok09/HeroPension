@@ -34,7 +34,7 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			conn = DBConn.getConnection();
 			log("1/6 S getReviewBbsList");
 			
-			String totalSql = " SELECT COUNT(REVIEW_SEQ) FROM REVIEWBBS ";			
+			String totalSql = " SELECT COUNT(SEQ_REVIEW) FROM REVIEWBBS ";			
 			psmt = conn.prepareStatement(totalSql);
 			rs = psmt.executeQuery();
 			
@@ -44,7 +44,8 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			totalCount = rs.getInt(1);
 			paging.setTotalCount(totalCount);
 			paging = PagingUtil.setPagingInfo(paging, 10, 10);
-			
+			System.out.println("paging.getCountPerPage()"+ paging.getCountPerPage());
+			System.out.println("paging.getBlockCount()"+ paging.getBlockCount());
 			log("1.5/6 S getReviewBbsList");
 			
 			psmt.close();
@@ -66,7 +67,7 @@ public class ReviewBbsDao implements IReviewBbsDao{
 
 			while(rs.next()) {
 				ReviewBbsDto dto = new ReviewBbsDto(
-						rs.getInt("REVIEW_SEQ"),
+						rs.getInt("SEQ_REVIEW"),
 						rs.getString("ID"),
 						rs.getString("TITLE"),
 						rs.getString("CONTENT"),
@@ -138,7 +139,7 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			log("1/6 S getBbs");
 			
 			String sql = " SELECT * FROM REVIEWBBS "
-					   + " WHERE REVIEW_SEQ=? ";
+					   + " WHERE SEQ_REVIEW=? ";
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, seq);
@@ -149,7 +150,7 @@ public class ReviewBbsDao implements IReviewBbsDao{
 
 			if(rs.next()) {
 				dto = new ReviewBbsDto(
-						rs.getInt("REVIEW_SEQ"),
+						rs.getInt("SEQ_REVIEW"),
 						rs.getString("ID"),
 						rs.getString("TITLE"),
 						rs.getString("CONTENT"),
@@ -174,7 +175,7 @@ public class ReviewBbsDao implements IReviewBbsDao{
 	}
 	@Override public void addReadcount(int seq) {
 		String sql = " UPDATE REVIEWBBS SET READCOUNT = READCOUNT+1"
-				   + " WHERE REVIEW_SEQ=? ";
+				   + " WHERE SEQ_REVIEW=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -198,8 +199,8 @@ public class ReviewBbsDao implements IReviewBbsDao{
 		}
 	}
 	@Override public boolean updateBbs(ReviewBbsDto bbs, int seq) {
-		String sql = " UPDATE BBS SET TITLE=?, CONTENT=?"
-				   + " WHERE REVIEW_SEQ=? ";
+		String sql = " UPDATE REVIEWBBS SET TITLE=?, CONTENT=?"
+				   + " WHERE SEQ_REVIEW=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;

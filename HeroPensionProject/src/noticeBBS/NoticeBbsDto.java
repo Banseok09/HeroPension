@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class NoticeBbsDto implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int notice_seq;
+	private int seq_notice;
 	private String id;
 	private String title;
 	private String content;
@@ -14,10 +14,10 @@ public class NoticeBbsDto implements Serializable{
 	private String wdate;
 	private int del;
 	private int readcount;
-	public NoticeBbsDto(int notice_seq, String id, String title, String content, int ref, int step,
+	public NoticeBbsDto(int seq_notice, String id, String title, String content, int ref, int step,
 			int depth, String wdate, int del, int readcount) {
 		super();
-		this.notice_seq = notice_seq;
+		this.seq_notice = seq_notice;
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -28,7 +28,7 @@ public class NoticeBbsDto implements Serializable{
 		this.del = del;
 		this.readcount = readcount;
 	}
-	public int getNotice_seq() {  return notice_seq; }
+	public int getSeq_notice() {  return seq_notice; }
 	public String getId() {  return id;  }
 	public String getTitle() { return title; }
 	public String getContent() {  return content;  }
@@ -38,7 +38,7 @@ public class NoticeBbsDto implements Serializable{
 	public String getWdate() {  return wdate;  }
 	public int getDel() {  return del;  }
 	public int getReadcount() {  return readcount;  }
-	public void setNotice_seq(int notice_seq) {  this.notice_seq = notice_seq;  }
+	public void setSeq_notice(int seq_notice) {  this.seq_notice = seq_notice;  }
 	public void setId(String id) {  this.id = id;  }
 	public void setTitle(String title) {  this.title = title;  }
 	public void setContent(String content) {  this.content = content;  }
@@ -49,7 +49,7 @@ public class NoticeBbsDto implements Serializable{
 	public void setDel(int del) {  this.del = del; }
 	public void setReadcount(int readcount) { this.readcount = readcount; }
 	@Override public String toString() {
-		return "ReviewBbsDto [review_seq=" + review_seq + ", id=" + id + ", title=" + title + ", content=" + content
+		return "ReviewBbsDto [seq_notice=" + seq_notice + ", id=" + id + ", title=" + title + ", content=" + content
 				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth
 				+ ", wdate=" + wdate +", del=" + del + ", readcount=" + readcount + "]";
 	}
