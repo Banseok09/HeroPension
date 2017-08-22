@@ -71,5 +71,7 @@ HERO Pension
 		</ul>
 	</div>
 </div>
+
+<a href="./room/roomController.jsp?command=roomInfo&seq_pen=4" >룸 정보 보기</a>
 </body>
 </html>
