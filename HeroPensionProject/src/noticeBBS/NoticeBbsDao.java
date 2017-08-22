@@ -34,7 +34,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 			conn = DBConn.getConnection();
 			log("1/6 S getBbsList");
 			
-			String totalSql = " SELECT COUNT(NOTICE_SEQ) FROM NOTICEBBS ";			
+			String totalSql = " SELECT COUNT(SEQ_NOTICE) FROM NOTICEBBS ";			
 			psmt = conn.prepareStatement(totalSql);
 			rs = psmt.executeQuery();
 			
@@ -51,7 +51,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 			rs.close();
 			
 			String sql = " SELECT * FROM "
-					   + " (SELECT * FROM (SELECT * FROM REVIEWBBS ORDER BY REF ASC, STEP DESC) "
+					   + " (SELECT * FROM (SELECT * FROM NOTICEBBS ORDER BY REF ASC, STEP DESC) "
 					   + " WHERE ROWNUM <= " + paging.getStartNum() + " ORDER BY REF DESC, STEP ASC) "
 					   + " WHERE ROWNUM <= " + paging.getCountPerPage();
 			

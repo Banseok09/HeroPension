@@ -1,4 +1,6 @@
+<%@page import="jdbc.DBConn"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% DBConn.initConnect(); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,20 +15,14 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- font awesome icon -->
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<style>
-/*Gnb Menu*/
-.gnb_menu {width:1200px; height:50px; margin:0 auto; background-color: #00568c;}
-.gnb_menu ul {margin-left: 40px; list-style:none;}
-.gnb_menu li {float:left; padding:17px 85px 17px 0; position:relative;}
-.gnb_menu li.last {padding-right: 0px;}
-.gnb_menu li a {display:inline; font-size:16px; font-weight:bold; line-height:16px; color:white;}
-.gnb_menu li a:hover {text-decoration: none;}
-</style>
-
+<link href="./css/index.css" rel="stylesheet" type="text/css" />
 </head>
-<body style="margin: 0 auto; text-align:center " >
-<div style="text-align:right">
-<a href="./reviewbbs/reviewBbsController.jsp?command=list">게시판</a>
+<body>
+<div class="header">
+
+<a href="./member/memberController.jsp?command=update">정보수정</a>
+<a href="./noticebbs/noticeBbsController.jsp?command=list">공지사항</a>
+<a href="./reviewbbs/reviewBbsController.jsp?command=list">리뷰게시판</a>
 <a href="./member/memberController.jsp?command=login">로그인</a>
 <a href="./member/memberController.jsp?command=regi">회원가입</a>
 </div>
@@ -40,11 +36,7 @@ HERO Pension
 
 </h1>
 <!-- Font Awesone(fa) 아이콘 example -->
-<h2>
-	<i class="fa fa-cog fa-spin"></i>
-	영업준비중
-	<i class="fa fa-spinner fa-pulse"></i>
-</h2>
+<h2><i class="fa fa-cog fa-spin"></i>영업준비중<i class="fa fa-spinner fa-pulse"></i></h2>
 <div style="width:400px; margin: 0 auto">
 	<div class="form-group">
 	<div class="input-group input-group-lg">
@@ -68,5 +60,11 @@ HERO Pension
 		</ul>
 	</div>
 </div>
+
+<div class="pension">
+</div>
+
+<br>
+<a href="./room/roomController.jsp?command=roomInfo&seq_pen=4" >룸 정보 보기</a>
 </body>
 </html>

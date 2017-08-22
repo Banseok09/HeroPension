@@ -110,6 +110,46 @@ public class MemberDao implements IMemberDao {
 		
 		return count>0?true:false;
 	}
+
+	
+	@Override
+	public boolean updateMem(String id,String pw, String name, String phone, String email) {
+		
+		String sql = " UPDATE MEMBER "
+				+ " SET PW=?, NAME=?, PHONE=?, EMAIL=? "
+				+ " WHERE ID=?";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count = 0;
+		
+		try {
+			conn = DBConn.getConnection();
+			System.out.println("2/6 S updateMem");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, pw);
+			psmt.setString(2, name);
+			psmt.setString(3, phone);
+			psmt.setString(4, email);
+			psmt.setString(5, id);
+			System.out.println("3/6 S updateMem");
+			
+			count = psmt.executeUpdate();
+			System.out.println("4/6 S updateMem");			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally{
+			DBConn.close(psmt, conn);
+			System.out.println("6/6 S updateMem");
+		}
+		
+		return count>0?true:false;
+	}
+	
 	
 	
 	
