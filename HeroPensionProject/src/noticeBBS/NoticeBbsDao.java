@@ -34,7 +34,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 			conn = DBConn.getConnection();
 			log("1/6 S getBbsList");
 			
-			String totalSql = " SELECT COUNT(NOTICE_SEQ) FROM NOTICEBBS ";			
+			String totalSql = " SELECT COUNT(SEQ_NOTICE) FROM NOTICEBBS ";			
 			psmt = conn.prepareStatement(totalSql);
 			rs = psmt.executeQuery();
 			
@@ -51,7 +51,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 			rs.close();
 			
 			String sql = " SELECT * FROM "
-					   + " (SELECT * FROM (SELECT * FROM REVIEWBBS ORDER BY REF ASC, STEP DESC) "
+					   + " (SELECT * FROM (SELECT * FROM NOTICEBBS ORDER BY REF ASC, STEP DESC) "
 					   + " WHERE ROWNUM <= " + paging.getStartNum() + " ORDER BY REF DESC, STEP ASC) "
 					   + " WHERE ROWNUM <= " + paging.getCountPerPage();
 			
@@ -66,7 +66,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 
 			while(rs.next()) {
 				NoticeBbsDto dto = new NoticeBbsDto(
-						rs.getInt("NOTICE_SEQ"),
+						rs.getInt("SEQ_NOTICE"),
 						rs.getString("ID"),
 						rs.getString("TITLE"),
 						rs.getString("CONTENT"),
@@ -90,7 +90,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 	}
 	@Override public boolean writeBbs(NoticeBbsDto bbs) {
 		String sql = " INSERT INTO NOTICEBBS "
-				+ " (NOTICE_SEQ, ID, TITLE, CONTENT, "
+				+ " (SEQ_NOTICE, ID, TITLE, CONTENT, "
 				+ " REF, STEP, DEPTH, WDATE)"
 				+ " VALUES(REVIEW_SEQ.NEXTVAL, ?, ?, ?, "	   // SEQ, ID, TITLE, CONTENT,
 				+ " (SELECT NVL(MAX(REF), 0)+1 FROM BBS), 0, 0, "  // REF, STEP, DEPTH,
@@ -134,7 +134,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 			log("1/6 S getBbs");
 			
 			String sql = " SELECT * FROM NOTICEBBS "
-					   + " WHERE NOTICE_SEQ=? ";
+					   + " WHERE SEQ_NOTICE=? ";
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, seq);
@@ -145,7 +145,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 
 			if(rs.next()) {
 				dto = new NoticeBbsDto(
-						rs.getInt("NOTICE_SEQ"),
+						rs.getInt("SEQ_NOTICE"),
 						rs.getString("ID"),
 						rs.getString("TITLE"),
 						rs.getString("CONTENT"),
@@ -167,8 +167,8 @@ public class NoticeBbsDao implements INoticeBbsDao{
 		return dto;
 	}
 	@Override public void addReadcount(int seq) {
-		String sql = " UPDATE REVIEWBBS SET READCOUNT = READCOUNT+1"
-				   + " WHERE REVIEW_SEQ=? ";
+		String sql = " UPDATE NOTICEBBS SET READCOUNT = READCOUNT+1"
+				   + " WHERE SEQ_NOTICE=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -192,8 +192,8 @@ public class NoticeBbsDao implements INoticeBbsDao{
 		}
 	}
 	@Override public boolean updateBbs(NoticeBbsDto bbs, int seq) {
-		String sql = " UPDATE BBS SET TITLE=?, CONTENT=?"
-				   + " WHERE NOTICE_SEQ=? ";
+		String sql = " UPDATE NOTICEBBS SET TITLE=?, CONTENT=?"
+				   + " WHERE SEQ_NOTICE=? ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
