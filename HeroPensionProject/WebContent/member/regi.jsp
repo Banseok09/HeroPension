@@ -27,8 +27,7 @@ String test=  "tEST입니다.";
 <div class="form-group">
 
 	<input type="text" id="_userid" name="id" class="form-control input-lg"
-	placeholder="&#xf007; user ID" style="font-family: FontAwesome; font-size: 20px">
-
+	placeholder="&#xf007; user ID" style="font-family: FontAwesome; font-size: 20px">	
 	<span id="id_check_text"></span>	
 
 	<input type="text" id="_pwd" name="pwd" class="form-control input-lg"
@@ -78,7 +77,40 @@ function allChecked(){
 $(document).ready(function(){
 	$("#_userid").blur(function(){
 		var idText = $("#_userid").val();
+		var regExp = /^[a-zA-Z][\w-]{6,14}$/;	
+		$.ajax({
+			type:"post",
+			url:"check.jsp?command=idCheck",
+			data:{"_userid":idText}
+		}).done(function(data){				
+			if($.trim(data) == 'YES'){	// 사용 가능 할때
+				if(regExp.test(idText)){
+					$("#_userid").css("border","2px solid #4CAF50");
+					$("#id_check_text").css("font-size","10px").css("color","#4CAF50");
+					$("#id_check_text").text("멋진 아이디네요!");
+					id_checked=true;
+				}else{
+					$("#_userid").css("border","2px solid red");
+					$("#id_check_text").css("font-size","10px").css("color","red");
+					$("#id_check_text").text("영어로 시작하는 7~15자리 영문,숫자 조합으로 만들어주세요");
+					id_checked=false;
+				} 
+			}else{	// 이미 사용중 일 때
+				if(!regExp.test(idText)){
+					$("#_userid").css("border","2px solid red");
+					$("#id_check_text").css("font-size","10px").css("color","red");
+					$("#id_check_text").text("영어로 시작하는 7~15자리 영문,숫자 조합으로 만들어주세요");
+					id_checked=false;
+				}else{
+					$("#_userid").css("border","2px solid red");
+					$("#id_check_text").css("font-size","10px").css("color","red");
+					$("#id_check_text").text("이미 사용중인 아이디입니다");
+					id_checked=false;
+				}				
+			}			
+		});		
 		
+		/* 
 		if(idText==""){
 			$("#_userid").css("border","2px solid red");
 			$("#id_check_text").css("font-size","10px").css("color","red");
@@ -88,18 +120,25 @@ $(document).ready(function(){
 		}
 		
 		// 영대소문자로 시작  영문+숫자 7~15글자
-		var regExp = /^[a-zA-Z][\w-]{6,14}$/;
+	//	var regExp = /^[a-zA-Z][\w-]{6,14}$/;		
 		if(regExp.test(idText)){
-			$("#_userid").css("border","2px solid #4CAF50");
-			$("#id_check_text").css("font-size","10px").css("color","#4CAF50");
-			$("#id_check_text").text("멋진 아이디네요!");
-			id_checked=true;
+			if(regExp.test(idText)){
+				$("#_userid").css("border","2px solid #4CAF50");
+				$("#id_check_text").css("font-size","10px").css("color","#4CAF50");
+				$("#id_check_text").text("멋진 아이디네요!");
+				id_checked=true;
+			}else{
+				$("#_userid").css("border","2px solid red");
+				$("#id_check_text").css("font-size","10px").css("color","red");
+				$("#id_check_text").text("이미 사용중인 아이디입니다");
+				id_checked=false;
+			}
 		}else{
 			$("#_userid").css("border","2px solid red");
 			$("#id_check_text").css("font-size","10px").css("color","red");
 			$("#id_check_text").text("영어로 시작하는 7~15자리 영문,숫자 조합으로 만들어주세요");
 			id_checked=false;
-		}
+		}  */
 	});
 	$("#_pwd").blur(function(){
 		var pwText = $("#_pwd").val();
@@ -129,7 +168,7 @@ $(document).ready(function(){
 	
 	$("#_pwd_same").blur(function(){
 		var pwText = $("#_pwd").val();
-		var pw_sameText = $("#_pwd_same").val();
+		var pw_sameText = $("#_pwd_same").val();	
 		if(pw_sameText==""){
 			$("#_pwd_same").css("border","2px solid red");
 			$("#pw_same_check_text").css("font-size","10px").css("color","red");
@@ -179,49 +218,82 @@ $(document).ready(function(){
 	
 	$("#_email").blur(function(){
 		var emailText = $("#_email").val();
-		if(emailText==""){
-			$("#_email").css("border","2px solid red");
-			$("#email_check_text").css("font-size","10px").css("color","red");
-			$("#email_check_text").text("필수 입력 사항입니다.");
-			email_checked = false;
-			return;
-		}
-		
 		var regExp  = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]){2,20}@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]){2,20}\.[a-zA-Z]{2,3}$/;
-		if(regExp.test(emailText)){
-			$("#_email").css("border","2px solid #4CAF50");
-			$("#email_check_text").css("font-size","10px").css("color","#4CAF50");
-			$("#email_check_text").text("사용 가능한 이메일입니다.!");
-			email_checked = true;
-		}else{
-			$("#_email").css("border","2px solid red");
-			$("#email_check_text").css("font-size","10px").css("color","red");
-			$("#email_check_text").text("이메일 형식을 확인해주세요");
-			email_checked = false;
-		}
+		
+		$.ajax({
+			type:"post",
+			url:"check.jsp?command=emailCheck",
+			data:{"_email":emailText}
+		}).done(function(data){								
+			if($.trim(data) == 'YES'){		// 사용 가능할때
+			//	alert("사용가능");
+				if(regExp.test(emailText)){
+					$("#_email").css("border","2px solid #4CAF50");
+					$("#email_check_text").css("font-size","10px").css("color","#4CAF50");
+					$("#email_check_text").text("사용 가능한 이메일입니다.!");
+					email_checked = true;
+				}else{
+					$("#_email").css("border","2px solid red");
+					$("#email_check_text").css("font-size","10px").css("color","red");
+					$("#email_check_text").text("이메일 형식을 확인해주세요");
+					email_checked = false;
+				}				
+			}else{		// 중복일때							
+			//	alert("사용불가");
+				if(!regExp.test(emailText)){
+					$("#_email").css("border","2px solid red");
+					$("#email_check_text").css("font-size","10px").css("color","red");
+					$("#email_check_text").text("이메일 형식을 확인해주세요");
+					email_checked = false;
+				}else{
+					$("#_email").css("border","2px solid red");
+					$("#email_check_text").css("font-size","10px").css("color","red");
+					$("#email_check_text").text("이미 사용중인 이메일 입니다");
+					email_checked = false;
+				}
+			}
+		});
+		
 	});
+	
 	$("#_phone").blur(function(){
 		var phoneText = $("#_phone").val();
-		if(phoneText==""){
-			$("#_phone").css("border","2px solid red");
-			$("#phone_check_text").css("font-size","10px").css("color","red");
-			$("#phone_check_text").text("필수 입력 사항입니다.");
-			phone_checked = false;
-			return;
-		}
-		
 		var regExp = /^0[0-9]{2}-[0-9]{3,4}-[0-9]{4}$/;
-		if(regExp.test(phoneText)){
-			$("#_phone").css("border","2px solid #4CAF50");
-			$("#phone_check_text").css("font-size","10px").css("color","#4CAF50");
-			$("#phone_check_text").text("사용 가능한 전화번호입니다.!");
-			phone_checked = true;
-		}else{
-			$("#_phone").css("border","2px solid red");
-			$("#phone_check_text").css("font-size","10px").css("color","red");
-			$("#phone_check_text").text("전화번호 형식을 확인해주세요");
-			phone_checked = false;
-		}
+		
+		$.ajax({
+			type:"post",
+			url:"check.jsp?command=phoneCheck",
+			data:{"_phone":phoneText}
+		}).done(function(data){				
+			if($.trim(data) == 'YES'){
+				alert("사용가능");
+				if(regExp.test(phoneText)){
+					$("#_phone").css("border","2px solid #4CAF50");
+					$("#phone_check_text").css("font-size","10px").css("color","#4CAF50");
+					$("#phone_check_text").text("사용 가능한 전화번호입니다.!");
+					phone_checked = true;
+				}else{
+					$("#_phone").css("border","2px solid red");
+					$("#phone_check_text").css("font-size","10px").css("color","red");
+					$("#phone_check_text").text("전화번호 형식을 확인해주세요");
+					phone_checked = false;
+				}				
+			}else{
+				alert("사용불가");
+				if(!regExp.test(phoneText)){
+					$("#_phone").css("border","2px solid red");
+					$("#phone_check_text").css("font-size","10px").css("color","red");
+					$("#phone_check_text").text("전화번호 형식을 확인해주세요");
+					phone_checked = false;
+				}else{
+					$("#_phone").css("border","2px solid red");
+					$("#phone_check_text").css("font-size","10px").css("color","red");
+					$("#phone_check_text").text("이미 사용중인 전화번호 입니다");
+					phone_checked = false;
+				}
+			}
+			
+		});		
 	});
 	
 	$("#_btnRegi").click(function(){
