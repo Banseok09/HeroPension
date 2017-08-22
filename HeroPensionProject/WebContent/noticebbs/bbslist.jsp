@@ -1,7 +1,7 @@
-<%@page import="reviewBBS.ReviewBbsDto"%>
-<%@page import="reviewBBS.ReviewBbsDao"%>
-<%@page import="reviewBBS.IReviewBbsDao"%>
-<%@page import="reviewBBS.PagingBean"%>
+<%@page import="noticeBBS.NoticeBbsDto"%>
+<%@page import="noticeBBS.NoticeBbsDao"%>
+<%@page import="noticeBBS.PagingBean"%>
+<%@page import="noticeBBS.INoticeBbsDao"%>
 <%@page import="java.util.List"%>
 
 <%@ page contentType="text/html; charset=UTF-8"%>
@@ -45,7 +45,7 @@ if(ologin==null){%>
 
 <%!
 public String arrow(int depth){
-	String rs = "<img src='image/arrow.png' width='20px' height='20px'>";
+	String rs = "<i class='fa fa-arrow-right'></i>";
 	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;";
 	String ts = "";
 	
@@ -56,8 +56,7 @@ public String arrow(int depth){
 
 <h3>환영합니다park님 반갑습니다.</h3>
 
-<a href="memberController.jsp?command=logout">로그아웃</a>
-<a href="memberController.jsp?command=signout" id="signout">회원탈퇴</a>
+<a href="index.jsp">Home</a>
 <hr>
 <%
 
@@ -72,13 +71,13 @@ String search_key = request.getParameter("search_key");
 if(search_type==null) search_type="";
 if(search_key==null) search_key=""; 
 
-IReviewBbsDao dao = ReviewBbsDao.getInstance();
-List<ReviewBbsDto> bbslist = dao.getBbsList(paging);
+INoticeBbsDao dao = NoticeBbsDao.getInstance();
+List<NoticeBbsDto> bbslist = dao.getBbsList(paging);
 System.out.println("bbslist" + bbslist.toString());
 
 %>
 <div class="center">
-<h1>리뷰 게시판</h1>
+<h1>공지사항</h1>
 <a href="bbswrite.jsp">글쓰기</a>
 
 <table class="table table-striped table-bordered">
@@ -91,20 +90,19 @@ System.out.println("bbslist" + bbslist.toString());
 
 <tbody>
 <% for(int i=0; i<bbslist.size(); i++){
-	ReviewBbsDto bbs = bbslist.get(i);
+	NoticeBbsDto bbs = bbslist.get(i);
 	%>
 	<tr>
 		<td><%=i+1 %></td>
 		<td class="title">
 			<%=arrow(bbs.getDepth())%>
 			<% if(bbs.getDel()==0){ %>
-			<a href="reviewBbsController.jsp?command=detail&seq=<%=bbs.getReview_seq()%>"><%=bbs.getTitle() %> </a>
+			<a href="reviewBbsController.jsp?command=detail&seq=<%=bbs.getSeq_notice()%>"><%=bbs.getTitle() %> </a>
 			<%} else { %>
 				삭제된 글입니다.
 			<%} %>
 		</td>
 		<td><%=bbs.getId() %></td>
-		<td><%=bbs.getRate() %></td>
 		<td><%=bbs.getReadcount() %></td>
 	</tr>
 <%} %>
