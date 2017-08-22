@@ -2,6 +2,6 @@ package room;
 
 import java.util.List;
 
-public interface RoomDao_i {
+public interface IRoomDao {
 	public List<RoomDto> getRoomList(int seq_pen); 
 }
