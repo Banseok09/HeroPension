@@ -1,4 +1,4 @@
-var id_checked = false;
+/*var id_checked = false;
 var pw_checked = false;
 var pw_same_checked = false;
 var name_checked = false;
@@ -49,7 +49,7 @@ $(document).ready(function(){
 		}
 		
 		// 영대소문자, 숫자, 특수문자 포함 8~15자리
-		/*var regExp  = /^.*(?=^[a-zA-Z\d!@#$%^&+=]{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;*/
+		var regExp  = /^.*(?=^[a-zA-Z\d!@#$%^&+=]{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 		var regExp  = /^.*(?=^.{8,15}$)(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[~`!@#$%^&\*\+=\-\|\\_\{\}\[\]:;'"<>\,\.\?\/]).*$/;
 		if(regExp.test(pwText)){
 			$("#_pwd").css("border","2px solid #4CAF50");
@@ -162,6 +162,7 @@ $(document).ready(function(){
 	});
 	
 	$("#_btnRegi").click(function(){
+		alert("ddlaj");
 		if(!allChecked()){
 			alert("모든 항목을 정확히 기입해주세요");
 		}else{
@@ -171,3 +172,4 @@ $(document).ready(function(){
 	});
 });
 
+*/

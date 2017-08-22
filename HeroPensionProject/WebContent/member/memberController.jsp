@@ -24,10 +24,10 @@ case "loginAf" :
 	System.out.println("pw"+pw);
 	
 	MemberDTO dto = dao.login(id, pw);		
-	System.out.println("dtoid"+dto.getId());
-	System.out.println("dtopw"+dto.getPw());
+//	System.out.println("dtoid"+dto.getId());
+//	System.out.println("dtopw"+dto.getPw());
 	
-	if(id.equals(dto.getId()) && pw.equals(dto.getPw())){
+	if(dto != null){
 		session.setAttribute("login", dto);
 		session.setMaxInactiveInterval(30 * 60);
 		%>
@@ -82,10 +82,16 @@ case "regiAf" :
 	break; 
 	
 case "update":
-	response.sendRedirect("./memberDetail.jsp");	
+//	response.sendRedirect("./memberDetail.jsp");	
+	%>
+		<script type="text/javascript">
+		alert("수정 실패");
+		location.href = "./memberDetail.jsp";
+		</script>
+	<%
 	break;
 
-case "updateAf":
+case "updateAf":	
 	id = request.getParameter("id");
 	pw = request.getParameter("pwd");
  	name = request.getParameter("name");
