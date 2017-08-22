@@ -56,7 +56,7 @@ public String arrow(int depth){
 
 <h3>환영합니다park님 반갑습니다.</h3>
 
-<a href="index.jsp">Home</a>
+<a href="../index.jsp">Home</a>
 <hr>
 <%
 
