@@ -1,0 +1,11 @@
+@CHARSET "UTF-8";
+
+body {margin: 0 auto; text-align:center }
+div.header{text-align:right}
+/*Gnb Menu*/
+.gnb_menu {width:1200px; height:50px; margin:0 auto; background-color: #00568c;}
+.gnb_menu ul {margin-left: 40px; list-style:none;}
+.gnb_menu li {float:left; padding:17px 85px 17px 0; position:relative;}
+.gnb_menu li.last {padding-right: 0px;}
+.gnb_menu li a {display:inline; font-size:16px; font-weight:bold; line-height:16px; color:white;}
+.gnb_menu li a:hover {text-decoration: none;}
