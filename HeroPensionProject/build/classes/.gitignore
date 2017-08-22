@@ -1,9 +1,6 @@
-/reservation/
-/room/
-/roomImage/
-/roomIMG/
-/member/
 /jdbc/
-/noticeBBS/
-/reviewBBS/
 /pension/
+/reviewBBS/
+/member/
+/noticeBBS/
+*
