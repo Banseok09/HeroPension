@@ -1,43 +1,16 @@
-/*var id_checked = false;
-var pw_checked = false;
+/*var pw_checked = false;
 var pw_same_checked = false;
 var name_checked = false;
 var email_checked = false;
 var phone_checked = false;
 function allChecked(){
-	return id_checked
-	    && pw_checked
+	return  pw_checked
 	    && pw_same_checked
 	    && email_checked
 	    && phone_checked;
 }
 
-$(document).ready(function(){
-	$("#_userid").blur(function(){
-		var idText = $("#_userid").val();
-		
-		if(idText==""){
-			$("#_userid").css("border","2px solid red");
-			$("#id_check_text").css("font-size","10px").css("color","red");
-			$("#id_check_text").text("필수 입력 사항입니다.");
-			id_checked=false;
-			return;
-		}
-		
-		// 영대소문자로 시작  영문+숫자 7~15글자
-		var regExp = /^[a-zA-Z][\w-]{6,14}$/;
-		if(regExp.test(idText)){
-			$("#_userid").css("border","2px solid #4CAF50");
-			$("#id_check_text").css("font-size","10px").css("color","#4CAF50");
-			$("#id_check_text").text("멋진 아이디네요!");
-			id_checked=true;
-		}else{
-			$("#_userid").css("border","2px solid red");
-			$("#id_check_text").css("font-size","10px").css("color","red");
-			$("#id_check_text").text("영어로 시작하는 7~15자리 영문,숫자 조합으로 만들어주세요");
-			id_checked=false;
-		}
-	});
+$(document).ready(function(){	
 	$("#_pwd").blur(function(){
 		var pwText = $("#_pwd").val();
 		if(pwText==""){
@@ -161,12 +134,11 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#_btnRegi").click(function(){
-		alert("ddlaj");
+	$("#_btnUpdate").click(function(){
 		if(!allChecked()){
 			alert("모든 항목을 정확히 기입해주세요");
 		}else{
-			$("#_regiForm").attr("action", "./memberController.jsp").submit();
+			$("#updateForm").attr("action", "./memberController.jsp").submit();
 		}
 		
 	});
