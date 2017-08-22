@@ -1,7 +1,10 @@
+<%@page import="pension.PensionDto"%>
+<%@page import="pension.PensionDao"%>
+<%@page import="pension.IPensionDao"%>
+<%@page import="room.IRoomDao"%>
 <%@page import="room.RoomDto"%>
 <%@page import="java.util.List"%>
 <%@page import="room.RoomDao"%>
-<%@page import="room.RoomDao_i"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,20 +14,78 @@
 </head>
 <body>
 
-<%
-	int seq_pen = Integer.parseInt(request.getParameter("seq_pen"));
-
-	RoomDao_i room = RoomDao.getInstance();
-	List<RoomDto> roomList = room.getRoomList(seq_pen);
-%>
-
-	<div align="center">
-		<h2>펜션이름</h2>
-	</div>
+	<%
+		int seq_pen = Integer.parseInt(request.getParameter("seq_pen"));
+		
+		/* 펜션정보 */
+		IPensionDao pension = PensionDao.getInstance();
+		PensionDto pensionDto = pension.getChoicePension(seq_pen);
 	
+		/* 룸정보 */
+		IRoomDao room = RoomDao.getInstance();
+		List<RoomDto> roomList = room.getRoomList(seq_pen);	
+	
+	%>
+	
+	<!-- 펜션정보 -->
+	<div align="center">
+	<table border="1">
+	<col width="650"><col width="430">
+		<tr>
+			<td>	
+				<table>
+					<tr>
+						<td>그림영역</td>
+					</tr>
+				</table>
+			</td>	
+			<td>	
+				<div align="center">
+				<table>
+					<tr>
+						<td colspan="2" align="center"><h2><%=pensionDto.getName_pen() %></h2><hr></td>
+					</tr>
+					<tr>
+						<th align="left">상세주소</th>
+						<td><%=pensionDto.getAddress() %></td>
+					</tr>
+					<tr>
+						<th align="left">입/퇴실시간</th>
+						<td>[입실] <%=pensionDto.getChechin_time() %>,
+						    [퇴실] <%=pensionDto.getChechout_time() %>
+					</tr>
+					<tr>
+						<th align="left">픽업여부</th>
+					<%if(pensionDto.getPickup() == 0){%>
+						<td>픽업가능</td>
+					<%}else{ %>
+						<td>픽업불가</td>
+					<%} %>
+					</tr>
+					<tr>
+						<th align="left">예약문의</th>
+						<td><%=pensionDto.getPhone() %></td>
+					</tr>	
+					<tr>
+						<th align="left">성수기구분</th>
+						<td>[성수기] <%=pensionDto.getSeason_start() %> ~ <%=pensionDto.getSeason_end() %><br></td>
+					</tr>	
+				</table>
+				</div>
+			</td>
+		</tr>	
+	</table>	
+	</div>
+		
+		
+		
+		
+	<!-- 객실정보 -->
+	<br><br>
 	<div align="center">
 		<form action="">
 			<table border="1">
+			<col width="200"><col width="300"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100">
 				<tr>
 					<th>객실명</th>
 					<th>객실형태</th>
@@ -38,51 +99,38 @@
 			<%
 				if(roomList == null || roomList.size() == 0){
 			%>  <tr>
-					<td colspan="8">작성된 글이 없습니다</td>
+					<td colspan="8">룸 정보가 없습니다.</td>
 				</tr>
 			<%
 				}
 				for(int i=0; i<roomList.size(); i++){
 					RoomDto roomDto = roomList.get(i);							
 			%>  <tr>
-					<td rowspan="2"><%=roomList.get(i).getName_room() %></td>	
-					<td rowspan="2"><%=roomList.get(i).getType_room() %></td>
-					<td rowspan="2"><%=roomList.get(i).getSize_room() %></td>		
-					<td rowspan="2"><%=roomList.get(i).getPerson_min() %>명/<%=roomList.get(i).getPerson_max() %>명</td>
-					<td>성수기</td>	
-					<td><%=roomList.get(i).getPrice_season_basic() %>원</td>
-					<td><%=roomList.get(i).getPrice_season_weekend() %>원</td>
-					<td rowspan="2"><a href="#">예약하기</a></td>
+					<td rowspan="2" align="center"><%=roomList.get(i).getName_room() %></td>	
+					<td rowspan="2" align="center"><%=roomList.get(i).getType_room() %></td>
+					<td rowspan="2" align="center"><%=roomList.get(i).getSize_room() %></td>		
+					<td rowspan="2" align="center"><%=roomList.get(i).getPerson_min() %>명/<%=roomList.get(i).getPerson_max() %>명</td>
+					<td align="center">성수기</td>	
+					<td align="center"><%=roomList.get(i).getPrice_season_basic() %>원</td>
+					<td align="center"><%=roomList.get(i).getPrice_season_weekend() %>원</td>
+					<td rowspan="2" align="center"><a href="#">예약하기</a></td>
 				</tr>	
 				<tr>
-					<td>비수기</td>
-					<td><%=roomList.get(i).getPrice_basic() %>원</td>
-					<td><%=roomList.get(i).getPrice_weekend() %>원</td>
+					<td align="center">비수기</td>
+					<td align="center"><%=roomList.get(i).getPrice_basic() %>원</td>
+					<td align="center"><%=roomList.get(i).getPrice_weekend() %>원</td>
 				</tr>				
 			<%				
 				}	
 			%>
-				
-				
-				
-				
-<!-- 				<tr>
-					<td rowspan="2">럭셔리</td>
-					<td rowspan="2">복층(침대룸+거실+주방+화장실)</td>
-					<td rowspan="2">12평</td>
-					<td rowspan="2">2/5</td>
-					<td >성수기</td>
-					<td>1111</td>
-					<td>2222</td>
-					<td rowspan="2"><a href="#">예약하기</a></td>
-				</tr>
-				<tr>
-					<td rowspan="2">비수기</td>
-					<td>3333</td>
-					<td>4444</td>
-				</tr> -->
 			</table>
 		</form>
+	</div>
+	
+	<!-- 객실 이미지 -->
+	<div>
+		
+		
 	</div>
 
 </body>
