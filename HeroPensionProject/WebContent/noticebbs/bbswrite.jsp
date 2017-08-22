@@ -1,7 +1,3 @@
-<%@page import="reviewBBS.ReviewBbsDto"%>
-<%@page import="reviewBBS.ReviewBbsDao"%>
-<%@page import="reviewBBS.IReviewBbsDao"%>
-<%@page import="member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,57 +21,43 @@ table{
 </head>
 <body>
 <%
-Object ologin = session.getAttribute("login");
-MemberDTO mem = null;
-mem = (MemberDTO)ologin;
-
-IReviewBbsDao dao = ReviewBbsDao.getInstance();
-int seq = Integer.parseInt(request.getParameter("seq"));
-ReviewBbsDto bbs = dao.getBbs(seq);
-
+/* Object ologin = session.getAttribute("login");
+MemberDto mem = null;
+mem = (MemberDto)ologin;
+System.out.println(mem.toString()); */
 %>
-
+<h1>글쓰기</h1>
 
 <div class="center">
-<h1>글 수정</h1>
-<form action="bbsupdateAf.jsp" method="POST">
-	<input type="hidden" name="seq" value="<%=seq %>">
+<form action="bbswriteAf.jsp" method="POST">
 	<table class="table table-bordered">
-	<col width="100"><col width="500">
+	<col width="200"><col width="500">
 	<tr>
 		<td><label>아이디</label></td>
-		<td>
-		<input type="text" name="id" readonly="readonly"
+		<td><input type="text" name="id" readonly="readonly"
 			 class="form-control" style="background-color: white"
-			 size="50" value="park<%-- <%=mem.getId() --%>" >
-		</td>
+			 size="50" value="<%="park" %>" ></td>
 	</tr>
 	
 	<tr>
 		<td><label>제목</label></td>
-		<td>
-		<input type="text" name="title" size="50" value="<%=bbs.getTitle() %>"
-		 class="form-control">
-		</td>
+		<td><input type="text" name="title" size="50" class="form-control"></td>
 	</tr>
 	
 	<tr>
 		<td><label>내용</label></td>
-		<td>
-			<textarea rows="10" cols="50" name="content" class="form-control"><%=bbs.getContent() %></textarea>
-			</td>
+		<td><textarea rows="10" cols="50" name="content" class="form-control"></textarea> </td>
 	</tr>
 	<tr>
-		<td colspan="2" align=center>
-		<input type="submit" id="updateBtn" value="글수정"
-			   class="btn btn-success" style="width:150px">
+		<td colspan="2" align="center">
+			<input type="submit" id="writeBtn" value="글쓰기" class="btn btn-success">
 		</td>
 	</tr>
 	</table>
 </form>
-<a href="bbslist.jsp">글목록</a><br>
 </div>
-
+<a href="bbslist.jsp">글목록</a><br>
+<a href=#>로그아웃</a>
 
 <script>
 /* $(document).ready(function(){
