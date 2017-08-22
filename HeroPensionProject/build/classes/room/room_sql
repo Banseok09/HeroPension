@@ -1,0 +1,63 @@
+DROP TABLE ROOM
+CASCADE CONSTRAINT;
+
+CREATE table "ROOM" (
+    "SEQ_ROOM"             NUMBER(8),
+    "NAME_ROOM"            VARCHAR2(20) NOT NULL,
+    "TYPE_ROOM"            VARCHAR2(100) NOT NULL,
+    "SIZE_ROOM"            VARCHAR2(20) NOT NULL,
+    "PERSON_MIN"           NUMBER(2) NOT NULL,
+    "PERSON_MAX"           NUMBER(2) NOT NULL,
+    "PRICE_BASIC"          NUMBER(8) NOT NULL,
+    "PRICE_WEEKEND"        NUMBER(8) NOT NULL,
+    "PRICE_SEASON_BASIC"   NUMBER(8) NOT NULL,
+    "PRICE_SEASON_WEEKEND" NUMBER(8) NOT NULL,
+    "INFO_ROOM"            VARCHAR2(4000) NOT NULL,
+    "ITEM"                 VARCHAR2(2000) NOT NULL,
+    "SEQ_PEN"              NUMBER(8) NOT NULL,
+    "DEL_ROOM"             NUMBER(1) NOT NULL,
+    constraint  "ROOM_PK" primary key ("SEQ_ROOM")
+);
+
+
+CREATE SEQUENCE SEQ_ROOM
+START WITH 1 INCREMENT BY 1;
+
+
+ALTER TABLE ROOM
+ADD CONSTRAINT FK_ROOM_SEQPEN FOREIGN KEY(SEQ_PEN)
+REFERENCES PENSION(SEQ_PEN);
+
+
+INSERT INTO ROOM
+VALUES( SEQ_ROOM.NEXTVAL, 
+        '반했어',
+        '복층(침대룸+거실+주방+화장실)',
+        '12평',
+        2,
+        5,
+        90000,
+        130000,
+        190000,
+        190000,
+        '* 2층위치/* 테라스가 있으며, 테라스에서 바베큐 가능',
+        'TV, 침대, 에어컨, 식탁, 냉장고, 취사도구, 전기밥솥, 세면도구, 드라이기',
+        4,
+        0);
+        
+        
+INSERT INTO ROOM
+VALUES( SEQ_ROOM.NEXTVAL, 
+        '럭셔리',
+        '복층(침대룸+거실+주방+화장실)',
+        '12평',
+        2,
+        5,
+        90000,
+        130000,
+        190000,
+        190000,
+        '* 2층위치/* 테라스가 있으며, 테라스에서 바베큐 가능',
+        'TV, 침대, 에어컨, 식탁, 냉장고, 취사도구, 전기밥솥, 세면도구, 드라이기',
+        4,
+        0);

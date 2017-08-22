@@ -74,6 +74,9 @@ HERO Pension
 	</div>
 </div>
 
+<!-- // 테스트  -->
+<a href="./pension/pensionList.jsp">펜션리스트</a>
+
 <a href="./room/roomController.jsp?command=roomInfo&seq_pen=4" >룸 정보 보기</a>
 </body>
 </html>
