@@ -16,14 +16,6 @@ case "list" :
 case "write" :
 	response.sendRedirect("./bbswrite.jsp");
 	break; 
-case "update" :
-	response.sendRedirect("./bbsupdate.jsp");
-	break; 
-case "detail" :
-	int seq = Integer.parseInt(request.getParameter("seq"));
-	response.sendRedirect("bbsdetail.jsp?seq="+ seq);
-	//pageContext.forward("bbsdetail.jsp?seq="+ seq);
-	break; 
 }
 %>
 </body>

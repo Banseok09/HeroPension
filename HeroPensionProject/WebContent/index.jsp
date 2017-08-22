@@ -26,10 +26,7 @@
 </head>
 <body style="margin: 0 auto; text-align:center " >
 <div style="text-align:right">
-
-<a href="./member/memberController.jsp?command=update">정보수정</a>
-<a href="./noticebbs/noticeBbsController.jsp?command=list">공지사항</a>
-<a href="./reviewbbs/reviewBbsController.jsp?command=list">리뷰게시판</a>
+<a href="./reviewbbs/reviewBbsController.jsp?command=list">게시판</a>
 <a href="./member/memberController.jsp?command=login">로그인</a>
 <a href="./member/memberController.jsp?command=regi">회원가입</a>
 </div>
@@ -50,15 +47,14 @@ HERO Pension
 </h2>
 <div style="width:400px; margin: 0 auto">
 	<div class="form-group">
-		<div class="input-group input-group-lg">
-			<input type="text" class="form-control" placeholder="&#xf002; 검색" style="font-family: FontAwesome">
-			<span class="input-group-btn">
-		        <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
-		    </span>
-		</div>
+	<div class="input-group input-group-lg">
+		<input type="text" class="form-control" placeholder="&#xf002; 검색" style="font-family: FontAwesome">
+		<span class="input-group-btn">
+	        <button class="btn btn-info" type="button"><i class="fa fa-search"></i></button>
+	    </span>
+	</div>
 	</div>
 </div>
-
 <div class="gnb_menu">
 	<div class="inner">
 		<ul>

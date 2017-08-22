@@ -4,7 +4,7 @@
 <head>
 <link rel="shortcut icon" href="../image/favicon-96x96.png">
 <title>login</title>
-<!-- ajax + jQuery -->
+<!-- ajax + jQeury -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- cookie -->
 <script src="../js/jquery.cookie.js"></script>

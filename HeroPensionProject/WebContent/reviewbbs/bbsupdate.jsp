@@ -1,7 +1,7 @@
-<%@page import="reviewBBS.ReviewBbsDto"%>
-<%@page import="reviewBBS.ReviewBbsDao"%>
-<%@page import="reviewBBS.IReviewBbsDao"%>
-<%@page import="member.MemberDTO"%>
+<%@page import="bbs.BbsDto"%>
+<%@page import="bbs.BbsDao"%>
+<%@page import="bbs.iBbsDao"%>
+<%@page import="member.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,12 +26,12 @@ table{
 <body>
 <%
 Object ologin = session.getAttribute("login");
-MemberDTO mem = null;
-mem = (MemberDTO)ologin;
+MemberDto mem = null;
+mem = (MemberDto)ologin;
 
-IReviewBbsDao dao = ReviewBbsDao.getInstance();
+iBbsDao dao = BbsDao.getInstance();
 int seq = Integer.parseInt(request.getParameter("seq"));
-ReviewBbsDto bbs = dao.getBbs(seq);
+BbsDto bbs = dao.getBbs(seq);
 
 %>
 
@@ -47,7 +47,7 @@ ReviewBbsDto bbs = dao.getBbs(seq);
 		<td>
 		<input type="text" name="id" readonly="readonly"
 			 class="form-control" style="background-color: white"
-			 size="50" value="park<%-- <%=mem.getId() --%>" >
+			 size="50" value="<%=mem.getId() %>" >
 		</td>
 	</tr>
 	
