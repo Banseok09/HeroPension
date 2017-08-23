@@ -73,6 +73,7 @@ public class reservDao implements IreservDao {
 		
 		return list;
 	}
+<<<<<<< HEAD
 	
 	
 
@@ -85,6 +86,8 @@ public class reservDao implements IreservDao {
 		
 		return null;
 	}
+=======
+>>>>>>> ad3b5eeb71b51e63758887854f2630a8604cf4ea
 
 	@Override
 	public boolean addReserv(reservDto reservdto) {
