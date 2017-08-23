@@ -70,6 +70,7 @@ function allChecked(){
 	return id_checked
 	    && pw_checked
 	    && pw_same_checked
+	    && name_checked
 	    && email_checked
 	    && phone_checked;
 }
@@ -266,7 +267,7 @@ $(document).ready(function(){
 			data:{"_phone":phoneText}
 		}).done(function(data){				
 			if($.trim(data) == 'YES'){
-				alert("사용가능");
+			//	alert("사용가능");
 				if(regExp.test(phoneText)){
 					$("#_phone").css("border","2px solid #4CAF50");
 					$("#phone_check_text").css("font-size","10px").css("color","#4CAF50");
@@ -279,7 +280,7 @@ $(document).ready(function(){
 					phone_checked = false;
 				}				
 			}else{
-				alert("사용불가");
+		//		alert("사용불가");
 				if(!regExp.test(phoneText)){
 					$("#_phone").css("border","2px solid red");
 					$("#phone_check_text").css("font-size","10px").css("color","red");

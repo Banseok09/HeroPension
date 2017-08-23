@@ -18,7 +18,7 @@
 	switch(command){
 		case "roomInfo" :				
 			response.sendRedirect("./roomInfo.jsp?seq_pen="+seq_pen);
-			break; 	
+			break; 			
 	}
 
 /* 	

@@ -1,4 +1,7 @@
 
+<%@page import="noticeBBS.NoticeBbsDto"%>
+<%@page import="noticeBBS.NoticeBbsDao"%>
+<%@page import="noticeBBS.INoticeBbsDao"%>
 <%@page import="reviewBBS.ReviewBbsDto"%>
 <%@page import="reviewBBS.ReviewBbsDao"%>
 <%@page import="reviewBBS.IReviewBbsDao"%>
@@ -29,8 +32,8 @@ table{
 String seqStr = request.getParameter("seq");
 int seq = Integer.parseInt(seqStr.trim());
 
-IReviewBbsDao dao = ReviewBbsDao.getInstance();
-ReviewBbsDto bbs = dao.getBbs(seq);
+INoticeBbsDao dao = NoticeBbsDao.getInstance();
+NoticeBbsDto bbs = dao.getBbs(seq);
 if(bbs==null){
 	%>
 	<script type="text/javascript">
@@ -65,12 +68,6 @@ dao.addReadcount(seq); // 조회수 증가
 </tr>
 <tr>
 	<td>작성일</td><td><%=bbs.getWdate() %></td>
-</tr>
-<tr>
-	<td>조회수</td><td><%=bbs.getReadcount() %></td>
-</tr>
-<tr>
-	<td>평점</td><td><%=bbs.getRate()%></td>
 </tr>
 <tr>
 	<td>조회수</td><td><%=bbs.getReadcount() %></td>
