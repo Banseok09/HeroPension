@@ -25,6 +25,8 @@
 <a href="./reviewbbs/reviewBbsController.jsp?command=list">리뷰게시판</a>
 <a href="./member/memberController.jsp?command=login">로그인</a>
 <a href="./member/memberController.jsp?command=regi">회원가입</a>
+<a href="./admin/AdminController.jsp?command=enterregi">가맹점등록</a>
+<a href="./admin/AdminController.jsp?command=admin">가맹점요청목록</a>
 </div>
 
 <h1 style="align:center">
