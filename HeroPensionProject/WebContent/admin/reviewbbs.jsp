@@ -1,16 +1,17 @@
 <%@page import="member.MemberDao"%>
 <%@page import="member.MemberDTO"%>
-<%@page import="noticeBBS.NoticeBbsDto"%>
-<%@page import="noticeBBS.NoticeBbsDao"%>
-<%@page import="noticeBBS.PagingBean"%>
-<%@page import="noticeBBS.INoticeBbsDao"%>
 <%@page import="java.util.List"%>
-
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@page import="reviewBBS.PagingBean"%>
+<%@page import="reviewBBS.ReviewBbsDto"%>
+<%@page import="reviewBBS.ReviewBbsDao"%>
+<%@page import="reviewBBS.IReviewBbsDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>bbslist</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>리뷰 게시판 관리</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -35,19 +36,26 @@ th, td{
 <%
 Object ologin = session.getAttribute("login");
 MemberDTO mem = null;
-MemberDao.getInstance();
 if(ologin==null){%>
-	<script type="text/javascript">
-		alert("로그인 해주십시오");
-		location.href = "index.jsp";
-	</script>
+<script type="text/javascript">
+	alert("로그인 해주십시오");
+	location.href = "../index.jsp";
+</script>
 <%}else{
-	mem = (MemberDTO)ologin;
+mem = (MemberDTO)ologin;
+if(mem.getAuth()!=1){
+	%>
+	<script type="text/javascript">
+		alert("관리자로 로그인 해주십시오");
+		location.href = "../index.jsp";
+	</script>
+<%
+}
 } %>
 
 <%!
 public String arrow(int depth){
-	String rs = "<i class='fa fa-arrow-right'></i>";
+	String rs = "<img src='image/arrow.png' width='20px' height='20px'>";
 	String nbsp = "&nbsp;&nbsp;&nbsp;&nbsp;";
 	String ts = "";
 	
@@ -56,10 +64,6 @@ public String arrow(int depth){
 }
 %>
 
-<h3>환영합니다park님 반갑습니다.</h3>
-
-<a href="../index.jsp">Home</a>
-<hr>
 <%
 
 PagingBean paging = new PagingBean();
@@ -73,45 +77,44 @@ String search_key = request.getParameter("search_key");
 if(search_type==null) search_type="";
 if(search_key==null) search_key=""; 
 
-INoticeBbsDao dao = NoticeBbsDao.getInstance();
-List<NoticeBbsDto> bbslist = dao.getBbsList(paging);
+IReviewBbsDao dao = ReviewBbsDao.getInstance();
+List<ReviewBbsDto> bbslist = dao.getBbsList(paging);
 System.out.println("bbslist" + bbslist.toString());
 
 %>
 <div class="center">
-<h1>공지사항</h1>
-<a href="bbswrite.jsp">글쓰기</a>
-
+<h1>리뷰 게시판 관리</h1>
 <table class="table table-striped table-bordered">
-<col width="50"><col width="400"><col width="50"><col width="50">
+<col width="50"><col width="400"><col width="50"><col width="50"><col width="50">
 <thead>
 <tr>
-<th>번호</th><th class="title">제목</th><th>작성자</th><th>조회수</th>
+<th>번호</th><th class="title">제목</th><th>작성자</th><th>평점</th><th>조회수</th>
 </tr>
 </thead>
 
 <tbody>
 <% for(int i=0; i<bbslist.size(); i++){
-	NoticeBbsDto bbs = bbslist.get(i);
+	ReviewBbsDto bbs = bbslist.get(i);
 	%>
 	<tr>
 		<td><%=i+1 %></td>
 		<td class="title">
 			<%=arrow(bbs.getDepth())%>
 			<% if(bbs.getDel()==0){ %>
-			<a href="noticeBbsController.jsp?command=detail&seq=<%=bbs.getSeq_notice()%>"><%=bbs.getTitle() %> </a>
+			<a href="AdminController.jsp?command=reviewdetail&seq=<%=bbs.getReview_seq()%>"><%=bbs.getTitle() %> </a>
 			<%} else { %>
 				삭제된 글입니다.
 			<%} %>
 		</td>
 		<td><%=bbs.getId() %></td>
+		<td><%=bbs.getRate() %></td>
 		<td><%=bbs.getReadcount() %></td>
 	</tr>
 <%} %>
 	<tr>
-	<td colspan="4">
+	<td colspan="5">
 	<jsp:include page="paging.jsp">
-		<jsp:param name="actionPath" value="bbslist.jsp"/>
+		<jsp:param name="actionPath" value="reviewbbs.jsp"/>
 		<jsp:param name="nowPage" value="<%=String.valueOf(paging.getNowPage()) %>" />
 		<jsp:param name="totalCount" value="<%=String.valueOf(paging.getTotalCount()) %>" />
 		<jsp:param name="countPerPage" value="<%=String.valueOf(paging.getCountPerPage()) %>" />

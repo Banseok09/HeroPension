@@ -228,4 +228,33 @@ public class ReviewBbsDao implements IReviewBbsDao{
 		return count>0?true:false;
 		
 	}
+	@Override public boolean deleteBbs(int seq) {
+		String sql = " DELETE FROM REVIEWBBS "
+				   + " WHERE SEQ_REVIEW=? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+		int count = 0;
+
+		try {
+			conn = DBConn.getConnection();
+			log("1/5 S DBConn deleteBbs");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			log("2/5 S psmt set deleteBbs");
+
+			count = psmt.executeUpdate();
+			log("3/5 S executeUpdate deleteBbs");
+
+		}catch (SQLException e) {
+			log("SQL F deleteBbs", e);
+		}finally {
+			DBConn.close(psmt, conn);
+			log("4/5 S deleteBbs");
+			log("5/5 S deleteBbs");
+		}
+		return count>0?true:false;
+	}
 }

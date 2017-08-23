@@ -1,7 +1,9 @@
+<%@page import="member.MemberDao"%>
+<%@page import="member.MemberDTO"%>
+<%@page import="reviewBBS.PagingBean"%>
 <%@page import="reviewBBS.ReviewBbsDto"%>
 <%@page import="reviewBBS.ReviewBbsDao"%>
 <%@page import="reviewBBS.IReviewBbsDao"%>
-<%@page import="reviewBBS.PagingBean"%>
 <%@page import="java.util.List"%>
 
 <%@ page contentType="text/html; charset=UTF-8"%>
@@ -30,9 +32,9 @@ th, td{
 </head>
 <body>
 
-<%-- <%
+<%
 Object ologin = session.getAttribute("login");
-MemberDto mem = null;
+MemberDTO mem = null;
 MemberDao.getInstance();
 if(ologin==null){%>
 	<script type="text/javascript">
@@ -40,8 +42,8 @@ if(ologin==null){%>
 		location.href = "index.jsp";
 	</script>
 <%}else{
-	mem = (MemberDto)ologin;
-} %> --%>
+	mem = (MemberDTO)ologin;
+} %>
 
 <%!
 public String arrow(int depth){
@@ -54,7 +56,7 @@ public String arrow(int depth){
 }
 %>
 
-<h3>환영합니다park님 반갑습니다.</h3>
+<h3>환영합니다<%=mem.getId() %>님 반갑습니다.</h3>
 
 <a href="memberController.jsp?command=logout">로그아웃</a>
 <a href="memberController.jsp?command=signout" id="signout">회원탈퇴</a>
@@ -141,6 +143,7 @@ System.out.println("bbslist" + bbslist.toString());
 </div>
 
 <script type="text/javascript">
+
 </script>
 </body>
 </html>

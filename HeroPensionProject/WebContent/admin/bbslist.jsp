@@ -37,12 +37,19 @@ Object ologin = session.getAttribute("login");
 MemberDTO mem = null;
 MemberDao.getInstance();
 if(ologin==null){%>
-	<script type="text/javascript">
-		alert("로그인 해주십시오");
-		location.href = "index.jsp";
-	</script>
+<script type="text/javascript">
+	alert("로그인 해주십시오");
+	location.href = "../index.jsp";
+</script>
 <%}else{
-	mem = (MemberDTO)ologin;
+mem = (MemberDTO)ologin;
+if(mem.getAuth()!=1){
+	%>
+	<script type="text/javascript">
+		alert("관리자로 로그인 해주십시오");
+		location.href = "../index.jsp";
+	</script>
+<% }
 } %>
 
 <%!

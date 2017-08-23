@@ -1,4 +1,6 @@
 
+<%@page import="member.MemberDao"%>
+<%@page import="member.MemberDTO"%>
 <%@page import="noticeBBS.NoticeBbsDto"%>
 <%@page import="noticeBBS.NoticeBbsDao"%>
 <%@page import="noticeBBS.INoticeBbsDao"%>
@@ -11,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>bbsDetail</title>
+<title>공지사항</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -27,7 +29,26 @@ table{
 </style>
 </head>
 <body>
-
+<%
+Object ologin = session.getAttribute("login");
+MemberDTO mem = null;
+MemberDao.getInstance();
+if(ologin==null){%>
+	<script type="text/javascript">
+		alert("로그인 해주십시오");
+		location.href = "../index.jsp";
+	</script>
+<%}else{
+	mem = (MemberDTO)ologin;
+	if(mem.getAuth()!=1){
+		%>
+		<script type="text/javascript">
+			alert("관리자로 로그인 해주십시오");
+			location.href = "../index.jsp";
+		</script>
+	<%
+	}
+} %>
 <%
 String seqStr = request.getParameter("seq");
 int seq = Integer.parseInt(seqStr.trim());
@@ -56,7 +77,7 @@ dao.addReadcount(seq); // 조회수 증가
 %>
 
 <div class="center">
-<h1>리뷰</h1>
+<h1>공지사항</h1>
 
 <table class="table table-bordered">
 <col width="100"> <col width="500">
@@ -77,29 +98,39 @@ dao.addReadcount(seq); // 조회수 증가
 	<td><textarea rows="10" cols="50" name="content" 
 	readonly="readonly" class="form-control" style="background: white"><%=bbs.getContent() %></textarea></td>
 </tr>
+<tr>
+	<td colspan="2" align="center">
+		<form id="form" method="post" style="text-align:center">
+			<input type="hidden" name="seq" value="<%=seq %>">
+			<input type="button" class="btn btn-success" id="bbs_update" value="수정">
+			<input type="button" class="btn btn-warning" id="bbs_delete" value="삭제">
+		</form>
+	</td>
 
+</tr>
 
 </table>
 
-<form action="answer.jsp" method="post">
-<input type="hidden" name="seq" value="<%=seq %>">
-<input type="submit" class="btn btn-success" value="답글">
-</form>
+
 
 <br>
-<a href="bbslist.jsp" class="btn btn-link">글목록</a>
-<%-- <%
-Object ologin = (Object)session.getAttribute("login");
-MemberDto ldto = (MemberDto)ologin;
-if(bbs.getId().equals(ldto.getId())){
-	%>
-	<a class="btn btn-link" href="bbsupdate.jsp?seq=<%=bbs.getSeq() %>">글수정</a>
-	<a class="btn btn-link" href="bbsdelete.jsp?seq=<%=bbs.getSeq() %>">글삭제</a>
-	<%
-}
-%> --%>
-
-
+<a href="AdminController.jsp?command=noticebbs" class="btn btn-link">글목록</a>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#bbs_update").click(function(){
+		$("#form").attr("action", "./AdminController.jsp?command=noticeupdate").submit();
+	});
+	$("#bbs_delete").click(function(){
+		var del = confirm("정말로 삭제하시겠습니까?");
+		if(del){
+			$("#form").attr("action", "./AdminController.jsp?command=noticedelete").submit();
+		}
+	});
+});
+
+
+</script>
 </body>    
 </html>
