@@ -37,8 +37,6 @@ REFERENCES MEMBER(ID);
 
 public class PensionDto implements Serializable {
 	
-	private static final long serialVersionUID = 8561426898926970448L;
-	
 	private int seq_pen;
 	private String id;
 	private String name_pen;
