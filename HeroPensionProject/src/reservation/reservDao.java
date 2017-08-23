@@ -73,21 +73,15 @@ public class reservDao implements IreservDao {
 		
 		return list;
 	}
-<<<<<<< HEAD
 	
 	
 
 	@Override
-	public List<reservDto> getReservDay(String date) {
-		String sql = " SELECT SEQ_RES, SEQ_PEN, SEQ_ROOM, ID, CHECKIN, CHECKOUT, PERSON_TOTAL, BBQ, PRICE_RES, DATE_RES, DEL_RES
-				FROM RESERVATION
-				WHERE (CHECKIN = NULL AND CHECKOUT = NULL) OR 
-				(CHECKIN < TO_DATE((?), 'YYYY/DD/MM') AND CHECKOUT > TO_DATE((?), 'YYYY/DD/MM')) "";
+	public List<reservDto> getReservDate(String date) {
+		String sql = 
 		
 		return null;
 	}
-=======
->>>>>>> ad3b5eeb71b51e63758887854f2630a8604cf4ea
 
 	@Override
 	public boolean addReserv(reservDto reservdto) {
