@@ -1,10 +1,11 @@
-<%@page import="member.MemberDao"%>
-<%@page import="member.IMemberDao"%>
+<%@page import="admin.enterpriseDao"%>
+<%@page import="admin.IenterpriseDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
 <% 
-IMemberDao dao = MemberDao.getInstance();
+IenterpriseDao dao = enterpriseDao.getInstance();
 String command = request.getParameter("command");
 
 String userid = request.getParameter("_userid");
@@ -76,18 +77,3 @@ if(command.equals("phoneCheck")){
 
 
 %>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
