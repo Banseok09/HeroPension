@@ -219,6 +219,5 @@ public class NoticeBbsDao implements INoticeBbsDao{
 			log("6/6 S updateBbs");
 		}
 		return count>0?true:false;
-		
 	}
 }
