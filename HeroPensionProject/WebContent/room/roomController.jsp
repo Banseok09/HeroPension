@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="room.RoomDao"%>
-<%@page import="room.RoomDao_i"%>
+<%@page import="room.IRoomDao"%>
 <%@page import="room.RoomDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
 	switch(command){
 		case "roomInfo" :				
 			response.sendRedirect("./roomInfo.jsp?seq_pen="+seq_pen);
-			break; 	
+			break; 			
 	}
 
 /* 	

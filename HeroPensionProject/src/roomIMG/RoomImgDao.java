@@ -9,7 +9,7 @@ import java.util.List;
 
 import jdbc.DBConn;
 
-public class RoomImgDao implements IRoomImg {
+public class RoomImgDao implements IRoomImgDao {
 	
 	private static RoomImgDao roomImgDao = null;
 	
@@ -26,7 +26,8 @@ public class RoomImgDao implements IRoomImg {
 	public List<RoomImgDto> getRoomImgList(int seq_room) {
 		
 		String sql = " SELECT SEQ_IMG_ROOM, SEQ_ROOM, IMG_NAME_ROOM, IMG_SRC_ROOM "
-	               + " FROM ROOM_IMG " 
+	               + " FROM ROOM_IMG "
+	               + " WHERE SEQ_ROOM="+seq_room 
 	               + " ORDER BY SEQ_IMG_ROOM";
 
 		Connection conn = null;
@@ -53,7 +54,7 @@ public class RoomImgDao implements IRoomImg {
 							 					rs.getString(i++)); //IMG_SRC_ROOM
 				list.add(dto);				
 			}System.out.println("5/6 Success getRoomImgList()");				
-
+			
 		} catch (SQLException e) {
 			//e.printStackTrace();
 			System.out.println(e.getMessage());
