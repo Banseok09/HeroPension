@@ -1,7 +1,6 @@
 *.class
-/.metadata/
-/Servers/
-/HeroPensionProject/src/jdbc/DBConn.java
-/HeroPensionProject/build/classes/
-/HeroPensionProject/build/classes/jdbc/DBConn.class
-/.recommenders/
+.metadata/
+Servers/
+HeroPensionProject/build/classes/
+HeroPensionProject/src/jdbc/DBConn.java
+.recommenders/
