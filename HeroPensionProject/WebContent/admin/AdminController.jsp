@@ -122,7 +122,7 @@ case "noticewrite":
 	response.sendRedirect("./noticewrite.jsp");
 	break;
 case "noticewriteAf":
-	String id = request.getParameter("id");
+	id = request.getParameter("id");
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
 	NoticeBbsDto dto = new NoticeBbsDto(id,title,content);
