@@ -14,6 +14,9 @@
 String command = request.getParameter("command");
 IMemberDao dao = MemberDao.getInstance();
 
+
+
+
 switch(command){
 case "login" : response.sendRedirect("./login.jsp"); break; 
 	
@@ -47,7 +50,7 @@ case "loginAf" :
 	%>
 	
 	<%
-	break; 
+	break; 	
 
 case "regi" : response.sendRedirect("./regi.jsp"); break; 
 	

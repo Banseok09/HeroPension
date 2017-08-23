@@ -111,7 +111,7 @@ public class MemberDao implements IMemberDao {
 		return count>0?true:false;
 	}
 
-	
+	// 회원 수정
 	@Override
 	public boolean updateMem(String id,String pw, String name, String phone, String email) {
 		
@@ -147,6 +147,101 @@ public class MemberDao implements IMemberDao {
 			System.out.println("6/6 S updateMem");
 		}
 		
+		return count>0?true:false;
+	}
+	
+	// 아이디 중복 체크 
+	@Override
+	public boolean idCheck(String id) {
+		
+		String sql = " SELECT ID "
+				+ " FROM MEMBER "
+				+ " WHERE ID=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;		
+		int count = 0;		
+		
+		try {
+			conn = DBConn.getConnection();
+			System.out.println("2/6 S idCheck");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			System.out.println("3/6 S idCheck");
+			
+			count = psmt.executeUpdate();
+			System.out.println("4/6 S idCheck");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBConn.close(psmt, conn);
+			System.out.println("5/6 S idCheck");
+		}
+		
+		
+		return count>0?true:false;
+	}
+	// 이메일 중복 체크
+	@Override
+	public boolean emailCheck(String email) {
+		String sql = " SELECT EMAIL "
+				+ " FROM MEMBER "
+				+ " WHERE EMAIL=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;		
+		int count = 0;		
+		
+		try {
+			conn = DBConn.getConnection();
+			System.out.println("2/6 S emailCheck");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, email);
+			System.out.println("3/6 S emailCheck");
+			
+			count = psmt.executeUpdate();
+			System.out.println("4/6 S emailCheck");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBConn.close(psmt, conn);
+			System.out.println("5/6 S emailCheck");
+		}		
+		return count>0?true:false;
+	}
+	// 전화번호 중복 체크
+	@Override
+	public boolean phoneCheck(String phone) {
+		
+		String sql = " SELECT PHONE "
+				+ " FROM MEMBER "
+				+ " WHERE PHONE=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;		
+		int count = 0;		
+		
+		try {
+			conn = DBConn.getConnection();
+			System.out.println("2/6 S phoneCheck");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, phone);
+			System.out.println("3/6 S phoneCheck");
+			
+			count = psmt.executeUpdate();
+			System.out.println("4/6 S phoneCheck");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			DBConn.close(psmt, conn);
+			System.out.println("5/6 S phoneCheck");
+		}
 		return count>0?true:false;
 	}
 	

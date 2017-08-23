@@ -51,8 +51,4 @@ public class MemberDTO implements Serializable{
 				+ ", auth=" + auth + ", del=" + del + "]";
 	}
 	
-	
-	
-	
-	
 }

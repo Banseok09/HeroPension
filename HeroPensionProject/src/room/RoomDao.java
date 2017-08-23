@@ -9,7 +9,7 @@ import java.util.List;
 
 import jdbc.DBConn;
 
-public class RoomDao implements RoomDao_i {
+public class RoomDao implements IRoomDao {
 	
 	private static RoomDao roomDao = null;
 	
@@ -30,24 +30,7 @@ public class RoomDao implements RoomDao_i {
 				          + " INFO_ROOM, ITEM, SEQ_PEN, DEL_ROOM " 
 	               + " FROM ROOM " 
 	               + " ORDER BY SEQ_ROOM";
-		
-/*		
-		private int seq_room;
-		private String name_room;
-		private String type_room;
-		private String size_room;
-		private int person_min;
-		private int person_max;
-		private int price_basic;
-		private int price_weekend;
-		private int price_season_basic;
-		private int price_season_weekend;
-		private String info_room;
-		private String item;
-		private int seq_pen;
-		private int del_room;
-*/
-	
+
 		Connection conn = null;
 		PreparedStatement psmt = null;	
 		ResultSet rs = null;
