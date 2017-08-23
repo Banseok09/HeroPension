@@ -8,5 +8,6 @@ public interface INoticeBbsDao {
 	public NoticeBbsDto getBbs(int seq);
 	public void addReadcount(int seq);
 	public boolean updateBbs(NoticeBbsDto bbs, int seq);
+	public boolean deleteBbs(int seq);
 	
 }

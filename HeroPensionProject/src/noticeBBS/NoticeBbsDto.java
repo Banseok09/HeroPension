@@ -28,6 +28,11 @@ public class NoticeBbsDto implements Serializable{
 		this.del = del;
 		this.readcount = readcount;
 	}
+	public NoticeBbsDto(String id, String title, String content) {
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
 	public int getSeq_notice() {  return seq_notice; }
 	public String getId() {  return id;  }
 	public String getTitle() { return title; }
