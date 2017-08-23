@@ -31,7 +31,7 @@ if(command.equals("idCheck")){
 	}else{ // 계정이 존재하지 않을 때
 		str = "YES";
 		out.print(str);
-	}	
+	}
 }
 
 if(command.equals("emailCheck")){
@@ -64,30 +64,12 @@ if(command.equals("phoneCheck")){
 	if(!phone.equals("")){
 		phoneCheck = dao.phoneCheck(phone);
 	}
-	
 	if(phoneCheck){ // 전화번호가 존재할 때
-		str = "NO";
+		str = "NO"; 
 		out.print(str);
 	}else{ // 전화번호가 존재하지 않을 때
 		str = "YES";
 		out.print(str);
 	}	
 }
-
-
-%>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%>

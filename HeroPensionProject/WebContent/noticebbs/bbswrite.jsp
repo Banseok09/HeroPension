@@ -57,7 +57,7 @@ System.out.println(mem.toString()); */
 </form>
 </div>
 <a href="bbslist.jsp">글목록</a><br>
-<a href=#>로그아웃</a>
+<a href="../index.jsp">Home</a>
 
 <script>
 /* $(document).ready(function(){
