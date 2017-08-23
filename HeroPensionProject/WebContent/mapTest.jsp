@@ -75,7 +75,8 @@ var marker = new daum.maps.Marker({
 });
 var markerImage = new daum.maps.MarkerImage(
 		/* 'http://i1.daumcdn.net/dmaps/apis/n_local_blit_04.png', */
-		'./image/marker.png',
+		'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
+		/* './image/marker.png', */
 	    new daum.maps.Size(26, 37), new daum.maps.Point(13, 34));
 	marker.setImage(markerImage);
 
