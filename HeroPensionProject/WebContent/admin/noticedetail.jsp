@@ -17,6 +17,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 .center{
 	margin: auto;
@@ -102,8 +103,12 @@ dao.addReadcount(seq); // 조회수 증가
 	<td colspan="2" align="center">
 		<form id="form" method="post" style="text-align:center">
 			<input type="hidden" name="seq" value="<%=seq %>">
-			<input type="button" class="btn btn-success" id="bbs_update" value="수정">
-			<input type="button" class="btn btn-warning" id="bbs_delete" value="삭제">
+			<button type="button" class="btn btn-warning" id="bbs_update">
+				<i class="fa fa-pencil">&nbsp; 수정</i>
+			</button>
+			<button type="button" class="btn btn-danger" id="bbs_delete">
+				<i class="fa fa-trash">&nbsp; 삭제</i>
+			</button>
 		</form>
 	</td>
 

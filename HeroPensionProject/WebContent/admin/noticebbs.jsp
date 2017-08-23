@@ -120,7 +120,7 @@ List<NoticeBbsDto> bbslist = dao.getBbsList(paging);
 				<input type="hidden" name="command" value="noticeupdate">
 				<input type="hidden" name="seq" value="<%=bbs.getSeq_notice()%>">
 				<button type="button" name="bbs_update"
-				 class="btn btn-sm btn-warning"><i class="fa fa-minus-circle"></i></button>
+				 class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></button>
 			</form>
 		</td>
 		<td>
@@ -128,7 +128,7 @@ List<NoticeBbsDto> bbslist = dao.getBbsList(paging);
 				<input type="hidden" name="command" value="noticedelete">
 				<input type="hidden" name="seq" value="<%=bbs.getSeq_notice()%>">
 				<button type="button" name="bbs_delete"
-				 class="btn btn-sm btn-danger"><i class="fa fa-minus-circle"></i></button>
+				 class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
 			</form>
 		</td>
 	</tr>
