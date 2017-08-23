@@ -43,6 +43,27 @@ public class reservDto implements Serializable {
 	private int price_res;
 	private String date_res;
 	private int del_res;
+	
+	public reservDto() {}
+	
+	public reservDto(int seq_res, int seq_pen, int seq_room, String id, String checkin, String checkout,
+			int person_total, int bbq, int price_res, String date_res, int del_res) {
+		super();
+		this.seq_res = seq_res;
+		this.seq_pen = seq_pen;
+		this.seq_room = seq_room;
+		this.id = id;
+		this.checkin = checkin;
+		this.checkout = checkout;
+		this.person_total = person_total;
+		this.bbq = bbq;
+		this.price_res = price_res;
+		this.date_res = date_res;
+		this.del_res = del_res;
+	}
+
+
+
 	public int getSeq_res() {
 		return seq_res;
 	}
