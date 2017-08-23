@@ -28,8 +28,9 @@ public class RoomDao implements IRoomDao {
 		String sql = " SELECT SEQ_ROOM, NAME_ROOM, TYPE_ROOM, SIZE_ROOM, PERSON_MIN, PERSON_MAX, "
 				          + " PRICE_BASIC, PRICE_WEEKEND, PRICE_SEASON_BASIC, PRICE_SEASON_WEEKEND, "
 				          + " INFO_ROOM, ITEM, SEQ_PEN, DEL_ROOM " 
-	               + " FROM ROOM " 
-	               + " ORDER BY SEQ_ROOM";
+	               + " FROM ROOM " 				          
+	               + " WHERE SEQ_PEN=? "
+	               + " ORDER BY SEQ_ROOM ";
 
 		Connection conn = null;
 		PreparedStatement psmt = null;	
@@ -42,6 +43,7 @@ public class RoomDao implements IRoomDao {
 			System.out.println("2/6 Success getRoomList()");
 			
 			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq_pen);
 			System.out.println("3/6 Success getRoomList()");
 			
 			rs = psmt.executeQuery();
@@ -68,7 +70,7 @@ public class RoomDao implements IRoomDao {
 			
 			
 
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			//e.printStackTrace();
 			System.out.println(e.getMessage());
 		} finally {
