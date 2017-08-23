@@ -1,5 +1,7 @@
 package member;
 
+import java.util.List;
+
 public interface IMemberDao {
 
 	public MemberDTO login(String id, String pw);
@@ -8,5 +10,7 @@ public interface IMemberDao {
 	public boolean idCheck(String id);
 	public boolean emailCheck(String email);
 	public boolean phoneCheck(String phone);
+	public List<MemberDTO> requestList();
+	public boolean req_answer(String id, int auth);
 	
 }

@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="shortcut icon" href="../image/favicon-96x96.png">
-<title>회원 가입</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>가맹정 등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -12,18 +12,16 @@
 <link href="../css/regi.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+
 <div style="text-align:right">
 <a href="../index.jsp">HOME</a>
 </div>
-<%
-String test=  "tEST입니다.";
-%>
 
 <div class="center">
-<h1>회원등록</h1>
+<h1>가맹정 등록</h1>
 <br>
-<form id="_regiForm" method="post">
-<input type="hidden" name="command" value="regiAf">
+<form id="_enterpriseForm" method="post">
+<input type="hidden" name="command" value="enterlogin">
 <div class="form-group">
 
 	<input type="text" id="_userid" name="id" class="form-control input-lg"
@@ -38,9 +36,9 @@ String test=  "tEST입니다.";
 	placeholder="&#xf09c; password 확인" style="font-family: FontAwesome; font-size: 20px">
 	<span id="pw_same_check_text"> </span>
 	
-	<input type="text" id="_name" name="name" class="form-control input-lg"
-	placeholder="&#xf2c3; 이름" style="font-family: FontAwesome; font-size: 20px">
-	<span id="name_check_text"> </span>
+	<input type="text" id="_enter_name" name="name" class="form-control input-lg"
+	placeholder="&#xf015; 업체명" style="font-family: FontAwesome; font-size: 20px">
+	<span id="entername_check_text"> </span>
 
 	<input type="text" id="_email" name="email" class="form-control input-lg"
 	placeholder="&#xf0e0; E-Mail" style="font-family: FontAwesome; font-size: 20px">
@@ -50,27 +48,25 @@ String test=  "tEST입니다.";
 	placeholder="&#xf098; 전화번호" style="font-family: FontAwesome; font-size: 20px">
 	<span id="phone_check_text"> </span>
 
-	<input type="button" id="_btnRegi" value="회원가입" class="btn btn-primary btn-lg btn-block">
+	<input type="button" id="_btnEnterprise" value="가맹점등록" class="btn btn-primary btn-lg btn-block">
 </div>
 </form>
-<a href="./memberController.jsp?command=login" >로그인</a>
+<a href="./AdminController.jsp?command=enterlogin" >업체 로그인</a>
 </div>
 
 
-
-<!-- <script type="text/javascript" src="../js/regi.js" ></script>  -->
 <script type="text/javascript">
 var id_checked = false;
 var pw_checked = false;
 var pw_same_checked = false;
-var name_checked = false;
+var enter_name_checked = false;
 var email_checked = false;
 var phone_checked = false;
 function allChecked(){
 	return id_checked
 	    && pw_checked
 	    && pw_same_checked
-	    && name_checked
+	    && enter_name_checked
 	    && email_checked
 	    && phone_checked;
 }
@@ -81,10 +77,10 @@ $(document).ready(function(){
 		var regExp = /^[a-zA-Z][\w-]{6,14}$/;	
 		$.ajax({
 			type:"post",
-			url:"check.jsp?command=idCheck",
+			url:"./entCheck.jsp?command=idCheck",
 			data:{"_userid":idText}
-		}).done(function(data){				
-			if($.trim(data) == 'YES'){	// 사용 가능 할때
+		}).done(function(data){		
+			if($.trim(data) == 'YES'){	// 사용 가능 할때				
 				if(regExp.test(idText)){
 					$("#_userid").css("border","2px solid #4CAF50");
 					$("#id_check_text").css("font-size","10px").css("color","#4CAF50");
@@ -110,36 +106,7 @@ $(document).ready(function(){
 				}				
 			}			
 		});		
-		
-		/* 
-		if(idText==""){
-			$("#_userid").css("border","2px solid red");
-			$("#id_check_text").css("font-size","10px").css("color","red");
-			$("#id_check_text").text("필수 입력 사항입니다.");
-			id_checked=false;
-			return;
-		}
-		
-		// 영대소문자로 시작  영문+숫자 7~15글자
-	//	var regExp = /^[a-zA-Z][\w-]{6,14}$/;		
-		if(regExp.test(idText)){
-			if(regExp.test(idText)){
-				$("#_userid").css("border","2px solid #4CAF50");
-				$("#id_check_text").css("font-size","10px").css("color","#4CAF50");
-				$("#id_check_text").text("멋진 아이디네요!");
-				id_checked=true;
-			}else{
-				$("#_userid").css("border","2px solid red");
-				$("#id_check_text").css("font-size","10px").css("color","red");
-				$("#id_check_text").text("이미 사용중인 아이디입니다");
-				id_checked=false;
-			}
-		}else{
-			$("#_userid").css("border","2px solid red");
-			$("#id_check_text").css("font-size","10px").css("color","red");
-			$("#id_check_text").text("영어로 시작하는 7~15자리 영문,숫자 조합으로 만들어주세요");
-			id_checked=false;
-		}  */
+
 	});
 	$("#_pwd").blur(function(){
 		var pwText = $("#_pwd").val();
@@ -192,28 +159,29 @@ $(document).ready(function(){
 		}
 	});
 	
-	$("#_name").blur(function(){
-		var nameText = $("#_name").val();
-		if(nameText==""){
-			$("#_name").css("border","2px solid red");
-			$("#name_check_text").css("font-size","10px").css("color","red");
-			$("#name_check_text").text("필수 입력 사항입니다.");
-			name_checked = false;
-			return;
-		}
-		
+	$("#_enter_name").blur(function(){
+		var enternameText = $("#_enter_name").val();
 		// 한글이나 영문 2글자이상 30글자 이하
 		var regExp  = /^.*(?=^[\sa-zA-Z가-힣]{2,30}$)(?=.*[a-zA-Z|가-힣]).*$/;
-		if(regExp.test(nameText)){
-			$("#_name").css("border","2px solid #4CAF50");
-			$("#name_check_text").css("font-size","10px").css("color","#4CAF50");
-			$("#name_check_text").text("멋진 이름이군요!");
-			name_checked = true;
+		
+		if(enternameText==""){
+			$("#_enter_name").css("border","2px solid red");
+			$("#entername_check_text").css("font-size","10px").css("color","red");
+			$("#entername_check_text").text("필수 입력 사항입니다.");
+			enter_name_checked = false;
+			return;
+		}
+					
+		if(regExp.test(enternameText)){
+			$("#_enter_name").css("border","2px solid #4CAF50");
+			$("#entername_check_text").css("font-size","10px").css("color","#4CAF50");
+			$("#entername_check_text").text("멋진 펜션이군요!");
+			enter_name_checked = true;
 		}else{
-			$("#_name").css("border","2px solid red");
-			$("#name_check_text").css("font-size","10px").css("color","red");
-			$("#name_check_text").text("영어 또는 한글로 2자리 이상 30자리 이하로 입력해주세요");
-			name_checked = false;
+			$("#_enter_name").css("border","2px solid red");
+			$("#entername_check_text").css("font-size","10px").css("color","red");
+			$("#entername_check_text").text("영어 또는 한글로 2자리 이상 30자리 이하로 입력해주세요");
+			enter_name_checked = false;
 		}
 	});
 	
@@ -223,7 +191,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:"post",
-			url:"check.jsp?command=emailCheck",
+			url:"./entCheck.jsp?command=emailCheck",
 			data:{"_email":emailText}
 		}).done(function(data){								
 			if($.trim(data) == 'YES'){		// 사용 가능할때
@@ -263,11 +231,11 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:"post",
-			url:"check.jsp?command=phoneCheck",
+			url:"./entCheck.jsp?command=phoneCheck",
 			data:{"_phone":phoneText}
 		}).done(function(data){				
 			if($.trim(data) == 'YES'){
-			//	alert("사용가능");
+		//		alert("사용가능");
 				if(regExp.test(phoneText)){
 					$("#_phone").css("border","2px solid #4CAF50");
 					$("#phone_check_text").css("font-size","10px").css("color","#4CAF50");
@@ -297,12 +265,11 @@ $(document).ready(function(){
 		});		
 	});
 	
-	$("#_btnRegi").click(function(){
-		alert("ddlaj");
+	$("#_btnEnterprise").click(function(){
 		if(!allChecked()){
 			alert("모든 항목을 정확히 기입해주세요");
-		}else{
-			$("#_regiForm").attr("action", "./memberController.jsp").submit();
+		}else{			
+			$("#_enterpriseForm").attr("action", "./AdminController.jsp").submit();
 		}
 		
 	});
@@ -310,5 +277,21 @@ $(document).ready(function(){
 </script>
 
 
-</body>    
+
+
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

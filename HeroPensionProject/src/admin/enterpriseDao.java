@@ -1,4 +1,4 @@
-package member;
+package admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,77 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jdbc.DBConn;
+import member.MemberDTO;
 
-public class MemberDao implements IMemberDao {
-	
-	public static MemberDao memberdao = null;
-	
-	private MemberDao() {DBConn.initConnect();}
-	
-	public static MemberDao getInstance(){
-		if(memberdao == null){
-			memberdao = new MemberDao();
-		}
-		return memberdao;		
-	}
+public class enterpriseDao implements IenterpriseDao {
 
-	//�α��� Ȯ��
-	@Override
-	public MemberDTO login(String id, String pw) {
-		
-		String sql = " SELECT ID, PW, NAME, EMAIL, PHONE, AUTH, DEL "
-				+ " FROM MEMBER "
-				+ " WHERE ID=? AND PW=?";
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		ResultSet rs = null;
-		
-		MemberDTO mem = null;
-		
-		try {
-			conn = DBConn.getConnection();
-			System.out.println("2/6 S login");
-			
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, id);
-			psmt.setString(2, pw);
-			System.out.println("3/6 S login");
-			
-			rs = psmt.executeQuery();
-			System.out.println("4/6 S login");
-			
-			while(rs.next()){
-				int i = 1;
-				
-				String _id = rs.getString(i++);
-				String _pw = rs.getString(i++);
-				String name = rs.getString(i++);
-				String email = rs.getString(i++);
-				String phone = rs.getString(i++);
-				int auth = rs.getInt(i++);
-				int del = rs.getInt(i++);
-				
-				mem = new MemberDTO(_id, _pw, name, email, phone, auth, del);				
-			}
-			System.out.println("5/6 S login");
-			
-		} catch (SQLException e) {			
-			e.printStackTrace();
-		} finally{
-			DBConn.close(rs, psmt, conn);
-			System.out.println("6/6 S login");
+	public static enterpriseDao enterpriseDao;
+	
+	public enterpriseDao() {DBConn.initConnect();}
+	
+	public static enterpriseDao getInstance(){
+		if(enterpriseDao == null){
+			enterpriseDao = new enterpriseDao();
 		}
-		
-		return mem;
+		return enterpriseDao;
 	}
-	// 회원가입
+	
+	// 업체등록
 	@Override
-	public boolean addMember(MemberDTO dto) {
+	public boolean addEnterprise(enterpriseDto dto) {
 		
-		String sql = " INSERT INTO MEMBER "
-				+ " (ID, PW, NAME, EMAIL, PHONE, AUTH, DEL) "
-				+ " VALUES(?, ?, ?, ?, ?, ?, 0) ";
+		String sql = " INSERT INTO ENTERPRISE "
+				+ " (ID, PW, NAME, EMAIL, PHONE, WDATE, AUTH, DEL) "
+				+ " VALUES(?, ?, ?, ?, ?, SYSDATE, ?, 0) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;	
@@ -87,7 +38,7 @@ public class MemberDao implements IMemberDao {
 		
 		try {
 			conn = DBConn.getConnection();
-			System.out.println("2/6 S addMember");
+			System.out.println("2/6 S addEnterprise");
 			
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getId());
@@ -96,65 +47,26 @@ public class MemberDao implements IMemberDao {
 			psmt.setString(4, dto.getEmail());
 			psmt.setString(5, dto.getPhone());
 			psmt.setInt(6, dto.getAuth());
-			System.out.println("3/6 S addMember");
+			System.out.println("3/6 S addEnterprise");
 			
 			count = psmt.executeUpdate();
-			System.out.println("4/6 S addMember");
+			System.out.println("4/6 S addEnterprise");
 			
 		} catch (SQLException e) {			
 			e.printStackTrace();
 			
 		} finally{
 			DBConn.close(psmt, conn);			
-			System.out.println("5/6 S addMember");
+			System.out.println("5/6 S addEnterprise");
 		}		
 		
 		return count>0?true:false;
 	}
-	// 회원 수정
-	@Override
-	public boolean updateMem(String id,String pw, String name, String phone, String email) {
-		
-		String sql = " UPDATE MEMBER "
-				+ " SET PW=?, NAME=?, PHONE=?, EMAIL=? "
-				+ " WHERE ID=?";
-		
-		Connection conn = null;
-		PreparedStatement psmt = null;
-		
-		int count = 0;
-		
-		try {
-			conn = DBConn.getConnection();
-			System.out.println("2/6 S updateMem");
-			
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, pw);
-			psmt.setString(2, name);
-			psmt.setString(3, phone);
-			psmt.setString(4, email);
-			psmt.setString(5, id);
-			System.out.println("3/6 S updateMem");
-			
-			count = psmt.executeUpdate();
-			System.out.println("4/6 S updateMem");			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally{
-			DBConn.close(psmt, conn);
-			System.out.println("6/6 S updateMem");
-		}
-		
-		return count>0?true:false;
-	}
-	// 아이디 중복 체크 
+	// 아이디 중복체크
 	@Override
 	public boolean idCheck(String id) {
-		
 		String sql = " SELECT ID "
-				+ " FROM MEMBER "
+				+ " FROM ENTERPRISE "
 				+ " WHERE ID=? ";
 		
 		Connection conn = null;
@@ -182,11 +94,11 @@ public class MemberDao implements IMemberDao {
 		
 		return count>0?true:false;
 	}
-	// 이메일 중복 체크
+	// 이메일 중복체크
 	@Override
 	public boolean emailCheck(String email) {
 		String sql = " SELECT EMAIL "
-				+ " FROM MEMBER "
+				+ " FROM ENTERPRISE "
 				+ " WHERE EMAIL=? ";
 		
 		Connection conn = null;
@@ -212,13 +124,12 @@ public class MemberDao implements IMemberDao {
 		}		
 		return count>0?true:false;
 	}
-	// 전화번호 중복 체크
+	// 전화번호 중복체크
 	@Override
 	public boolean phoneCheck(String phone) {
 
-		
 		String sql = " SELECT PHONE "
-				+ " FROM MEMBER "
+				+ " FROM ENTERPRISE "
 				+ " WHERE PHONE=? ";
 		
 		Connection conn = null;
@@ -244,17 +155,15 @@ public class MemberDao implements IMemberDao {
 		}
 		return count>0?true:false;
 	}
-
-	
-	// 가맹점 등록 요청 리스트
+	// 업체등록 요청 리스트
 	@Override
-	public List<MemberDTO> requestList() {
+	public List<enterpriseDto> requestList() {
+		String sql = " SELECT ID, PW, NAME, EMAIL, PHONE, WDATE, AUTH, DEL "
+				+ " FROM ENTERPRISE "
+				+ " WHERE AUTH=-1 "
+				+ " ORDER BY WDATE ASC";
 		
-		String sql = " SELECT ID, PW, NAME, PHONE, EMAIL, AUTH, DEL "
-				+ " FROM MEMBER "
-				+ " WHERE AUTH=-1";
-		
-		List<MemberDTO> list = new ArrayList<>();
+		List<enterpriseDto> list = new ArrayList<>();
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -275,13 +184,14 @@ public class MemberDao implements IMemberDao {
 				
 				String id = rs.getString(1);
 				String pw = rs.getString(2);
-				String name = rs.getString(3);
-				String phone = rs.getString(4);
-				String email = rs.getString(5);
-				int auth = rs.getInt(6);
-				int del = rs.getInt(7);
+				String name = rs.getString(3);				
+				String email = rs.getString(4);
+				String phone = rs.getString(5);
+				String wdate = rs.getString(6);
+				int auth = rs.getInt(7);
+				int del = rs.getInt(8);
 				
-				list.add(new MemberDTO(id, pw, name, email, phone, auth, del));
+				list.add(new enterpriseDto(id, pw, name, email, phone, wdate, auth, del));
 			}			
 			System.out.println("5/6 S requestList");
 			
@@ -290,17 +200,14 @@ public class MemberDao implements IMemberDao {
 		} finally {
 			DBConn.close(rs, psmt, conn);
 			System.out.println("6/6 S requestList");
-		}
-				
+		}				
 		return list;
 	}
-
-	
-	// 요청에 대한 응답
+	// 업체등록 요청에 대한 응답
 	@Override
 	public boolean req_answer(String id, int auth) {
-		
-		String sql = " UPDATE MEMBER "
+
+		String sql = " UPDATE ENTERPRISE "
 				+ " SET AUTH=? "
 				+ " WHERE ID=? ";
 		
@@ -328,25 +235,18 @@ public class MemberDao implements IMemberDao {
 			System.out.println("5/6 S req_answer");
 		}
 		
-		return count>0?true:false;		
+		return count>0?true:false;	
 	}
-
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
+
+
+
+
+
+
+
 
 
 
