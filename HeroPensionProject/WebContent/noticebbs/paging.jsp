@@ -63,7 +63,7 @@ System.out.println("nextPage: " + nextPage);
 function gotoPage(pageNum){
 	var objForm = document.frmPaging;
 	objForm.nowPage.value = pageNum;
-	objForm.submit();
+	objForm.submit(); //form의 action을 실행되도록 하는 기능
 }
 </script>
 

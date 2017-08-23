@@ -28,7 +28,7 @@ String test=  "tEST입니다.";
 
 	<input type="text" id="_userid" name="id" class="form-control input-lg"
 	placeholder="&#xf007; user ID" style="font-family: FontAwesome; font-size: 20px">	
-	<span id="id_check_text"></span>
+	<span id="id_check_text"></span>	
 
 	<input type="text" id="_pwd" name="pwd" class="form-control input-lg"
 	placeholder="&#xf023; password" style="font-family: FontAwesome; font-size: 20px">
@@ -82,7 +82,7 @@ $(document).ready(function(){
 			type:"post",
 			url:"check.jsp?command=idCheck",
 			data:{"_userid":idText}
-		}).done(function(data){
+		}).done(function(data){				
 			if($.trim(data) == 'YES'){	// 사용 가능 할때
 				if(regExp.test(idText)){
 					$("#_userid").css("border","2px solid #4CAF50");
