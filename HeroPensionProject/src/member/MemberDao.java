@@ -22,12 +22,12 @@ public class MemberDao implements IMemberDao {
 		return memberdao;		
 	}
 
-	//�α��� Ȯ��
+	//로그인
 	@Override
 	public MemberDTO login(String id, String pw) {
 		
 		String sql = " SELECT ID, PW, NAME, EMAIL, PHONE, AUTH, DEL "
-				+ " FROM MEMBER "
+				+ " FROM MEMBER innerjoin "
 				+ " WHERE ID=? AND PW=?";
 		
 		Connection conn = null;

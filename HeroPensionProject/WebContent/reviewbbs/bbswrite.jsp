@@ -29,7 +29,7 @@ System.out.println(mem.toString()); */
 <h1>글쓰기</h1>
 
 <div class="center">
-<form action="bbswriteAf.jsp" method="POST">
+<form action="reviewBbsController.jsp?command=writeAf" method="POST" enctype="multipart/form-data">
 	<table class="table table-bordered">
 	<col width="200"><col width="500">
 	<tr>
@@ -42,6 +42,11 @@ System.out.println(mem.toString()); */
 	<tr>
 		<td><label>제목</label></td>
 		<td><input type="text" name="title" size="50" class="form-control"></td>
+	</tr>
+	
+	<tr>
+		<td><label>파일</label></td>
+		<td><input type="file" name="upload" size="50" class="form-control"></td>
 	</tr>
 	
 	<tr>

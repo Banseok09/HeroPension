@@ -78,7 +78,7 @@ if(search_type==null) search_type="";
 if(search_key==null) search_key=""; 
 
 IReviewBbsDao dao = ReviewBbsDao.getInstance();
-List<ReviewBbsDto> bbslist = dao.getBbsList(paging);
+List<ReviewBbsDto> bbslist = dao.getBbsList(paging, search_type, search_key);
 System.out.println("bbslist" + bbslist.toString());
 
 %>

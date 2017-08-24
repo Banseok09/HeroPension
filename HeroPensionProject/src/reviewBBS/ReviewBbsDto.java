@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ReviewBbsDto implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int review_seq;
+	private int seq_review;
 	private String id;
 	private String title;
 	private String content;
@@ -12,14 +12,13 @@ public class ReviewBbsDto implements Serializable{
 	private int ref;
 	private int step;
 	private int depth;
-	private int room_seq;
+	private int seq_pen;
 	private String wdate;
 	private int del;
 	private int readcount;
-	public ReviewBbsDto(int review_seq, String id, String title, String content, int rate, int ref, int step,
-			int depth, int room_seq, String wdate, int del, int readcount) {
-		super();
-		this.review_seq = review_seq;
+	public ReviewBbsDto(int seq_review, String id, String title, String content, int rate, int ref, int step,
+			int depth, int seq_pen, String wdate, int del, int readcount) {
+		this.seq_review = seq_review;
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -27,12 +26,17 @@ public class ReviewBbsDto implements Serializable{
 		this.ref = ref;
 		this.step = step;
 		this.depth = depth;
-		this.room_seq = room_seq;
+		this.seq_pen = seq_pen;
 		this.wdate = wdate;
 		this.del = del;
 		this.readcount = readcount;
 	}
-	public int getReview_seq() {  return review_seq; }
+	public ReviewBbsDto(String id, String title, String content) {
+		this.id = id;
+		this.title = title;
+		this.content = content;
+	}
+	public int getSeq_review() {  return seq_review; }
 	public String getId() {  return id;  }
 	public String getTitle() { return title; }
 	public String getContent() {  return content;  }
@@ -40,11 +44,11 @@ public class ReviewBbsDto implements Serializable{
 	public int getRef() {  return ref;  }
 	public int getStep() {  return step;  }
 	public int getDepth() {  return depth;  }
-	public int getRoom_seq() {  return room_seq;  }
+	public int getSeq_pen() {  return seq_pen;  }
 	public String getWdate() {  return wdate;  }
 	public int getDel() {  return del;  }
 	public int getReadcount() {  return readcount;  }
-	public void setReview_seq(int review_seq) {  this.review_seq = review_seq;  }
+	public void setSeq_review(int seq_review) {  this.seq_review = seq_review;  }
 	public void setId(String id) {  this.id = id;  }
 	public void setTitle(String title) {  this.title = title;  }
 	public void setContent(String content) {  this.content = content;  }
@@ -52,13 +56,13 @@ public class ReviewBbsDto implements Serializable{
 	public void setRef(int ref) {  this.ref = ref;  }
 	public void setStep(int step) {  this.step = step;  }
 	public void setDepth(int depth) {  this.depth = depth;  }
-	public void setRoom_seq(int room_seq) {  this.room_seq = room_seq;  }
+	public void setSeq_pen(int seq_pen) {  this.seq_pen = seq_pen;  }
 	public void setWdate(String wdate) {  this.wdate = wdate; }
 	public void setDel(int del) {  this.del = del; }
 	public void setReadcount(int readcount) { this.readcount = readcount; }
 	@Override public String toString() {
-		return "ReviewBbsDto [review_seq=" + review_seq + ", id=" + id + ", title=" + title + ", content=" + content
-				+ ", rate=" + rate + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", room_seq=" + room_seq
+		return "ReviewBbsDto [seq_review=" + seq_review + ", id=" + id + ", title=" + title + ", content=" + content
+				+ ", rate=" + rate + ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", seq_pen=" + seq_pen
 				+ ", wdate=" + wdate +", del=" + del + ", readcount=" + readcount + "]";
 	}
 	
