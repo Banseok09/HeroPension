@@ -64,6 +64,12 @@ case "loginAf" :
 	
 	<%
 	break; 	
+case "logout" :
+	session.invalidate();
+	response.sendRedirect("../index.jsp"); 
+
+	break;
+
 
 case "regi" : response.sendRedirect("./regi.jsp"); break; 
 	
@@ -101,7 +107,6 @@ case "update":
 //	response.sendRedirect("./memberDetail.jsp");	
 	%>
 		<script type="text/javascript">
-		alert("수정 실패");
 		location.href = "./memberDetail.jsp";
 		</script>
 	<%

@@ -12,8 +12,9 @@
 <body style="margin:0 auto">
 <table style="background-color: pink; width:1200px">
 <tr height=50>
-<td><a id="enterprise" href="">업체 관리</a></td>
-<td><a id="pension" href="">펜션 관리</a></td>
+<td><a id="pension" href="memberManager.jsp">회원 관리</a></td>
+<td><a id="enterprise" href="enterpriseAdmin.jsp">업체 관리</a></td>
+<td><a id="enterprise" href="pensionManager.jsp">펜션 관리</a></td>
 <td><a id="noticebbs" href="noticebbs.jsp">공지사항 게시판 관리</a></td>
 <td><a id="reviewbbs" href="reviewbbs.jsp">리뷰 게시판 관리</a></td>
 </tr>
