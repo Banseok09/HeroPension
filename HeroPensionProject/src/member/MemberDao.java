@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import jdbc.DBConn;
 
@@ -70,15 +72,13 @@ public class MemberDao implements IMemberDao {
 		
 		return mem;
 	}
-
-	
 	// 회원가입
 	@Override
 	public boolean addMember(MemberDTO dto) {
 		
 		String sql = " INSERT INTO MEMBER "
 				+ " (ID, PW, NAME, EMAIL, PHONE, AUTH, DEL) "
-				+ " VALUES(?, ?, ?, ?, ?, 3, 0) ";
+				+ " VALUES(?, ?, ?, ?, ?, ?, 0) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;	
@@ -95,6 +95,7 @@ public class MemberDao implements IMemberDao {
 			psmt.setString(3, dto.getName());
 			psmt.setString(4, dto.getEmail());
 			psmt.setString(5, dto.getPhone());
+			psmt.setInt(6, dto.getAuth());
 			System.out.println("3/6 S addMember");
 			
 			count = psmt.executeUpdate();
@@ -110,7 +111,6 @@ public class MemberDao implements IMemberDao {
 		
 		return count>0?true:false;
 	}
-
 	// 회원 수정
 	@Override
 	public boolean updateMem(String id,String pw, String name, String phone, String email) {
@@ -149,7 +149,6 @@ public class MemberDao implements IMemberDao {
 		
 		return count>0?true:false;
 	}
-	
 	// 아이디 중복 체크 
 	@Override
 	public boolean idCheck(String id) {
@@ -216,6 +215,7 @@ public class MemberDao implements IMemberDao {
 	// 전화번호 중복 체크
 	@Override
 	public boolean phoneCheck(String phone) {
+
 		
 		String sql = " SELECT PHONE "
 				+ " FROM MEMBER "
@@ -244,6 +244,95 @@ public class MemberDao implements IMemberDao {
 		}
 		return count>0?true:false;
 	}
+
+	
+	// 가맹점 등록 요청 리스트
+	@Override
+	public List<MemberDTO> requestList() {
+		
+		String sql = " SELECT ID, PW, NAME, PHONE, EMAIL, AUTH, DEL "
+				+ " FROM MEMBER "
+				+ " WHERE AUTH=-1";
+		
+		List<MemberDTO> list = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = DBConn.getConnection();
+			System.out.println("2/6 S requestList");
+			
+			psmt = conn.prepareStatement(sql);
+			System.out.println("3/6 S requestList");
+			
+			rs = psmt.executeQuery();
+			System.out.println("4/6 S requestList");
+			
+			while(rs.next()){
+				int i = 1;
+				
+				String id = rs.getString(1);
+				String pw = rs.getString(2);
+				String name = rs.getString(3);
+				String phone = rs.getString(4);
+				String email = rs.getString(5);
+				int auth = rs.getInt(6);
+				int del = rs.getInt(7);
+				
+				list.add(new MemberDTO(id, pw, name, email, phone, auth, del));
+			}			
+			System.out.println("5/6 S requestList");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(rs, psmt, conn);
+			System.out.println("6/6 S requestList");
+		}
+				
+		return list;
+	}
+
+	
+	// 요청에 대한 응답
+	@Override
+	public boolean req_answer(String id, int auth) {
+		
+		String sql = " UPDATE MEMBER "
+				+ " SET AUTH=? "
+				+ " WHERE ID=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count = 0;
+		
+		try {
+			conn = DBConn.getConnection();
+			System.out.println("2/6 S req_answer");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, auth);
+			psmt.setString(2, id);
+			System.out.println("3/6 S req_answer");
+			
+			count = psmt.executeUpdate();
+			System.out.println("4/6 S req_answer");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(psmt, conn);
+			System.out.println("5/6 S req_answer");
+		}
+		
+		return count>0?true:false;		
+	}
+
+	
+	
 	
 	
 	

@@ -91,7 +91,7 @@ public class NoticeBbsDao implements INoticeBbsDao{
 	@Override public boolean writeBbs(NoticeBbsDto bbs) {
 		String sql = " INSERT INTO NOTICEBBS "
 				+ " (SEQ_NOTICE, ID, TITLE, CONTENT, "
-				+ " REF, STEP, DEPTH, WDATE)"
+				+ " REF, STEP, DEPTH, WDATE, DEL, READCOUNT)"
 				+ " VALUES(REVIEW_SEQ.NEXTVAL, ?, ?, ?, "	   // SEQ, ID, TITLE, CONTENT,
 				+ " (SELECT NVL(MAX(REF), 0)+1 FROM BBS), 0, 0, "  // REF, STEP, DEPTH,
 				+ " SYSDATE, 0, 0) ";	// WDATE, DEL, READCOUNT
@@ -217,6 +217,34 @@ public class NoticeBbsDao implements INoticeBbsDao{
 		}finally {
 			DBConn.close(psmt, conn);
 			log("6/6 S updateBbs");
+		}
+		return count>0?true:false;
+	}
+	@Override public boolean deleteBbs(int seq) {
+		String sql = " DELETE FROM NOTICEBBS "
+				   + " WHERE SEQ_NOTICE=? ";
+
+		Connection conn = null;
+		PreparedStatement psmt = null;
+
+		int count = 0;
+
+		try {
+			conn = DBConn.getConnection();
+			log("1/5 S DBConn deleteBbs");
+
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			log("2/5 S psmt set deleteBbs");
+
+			count = psmt.executeUpdate();
+			log("3/5 S executeUpdate deleteBbs");
+
+		}catch (SQLException e) {
+			log("SQL F deleteBbs", e);
+		}finally {
+			DBConn.close(psmt, conn);
+			log("5/5 S deleteBbs");
 		}
 		return count>0?true:false;
 	}

@@ -8,5 +8,6 @@ public interface IReviewBbsDao {
 	public ReviewBbsDto getBbs(int seq);
 	public void addReadcount(int seq);
 	public boolean updateBbs(ReviewBbsDto bbs, int seq);
+	public boolean deleteBbs(int seq);
 	
 }

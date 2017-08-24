@@ -11,8 +11,8 @@ String userid = request.getParameter("_userid");
 String email = request.getParameter("_email");
 String phone = request.getParameter("_phone");
 //System.out.println("userid : "+ userid);
-System.out.println("email : "+ email);
-System.out.println("phone : "+ phone);
+//System.out.println("email : "+ email);
+//System.out.println("phone : "+ phone);
 
 if(command.equals("idCheck")){
 	boolean loginCheck = true;

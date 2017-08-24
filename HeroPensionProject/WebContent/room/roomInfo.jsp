@@ -6,6 +6,7 @@
 <%@page import="java.util.List"%>
 <%@page import="room.RoomDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,8 +31,8 @@
 	<!-- 펜션정보 -->
 	<div align="center">
 	<table border="1">
-	<col width="650"><col width="430">
-		<tr>
+	<col width="600"><col width="400">
+		<tr height="400">
 			<td>	
 				<table>
 					<tr>
@@ -77,15 +78,48 @@
 	</table>	
 	</div>
 		
-		
-		
+
+
+	<!-- 객실 이름 -->
+	<%
+		String info_room = roomList.get(0).getName_room()+" : " + roomList.get(0).getType_room();	
+	%>
+	<br><br><br><br><br><br><br><br><br><br>
+	<div align="center">
+		<table border="1">	
+		<col width="123"><col width="123"><col width="123"><col width="123">
+		<col width="123"><col width="123"><col width="123"><col width="123">
+		<%	for(int i=0; i<(roomList.size()/8)+1; i++){	%>	
+			<tr>
+			<% 	for(int j=0; j<8; j++){	%>	
+				<td height="30">
+					<% if(roomList.size() > ((i*8)+j)){ %>					
+						<a href="./roomInfoImg.jsp?seq_room=<%=roomList.get((i*8)+j).getSeq_room() %>&info_room=<%=info_room %>">
+							<%=roomList.get((i*8)+j).getName_room() %>
+						</a>									
+					<%	} %>
+				</td>											
+			<%	} %>					 
+			</tr>
+		<%	} %>	
+						
+		</table>
+	</div>	
+	
+	<!-- 객실 이미지 -->
+	<jsp:include page="./roomInfoImg.jsp" >
+		<jsp:param value="<%=roomList.get(0).getSeq_room() %>" name="seq_room"/>
+		<jsp:param value="<%=info_room %>" name="info_room"/>
+	</jsp:include>
+ 	
+ 	
+ 	
 		
 	<!-- 객실정보 -->
-	<br><br>
 	<div align="center">
 		<form action="">
 			<table border="1">
-			<col width="200"><col width="300"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100">
+			<col width="140"><col width="280"><col width="100"><col width="100"><col width="100"><col width="100"><col width="100">
 				<tr>
 					<th>객실명</th>
 					<th>객실형태</th>
@@ -127,11 +161,7 @@
 		</form>
 	</div>
 	
-	<!-- 객실 이미지 -->
-	<div>
-		
-		
-	</div>
+
 
 </body>
 </html>
