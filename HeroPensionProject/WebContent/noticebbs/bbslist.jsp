@@ -1,3 +1,5 @@
+<%@page import="member.MemberDao"%>
+<%@page import="member.MemberDTO"%>
 <%@page import="noticeBBS.NoticeBbsDto"%>
 <%@page import="noticeBBS.NoticeBbsDao"%>
 <%@page import="noticeBBS.PagingBean"%>
@@ -30,9 +32,9 @@ th, td{
 </head>
 <body>
 
-<%-- <%
+<%
 Object ologin = session.getAttribute("login");
-MemberDto mem = null;
+MemberDTO mem = null;
 MemberDao.getInstance();
 if(ologin==null){%>
 	<script type="text/javascript">
@@ -40,8 +42,8 @@ if(ologin==null){%>
 		location.href = "index.jsp";
 	</script>
 <%}else{
-	mem = (MemberDto)ologin;
-} %> --%>
+	mem = (MemberDTO)ologin;
+} %>
 
 <%!
 public String arrow(int depth){
@@ -81,10 +83,10 @@ System.out.println("bbslist" + bbslist.toString());
 <a href="bbswrite.jsp">글쓰기</a>
 
 <table class="table table-striped table-bordered">
-<col width="50"><col width="400"><col width="50"><col width="50"><col width="50">
+<col width="50"><col width="400"><col width="50"><col width="50">
 <thead>
 <tr>
-<th>번호</th><th class="title">제목</th><th>작성자</th><th>평점</th><th>조회수</th>
+<th>번호</th><th class="title">제목</th><th>작성자</th><th>조회수</th>
 </tr>
 </thead>
 
@@ -97,7 +99,7 @@ System.out.println("bbslist" + bbslist.toString());
 		<td class="title">
 			<%=arrow(bbs.getDepth())%>
 			<% if(bbs.getDel()==0){ %>
-			<a href="reviewBbsController.jsp?command=detail&seq=<%=bbs.getSeq_notice()%>"><%=bbs.getTitle() %> </a>
+			<a href="noticeBbsController.jsp?command=detail&seq=<%=bbs.getSeq_notice()%>"><%=bbs.getTitle() %> </a>
 			<%} else { %>
 				삭제된 글입니다.
 			<%} %>
@@ -107,7 +109,7 @@ System.out.println("bbslist" + bbslist.toString());
 	</tr>
 <%} %>
 	<tr>
-	<td colspan="5">
+	<td colspan="4">
 	<jsp:include page="paging.jsp">
 		<jsp:param name="actionPath" value="bbslist.jsp"/>
 		<jsp:param name="nowPage" value="<%=String.valueOf(paging.getNowPage()) %>" />

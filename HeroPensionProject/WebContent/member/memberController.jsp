@@ -3,6 +3,7 @@
 <%@page import="member.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,12 +34,24 @@ case "loginAf" :
 	if(dto != null){
 		session.setAttribute("login", dto);
 		session.setMaxInactiveInterval(30 * 60);
-		%>
+		switch(dto.getAuth()){
+		case 1: //admin
+			%>
+			<script type="text/javascript">
+			alert("로그인");
+			location.href = "../admin/AdminController.jsp?command=login";
+			</script>
+			<%	
+		break;
+		case 3:
+			%>
 		<script type="text/javascript">
 		alert("로그인");
 		location.href = "../index.jsp";
-		</script>				
-		<%
+		</script>
+		<%	
+		break;
+		}
 	}else{
 		%>
 		<script type="text/javascript">

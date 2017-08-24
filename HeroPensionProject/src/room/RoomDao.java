@@ -28,7 +28,8 @@ public class RoomDao implements IRoomDao {
 		String sql = " SELECT SEQ_ROOM, NAME_ROOM, TYPE_ROOM, SIZE_ROOM, PERSON_MIN, PERSON_MAX, "
 				          + " PRICE_BASIC, PRICE_WEEKEND, PRICE_SEASON_BASIC, PRICE_SEASON_WEEKEND, "
 				          + " INFO_ROOM, ITEM, SEQ_PEN, DEL_ROOM " 
-	               + " FROM ROOM " 
+	               + " FROM ROOM "
+	               + " WHERE SEQ_PEN = " + seq_pen 
 	               + " ORDER BY SEQ_ROOM";
 
 		Connection conn = null;
