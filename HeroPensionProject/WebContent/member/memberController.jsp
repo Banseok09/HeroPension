@@ -64,6 +64,12 @@ case "loginAf" :
 	
 	<%
 	break; 	
+case "logout" :
+	session.invalidate();
+	response.sendRedirect("../index.jsp"); 
+
+	break;
+
 
 case "regi" : response.sendRedirect("./regi.jsp"); break; 
 	
@@ -74,7 +80,7 @@ case "regiAf" :
 	String email = request.getParameter("email");
 	String phone = request.getParameter("phone");
 	
-	MemberDTO mem = new MemberDTO(id, pw, name, email, phone, 3, 0);
+	MemberDTO mem = new MemberDTO(id, pw, name, email, phone, 3, 0, null);
 	
 	boolean isS = dao.addMember(mem);
 	if(isS){
@@ -96,18 +102,14 @@ case "regiAf" :
 	
 	<%		
 	break; 
-	
+case "info":
+	response.sendRedirect("./memberInfo.jsp");	
+	break;
 case "update":
-//	response.sendRedirect("./memberDetail.jsp");	
-	%>
-		<script type="text/javascript">
-		alert("수정 실패");
-		location.href = "./memberDetail.jsp";
-		</script>
-	<%
+	response.sendRedirect("./memberDetail.jsp");
 	break;
 
-case "updateAf":	
+case "updateAf":
 	id = request.getParameter("id");
 	pw = request.getParameter("pwd");
  	name = request.getParameter("name");

@@ -326,5 +326,17 @@ public class PensionDao implements IPensionDao {
 		
 		return penlist;
 	}
+	
+	//펜션 리스트 목록
+	@Override
+	public List<PensionDto> getPensionList() {
+		
+		List<PensionDto> list = new ArrayList<>();
+		
+		
+		return list;
+	}
+	
+	
 
 }
