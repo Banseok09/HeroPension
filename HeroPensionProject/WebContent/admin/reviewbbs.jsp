@@ -78,7 +78,7 @@ if(search_type==null) search_type="";
 if(search_key==null) search_key=""; 
 
 IReviewBbsDao dao = ReviewBbsDao.getInstance();
-List<ReviewBbsDto> bbslist = dao.getBbsList(paging);
+List<ReviewBbsDto> bbslist = dao.getBbsList(paging, search_type, search_key);
 System.out.println("bbslist" + bbslist.toString());
 
 %>
@@ -101,7 +101,7 @@ System.out.println("bbslist" + bbslist.toString());
 		<td class="title">
 			<%=arrow(bbs.getDepth())%>
 			<% if(bbs.getDel()==0){ %>
-			<a href="AdminController.jsp?command=reviewdetail&seq=<%=bbs.getReview_seq()%>"><%=bbs.getTitle() %> </a>
+			<a href="AdminController.jsp?command=reviewdetail&seq=<%=bbs.getSeq_review()%>"><%=bbs.getTitle() %> </a>
 			<%} else { %>
 				삭제된 글입니다.
 			<%} %>

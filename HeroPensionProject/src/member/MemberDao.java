@@ -23,12 +23,12 @@ public class MemberDao implements IMemberDao {
 		return memberdao;		
 	}
 
-	//�α��� Ȯ��
+	//로그인
 	@Override
 	public MemberDTO login(String id, String pw) {
 		
-		String sql = " SELECT ID, PW, NAME, EMAIL, PHONE, AUTH, DEL "
-				+ " FROM MEMBER "
+		String sql = " SELECT ID, PW, NAME, EMAIL, PHONE, AUTH, DEL, SYSDATE "
+				+ " FROM MEMBER innerjoin "
 				+ " WHERE ID=? AND PW=?";
 		
 		Connection conn = null;
@@ -59,8 +59,9 @@ public class MemberDao implements IMemberDao {
 				String phone = rs.getString(i++);
 				int auth = rs.getInt(i++);
 				int del = rs.getInt(i++);
+				String regidate = rs.getString(i++);
 				
-				mem = new MemberDTO(_id, _pw, name, email, phone, auth, del);				
+				mem = new MemberDTO(_id, _pw, name, email, phone, auth, del, regidate);				
 			}
 			System.out.println("5/6 S login");
 			
@@ -78,8 +79,8 @@ public class MemberDao implements IMemberDao {
 	public boolean addMember(MemberDTO dto) {
 		
 		String sql = " INSERT INTO MEMBER "
-				+ " (ID, PW, NAME, EMAIL, PHONE, AUTH, DEL) "
-				+ " VALUES(?, ?, ?, ?, ?, ?, 0) ";
+				+ " (ID, PW, NAME, EMAIL, PHONE, AUTH, DEL, REGIDATE) "
+				+ " VALUES(?, ?, ?, ?, ?, ?, 0, SYSDATE) ";
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;	
@@ -251,7 +252,9 @@ public class MemberDao implements IMemberDao {
 	@Override
 	public List<MemberDTO> getMemberList() {
 		
-		String sql = " SELECT ID, PW, NAME, EMAIL, PHONE, AUTH, DEL "
+
+		String sql = " SELECT ID, PW, NAME, PHONE, EMAIL, AUTH, DEL, REGIDATE "
+	
 				+ " FROM MEMBER "
 				+ " WHERE AUTH=3";
 		
@@ -272,7 +275,8 @@ public class MemberDao implements IMemberDao {
 			System.out.println("4/6 S getMemberList");
 			
 			while(rs.next()){
-							
+					
+
 				String id = rs.getString(1);
 				String pw = rs.getString(2);
 				String name = rs.getString(3);				
@@ -280,8 +284,9 @@ public class MemberDao implements IMemberDao {
 				String phone = rs.getString(5);				
 				int auth = rs.getInt(6);
 				int del = rs.getInt(7);
+				String regidate = rs.getString(8);
 				
-				list.add(new MemberDTO(id, pw, name, email, phone, auth, del));
+				list.add(new MemberDTO(id, pw, name, email, phone, auth, del, regidate));
 			}			
 			System.out.println("5/6 S getMemberList");
 			
@@ -296,20 +301,41 @@ public class MemberDao implements IMemberDao {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	// 요청에 대한 응답
+	@Override
+	public boolean req_answer(String id, int auth) {
+		
+		String sql = " UPDATE MEMBER "
+				+ " SET AUTH=? "
+				+ " WHERE ID=? ";
+		
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		
+		int count = 0;
+		
+		try {
+			conn = DBConn.getConnection();
+			System.out.println("2/6 S req_answer");
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, auth);
+			psmt.setString(2, id);
+			System.out.println("3/6 S req_answer");
+			
+			count = psmt.executeUpdate();
+			System.out.println("4/6 S req_answer");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBConn.close(psmt, conn);
+			System.out.println("5/6 S req_answer");
+		}
+		return count>0?true:false;		
+	}
+
 
 }
 
