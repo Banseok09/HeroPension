@@ -10,5 +10,6 @@ public interface IReviewBbsDao {
 	public void addReadcount(int seq);
 	public boolean updateBbs(ReviewBbsDto bbs, int seq);
 	public boolean deleteBbs(int seq);
+	public String getPensionName(int seq_pen);
 	
 }
