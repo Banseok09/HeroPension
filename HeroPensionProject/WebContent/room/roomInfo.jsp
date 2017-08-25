@@ -52,8 +52,8 @@
 					</tr>
 					<tr>
 						<th align="left">입/퇴실시간</th>
-						<td>[입실] <%=pensionDto.getChechin_time() %>,
-						    [퇴실] <%=pensionDto.getChechout_time() %>
+						<td>[입실] <%=pensionDto.getCheckin_time() %>,
+						    [퇴실] <%=pensionDto.getCheckout_time() %>
 					</tr>
 					<tr>
 						<th align="left">픽업여부</th>

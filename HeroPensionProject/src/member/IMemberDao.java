@@ -12,5 +12,6 @@ public interface IMemberDao {
 	public boolean phoneCheck(String phone);
 	public List<MemberDTO> requestList();
 	public boolean req_answer(String id, int auth);
+
 	
 }

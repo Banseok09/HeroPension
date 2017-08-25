@@ -11,7 +11,7 @@ CREATE TABLE PENSION(
 	SEQ_PEN NUMBER(8) PRIMARY KEY,		-- 펜션 seq
 	ID VARCHAR2(20) NOT NULL,			-- 펜션주인(업체) ID
 	NAME_PEN VARCHAR2(100) NOT NULL,		-- 펜션이름
-	ADDRESS VARCHAR2(100) NOT NULL,		-- 펜션주소
+	ADDRESS VARCHAR2(200) NOT NULL,		-- 펜션주소
 	PHONE VARCHAR2(20) NOT NULL,		-- 펜션전화번호
 	CHECKIN_TIME VARCHAR2(20) NOT NULL,		-- 체크인 시간
 	CHECKOUT_TIME VARCHAR2(20) NOT NULL,	-- 체크아웃 시간
@@ -44,8 +44,8 @@ public class PensionDto implements Serializable {
 	private String name_pen;
 	private String address;
 	private String phone;
-	private String chechin_time;
-	private String chechout_time;
+	private String checkin_time;
+	private String checkout_time;
 	private int pickup;	// 0: 픽업가능 1: 불가능
 	private String season_start;
 	private String season_end;
@@ -69,8 +69,8 @@ public class PensionDto implements Serializable {
 		this.name_pen = name_pen;
 		this.address = address;
 		this.phone = phone;
-		this.chechin_time = chechin_time;
-		this.chechout_time = chechout_time;
+		this.checkin_time = chechin_time;
+		this.checkout_time = chechout_time;
 		this.pickup = pickup;
 		this.season_start = season_start;
 		this.season_end = season_end;
@@ -114,17 +114,17 @@ public class PensionDto implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getChechin_time() {
-		return chechin_time;
+	public String getCheckin_time() {
+		return checkin_time;
 	}
-	public void setChechin_time(String chechin_time) {
-		this.chechin_time = chechin_time;
+	public void setCheckin_time(String checkin_time) {
+		this.checkin_time = checkin_time;
 	}
-	public String getChechout_time() {
-		return chechout_time;
+	public String getCheckout_time() {
+		return checkout_time;
 	}
-	public void setChechout_time(String chechout_time) {
-		this.chechout_time = chechout_time;
+	public void setCheckout_time(String checkout_time) {
+		this.checkout_time = checkout_time;
 	}
 	public int getPickup() {
 		return pickup;
@@ -190,7 +190,7 @@ public class PensionDto implements Serializable {
 	@Override
 	public String toString() {
 		return "PensionDto [seq_pen=" + seq_pen + ", id=" + id + ", name_pen=" + name_pen + ", address=" + address
-				+ ", phone=" + phone + ", chechin_time=" + chechin_time + ", chechout_time=" + chechout_time
+				+ ", phone=" + phone + ", checkin_time=" + checkin_time + ", checkout_time=" + checkout_time
 				+ ", pickup=" + pickup + ", season_start=" + season_start + ", season_end=" + season_end
 				+ ", price_person=" + price_person + ", price_bbq=" + price_bbq + ", info_pen=" + info_pen
 				+ ", directions=" + directions + ", x_coordinate=" + x_coordinate + ", Y_coordinate=" + Y_coordinate
