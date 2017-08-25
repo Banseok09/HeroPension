@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import admin.enterpriseDto;
 import jdbc.DBConn;
 
 public class MemberDao implements IMemberDao {
@@ -246,14 +247,16 @@ public class MemberDao implements IMemberDao {
 		return count>0?true:false;
 	}
 
-	
-	// 가맹점 등록 요청 리스트
+
+	// 회원 목록 
 	@Override
-	public List<MemberDTO> requestList() {
+	public List<MemberDTO> getMemberList() {
 		
+
 		String sql = " SELECT ID, PW, NAME, PHONE, EMAIL, AUTH, DEL, REGIDATE "
+	
 				+ " FROM MEMBER "
-				+ " WHERE AUTH=-1";
+				+ " WHERE AUTH=3";
 		
 		List<MemberDTO> list = new ArrayList<>();
 		
@@ -263,39 +266,42 @@ public class MemberDao implements IMemberDao {
 		
 		try {
 			conn = DBConn.getConnection();
-			System.out.println("2/6 S requestList");
+			System.out.println("2/6 S getMemberList");
 			
 			psmt = conn.prepareStatement(sql);
-			System.out.println("3/6 S requestList");
+			System.out.println("3/6 S getMemberList");
 			
 			rs = psmt.executeQuery();
-			System.out.println("4/6 S requestList");
+			System.out.println("4/6 S getMemberList");
 			
 			while(rs.next()){
+					
+
 				String id = rs.getString(1);
 				String pw = rs.getString(2);
-				String name = rs.getString(3);
-				String phone = rs.getString(4);
-				String email = rs.getString(5);
+				String name = rs.getString(3);				
+				String email = rs.getString(4);
+				String phone = rs.getString(5);				
 				int auth = rs.getInt(6);
 				int del = rs.getInt(7);
 				String regidate = rs.getString(8);
 				
 				list.add(new MemberDTO(id, pw, name, email, phone, auth, del, regidate));
 			}			
-			System.out.println("5/6 S requestList");
+			System.out.println("5/6 S getMemberList");
 			
 		} catch (SQLException e) {
+			
 			e.printStackTrace();
 		} finally {
 			DBConn.close(rs, psmt, conn);
-			System.out.println("6/6 S requestList");
-		}
-				
+			System.out.println("6/6 S getMemberList");
+		}				
 		return list;
 	}
 
 	
+
 	// 요청에 대한 응답
 	@Override
 	public boolean req_answer(String id, int auth) {
@@ -329,6 +335,7 @@ public class MemberDao implements IMemberDao {
 		}
 		return count>0?true:false;		
 	}
+
 
 }
 
