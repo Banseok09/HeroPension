@@ -35,4 +35,38 @@ div.pension table tr td p{
 .gnb_menu li {float:left; padding:17px 85px 17px 0; position:relative;}
 .gnb_menu li.last {padding-right: 0px;}
 .gnb_menu li a {display:inline; font-size:16px; font-weight:bold; line-height:16px; color:white;}
-.gnb_menu li a:hover {text-decoration: none;}
+.gnb_menu li a:hover {
+	text-decoration: none;
+	background-color: #ddd;
+    color: black;
+}
+
+.tablink {
+    background-color: #555;
+    color: white;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 17px;
+ 	width: 25%; 
+ 	margin: 0;
+}
+.tablinkgroup{
+	width:1200px;
+	text-align: center;	
+	margin: auto;
+}
+/* 마우스 오버시 버튼의 배경색 변경 */
+.tablink:hover {
+    background-color: #777;
+}
+
+/* 탭 내용의 기본 스타일 설정 */
+.tabcontent {
+    color: white;
+    display: none;
+   /*  padding: 50px; */
+   /*  text-align: center; */
+}

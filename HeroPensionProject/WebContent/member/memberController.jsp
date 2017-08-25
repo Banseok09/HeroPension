@@ -64,6 +64,12 @@ case "loginAf" :
 	
 	<%
 	break; 	
+case "logout" :
+	session.invalidate();
+	response.sendRedirect("../index.jsp"); 
+
+	break;
+
 
 case "regi" : response.sendRedirect("./regi.jsp"); break; 
 	
