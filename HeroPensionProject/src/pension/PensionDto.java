@@ -37,164 +37,162 @@ REFERENCES MEMBER(ID);
 
 public class PensionDto implements Serializable {
 	
-	private static final long serialVersionUID = 8561426898926970448L;
-	
-	private int seq_pen;
-	private String id;
-	private String name_pen;
-	private String address;
-	private String phone;
-	private String chechin_time;
-	private String chechout_time;
-	private int pickup;	// 0: 픽업가능 1: 불가능
-	private String season_start;
-	private String season_end;
-	private int price_person;
-	private int price_bbq;
-	private String info_pen;
-	private String directions;
-	private String x_coordinate;
-	private String Y_coordinate;
-	private int del_pen;		// 0: 기본 1: 삭제승인대기
-	
-	
-	public PensionDto() {}
-		
-	public PensionDto(int seq_pen, String id, String name_pen, String address, String phone, String chechin_time,
-			String chechout_time, int pickup, String season_start, String season_end, int price_person, int price_bbq,
-			String info_pen, String directions, String x_coordinate, String y_coordinate, int del_pen) {
-		super();
-		this.seq_pen = seq_pen;
-		this.id = id;
-		this.name_pen = name_pen;
-		this.address = address;
-		this.phone = phone;
-		this.chechin_time = chechin_time;
-		this.chechout_time = chechout_time;
-		this.pickup = pickup;
-		this.season_start = season_start;
-		this.season_end = season_end;
-		this.price_person = price_person;
-		this.price_bbq = price_bbq;
-		this.info_pen = info_pen;
-		this.directions = directions;
-		this.x_coordinate = x_coordinate;
-		this.Y_coordinate = y_coordinate;
-		this.del_pen = del_pen;
-	}
+	private static final long serialVersionUID = 8561426898926970448L; private int seq_pen;
+	   private String id;
+	   private String name_pen;
+	   private String address;
+	   private String phone;
+	   private String checkin_time;
+	   private String checkout_time;
+	   private int pickup;   // 0: 픽업가능 1: 불가능
+	   private String season_start;
+	   private String season_end;
+	   private int price_person;
+	   private int price_bbq;
+	   private String info_pen;
+	   private String directions;
+	   private String x_coordinate;
+	   private String Y_coordinate;
+	   private int del_pen;      // 0: 기본 1: 삭제승인대기
+	   
+	   
+	   public PensionDto() {}
+	      
+	   public PensionDto(int seq_pen, String id, String name_pen, String address, String phone, String chechin_time,
+	         String chechout_time, int pickup, String season_start, String season_end, int price_person, int price_bbq,
+	         String info_pen, String directions, String x_coordinate, String y_coordinate, int del_pen) {
+	      super();
+	      this.seq_pen = seq_pen;
+	      this.id = id;
+	      this.name_pen = name_pen;
+	      this.address = address;
+	      this.phone = phone;
+	      this.checkin_time = chechin_time;
+	      this.checkout_time = chechout_time;
+	      this.pickup = pickup;
+	      this.season_start = season_start;
+	      this.season_end = season_end;
+	      this.price_person = price_person;
+	      this.price_bbq = price_bbq;
+	      this.info_pen = info_pen;
+	      this.directions = directions;
+	      this.x_coordinate = x_coordinate;
+	      this.Y_coordinate = y_coordinate;
+	      this.del_pen = del_pen;
+	   }
 
 
-	public int getSeq_pen() {
-		return seq_pen;
-	}
-	public void setSeq_pen(int seq_pen) {
-		this.seq_pen = seq_pen;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName_pen() {
-		return name_pen;
-	}
-	public void setName_pen(String name_pen) {
-		this.name_pen = name_pen;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getChechin_time() {
-		return chechin_time;
-	}
-	public void setChechin_time(String chechin_time) {
-		this.chechin_time = chechin_time;
-	}
-	public String getChechout_time() {
-		return chechout_time;
-	}
-	public void setChechout_time(String chechout_time) {
-		this.chechout_time = chechout_time;
-	}
-	public int getPickup() {
-		return pickup;
-	}
-	public void setPickup(int pickup) {
-		this.pickup = pickup;
-	}
-	public String getSeason_start() {
-		return season_start;
-	}
-	public void setSeason_start(String season_start) {
-		this.season_start = season_start;
-	}
-	public String getSeason_end() {
-		return season_end;
-	}
-	public void setSeason_end(String season_end) {
-		this.season_end = season_end;
-	}
-	public int getPrice_person() {
-		return price_person;
-	}
-	public void setPrice_person(int price_person) {
-		this.price_person = price_person;
-	}
-	public int getPrice_bbq() {
-		return price_bbq;
-	}
-	public void setPrice_bbq(int price_bbq) {
-		this.price_bbq = price_bbq;
-	}
-	public String getInfo_pen() {
-		return info_pen;
-	}
-	public void setInfo_pen(String info_pen) {
-		this.info_pen = info_pen;
-	}
-	public String getDirections() {
-		return directions;
-	}
-	public void setDirections(String directions) {
-		this.directions = directions;
-	}
-	public String getX_coordinate() {
-		return x_coordinate;
-	}
-	public void setX_coordinate(String x_coordinate) {
-		this.x_coordinate = x_coordinate;
-	}
-	public String getY_coordinate() {
-		return Y_coordinate;
-	}
-	public void setY_coordinate(String y_coordinate) {
-		Y_coordinate = y_coordinate;
-	}
-	public int getDel_pen() {
-		return del_pen;
-	}
-	public void setDel_pen(int del_pen) {
-		this.del_pen = del_pen;
-	}
+	   public int getSeq_pen() {
+	      return seq_pen;
+	   }
+	   public void setSeq_pen(int seq_pen) {
+	      this.seq_pen = seq_pen;
+	   }
+	   public String getId() {
+	      return id;
+	   }
+	   public void setId(String id) {
+	      this.id = id;
+	   }
+	   public String getName_pen() {
+	      return name_pen;
+	   }
+	   public void setName_pen(String name_pen) {
+	      this.name_pen = name_pen;
+	   }
+	   public String getAddress() {
+	      return address;
+	   }
+	   public void setAddress(String address) {
+	      this.address = address;
+	   }
+	   public String getPhone() {
+	      return phone;
+	   }
+	   public void setPhone(String phone) {
+	      this.phone = phone;
+	   }
+	   public String getCheckin_time() {
+	      return checkin_time;
+	   }
+	   public void setCheckin_time(String checkin_time) {
+	      this.checkin_time = checkin_time;
+	   }
+	   public String getCheckout_time() {
+	      return checkout_time;
+	   }
+	   public void setCheckout_time(String checkout_time) {
+	      this.checkout_time = checkout_time;
+	   }
+	   public int getPickup() {
+	      return pickup;
+	   }
+	   public void setPickup(int pickup) {
+	      this.pickup = pickup;
+	   }
+	   public String getSeason_start() {
+	      return season_start;
+	   }
+	   public void setSeason_start(String season_start) {
+	      this.season_start = season_start;
+	   }
+	   public String getSeason_end() {
+	      return season_end;
+	   }
+	   public void setSeason_end(String season_end) {
+	      this.season_end = season_end;
+	   }
+	   public int getPrice_person() {
+	      return price_person;
+	   }
+	   public void setPrice_person(int price_person) {
+	      this.price_person = price_person;
+	   }
+	   public int getPrice_bbq() {
+	      return price_bbq;
+	   }
+	   public void setPrice_bbq(int price_bbq) {
+	      this.price_bbq = price_bbq;
+	   }
+	   public String getInfo_pen() {
+	      return info_pen;
+	   }
+	   public void setInfo_pen(String info_pen) {
+	      this.info_pen = info_pen;
+	   }
+	   public String getDirections() {
+	      return directions;
+	   }
+	   public void setDirections(String directions) {
+	      this.directions = directions;
+	   }
+	   public String getX_coordinate() {
+	      return x_coordinate;
+	   }
+	   public void setX_coordinate(String x_coordinate) {
+	      this.x_coordinate = x_coordinate;
+	   }
+	   public String getY_coordinate() {
+	      return Y_coordinate;
+	   }
+	   public void setY_coordinate(String y_coordinate) {
+	      Y_coordinate = y_coordinate;
+	   }
+	   public int getDel_pen() {
+	      return del_pen;
+	   }
+	   public void setDel_pen(int del_pen) {
+	      this.del_pen = del_pen;
+	   }
 
-	@Override
-	public String toString() {
-		return "PensionDto [seq_pen=" + seq_pen + ", id=" + id + ", name_pen=" + name_pen + ", address=" + address
-				+ ", phone=" + phone + ", chechin_time=" + chechin_time + ", chechout_time=" + chechout_time
-				+ ", pickup=" + pickup + ", season_start=" + season_start + ", season_end=" + season_end
-				+ ", price_person=" + price_person + ", price_bbq=" + price_bbq + ", info_pen=" + info_pen
-				+ ", directions=" + directions + ", x_coordinate=" + x_coordinate + ", Y_coordinate=" + Y_coordinate
-				+ ", del_pen=" + del_pen + "]";
-	}
+	   @Override
+	   public String toString() {
+	      return "PensionDto [seq_pen=" + seq_pen + ", id=" + id + ", name_pen=" + name_pen + ", address=" + address
+	            + ", phone=" + phone + ", checkin_time=" + checkin_time + ", checkout_time=" + checkout_time
+	            + ", pickup=" + pickup + ", season_start=" + season_start + ", season_end=" + season_end
+	            + ", price_person=" + price_person + ", price_bbq=" + price_bbq + ", info_pen=" + info_pen
+	            + ", directions=" + directions + ", x_coordinate=" + x_coordinate + ", Y_coordinate=" + Y_coordinate
+	            + ", del_pen=" + del_pen + "]";
+	   }
 	
 }

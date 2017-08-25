@@ -1,0 +1,16 @@
+select * from room_IMG;
+
+
+INSERT INTO PENSION_IMG VALUES(SEQ_IMG_PEN.NEXTVAL, 4, 'pension4_00.jpg', '/image/PENSION_IMG/pension4' );
+INSERT INTO PENSION_IMG VALUES(SEQ_IMG_PEN.NEXTVAL, 4, 'pension4_01.jpg', '/image/PENSION_IMG/pension4' );
+INSERT INTO PENSION_IMG VALUES(SEQ_IMG_PEN.NEXTVAL, 4, 'pension4_02.jpg', '/image/PENSION_IMG/pension4' );
+INSERT INTO PENSION_IMG VALUES(SEQ_IMG_PEN.NEXTVAL, 4, 'pension4_03.jpg', '/image/PENSION_IMG/pension4' );
+INSERT INTO PENSION_IMG VALUES(SEQ_IMG_PEN.NEXTVAL, 4, 'pension4_04.jpg', '/image/PENSION_IMG/pension4' );
+
+commit;
+
+select * from pension_IMG;
+
+
+
+

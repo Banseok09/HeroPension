@@ -13,21 +13,16 @@
 <%
 	String command = request.getParameter("command");
 
-	int seq_pen = Integer.parseInt(request.getParameter("seq_pen"));	
+	int seq_pen = Integer.parseInt(request.getParameter("seq_pen"));
 
 	switch(command){
-		case "roomInfo" :				
+		case "roomInfo" :	
 			response.sendRedirect("./roomInfo.jsp?seq_pen="+seq_pen);
-			break; 			
+			break; 	
+
 	}
 
-/* 	
-	String id = req.getParameter("id");
-	CustUserService service = CustUserService.getInstance();
-	CustUserBean cust = service.getCustUser(id);				
-	req.setAttribute("cust", cust);
-	dispatch("CustUpdate.jsp", req, resp);
- */
+
 %>
 </body>
 </html>
