@@ -24,6 +24,8 @@
 <a href="./member/memberController.jsp?command=update">정보수정</a>
 <a href="./noticebbs/noticeBbsController.jsp?command=list">공지사항</a>
 <a href="./reviewbbs/reviewBbsController.jsp?command=list">리뷰게시판</a>
+<a href="./member/memberController.jsp?command=info">회원 정보</a>
+<br>
 <a href="./member/memberController.jsp?command=login">로그인</a>
 <a href="./member/memberController.jsp?command=regi">회원가입</a>
 <a href="./admin/AdminController.jsp?command=enterregi">가맹점등록</a>

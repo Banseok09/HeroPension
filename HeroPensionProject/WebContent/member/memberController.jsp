@@ -96,18 +96,14 @@ case "regiAf" :
 	
 	<%		
 	break; 
-	
+case "info":
+	response.sendRedirect("./memberInfo.jsp");	
+	break;
 case "update":
-//	response.sendRedirect("./memberDetail.jsp");	
-	%>
-		<script type="text/javascript">
-		alert("수정 실패");
-		location.href = "./memberDetail.jsp";
-		</script>
-	<%
+	response.sendRedirect("./memberDetail.jsp");
 	break;
 
-case "updateAf":	
+case "updateAf":
 	id = request.getParameter("id");
 	pw = request.getParameter("pwd");
  	name = request.getParameter("name");

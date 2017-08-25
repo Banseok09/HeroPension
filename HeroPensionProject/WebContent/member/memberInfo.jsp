@@ -1,3 +1,5 @@
+<%@page import="reservation.reservDao"%>
+<%@page import="reservation.IreservDao"%>
 <%@page import="member.MemberDao"%>
 <%@page import="member.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -38,10 +40,35 @@ mem = (MemberDTO)ologin;
 <th>이메일</th><td><%=mem.getEmail() %></td>
 </tr>
 <tr>
-<th>가입일</th><td><%= %></td>
-<th></th><td></td>
+<th>가입일</th><td><%=mem.getRegidate() %></td>
+<th>정보 수정</th>
+<td>
+<a href="memberController.jsp?command=update" class="btn btn-warning" id="bbs_update">
+		<i class="fa fa-pencil">&nbsp; 수정</i>
+</a>
+</td>
 </tr>
+</table>
+<br>
 
+<h2>ㅇ</h2>
+<%
+	IreservDao dao = reservDao.getInstance();
+%>
+<table class="table table-bordered">
+<tr>
+<th>펜션명</th><th>방이름</th><th>체크인</th><th>체크아웃</th><th>인원수</th><th>가격</th>
+</tr>
+</table>
+
+<h2>다녀간 펜션</h2>
+<%
+
+%>
+<table class="table table-bordered">
+<tr>
+<th>펜션명</th><th>방이름</th><th>체크인</th><th>체크아웃</th><th>인원수</th><th>가격</th>
+</tr>
 </table>
 
 </body>
