@@ -120,6 +120,7 @@ HERO Pension
 	</div>
 </div>
 
+
 <!-- 메인 top header 시작  -->
 
 <div id="hotel" class="tabcontent">
@@ -171,9 +172,11 @@ document.getElementById("defaultOpen").click();
 <!-- 메인 top header 끝  -->
 <br>
 
-
-
-
+<div class="pension">
+	<jsp:include page="./pension/pensionList.jsp"/>
+</div>
+<a href="./pension/pensionController.jsp?command=pensionAdd">펜션추가</a>
+  
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
