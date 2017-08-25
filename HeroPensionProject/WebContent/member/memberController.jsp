@@ -65,9 +65,13 @@ case "loginAf" :
 	<%
 	break; 	
 case "logout" :
-	session.invalidate();
+	session.invalidate();	
+	%>	
+	<script type="text/javascript">
+	alert("로그아웃");
+	</script>
+	<%
 	response.sendRedirect("../index.jsp"); 
-
 	break;
 
 
@@ -136,6 +140,38 @@ case "updateAf":
 		<%
 	}
 	
+	break;
+	
+case "enterregi" : response.sendRedirect("./enterpriseRegi.jsp"); break;
+
+case "enterlogin" : 	
+	id = request.getParameter("id");
+	pw = request.getParameter("pwd");
+	name = request.getParameter("name");
+	email = request.getParameter("email");
+	phone = request.getParameter("phone");
+	
+	MemberDTO mem1 = new MemberDTO(id, pw, name, email, phone, -1, 0, null);
+	isS = dao.addMember(mem1);
+	if(isS){
+		%>
+		<script type="text/javascript">
+		alert("회원가입 성공");
+		alert("관리자에게 가맹점 승인요청을 보냈습니다 !!");
+		location.href = "../index.jsp";
+		</script>
+		<%
+	}else{
+		%>
+		<script type="text/javascript">
+		alert("회원가입 실패");
+		location.href = "./enterpriseRegi.jsp";
+		</script>
+		<%
+	}
+	%>
+	
+	<%	
 	break;
 	
 }

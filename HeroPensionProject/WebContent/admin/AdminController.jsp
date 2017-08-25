@@ -38,35 +38,7 @@ case "admin": response.sendRedirect("./enterpriseAdmin.jsp"); break;
 
 case "enterregi" : response.sendRedirect("./enterpriseRegi.jsp"); break;
 
-case "enterlogin" : 	
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pwd");
-	String name = request.getParameter("name");
-	String email = request.getParameter("email");
-	String phone = request.getParameter("phone");
-	
-	enterpriseDto ent = new enterpriseDto(id, pw, name, email, phone, null, -1, 0);
-	isS = dao.addEnterprise(ent);
-	if(isS){
-		%>
-		<script type="text/javascript">
-		alert("회원가입 성공");
-		alert("관리자에게 가맹점 승인요청을 보냈습니다 !!");
-		location.href = "../index.jsp";
-		</script>
-		<%
-	}else{
-		%>
-		<script type="text/javascript">
-		alert("회원가입 실패");
-		location.href = "./enterpriseRegi.jsp";
-		</script>
-		<%
-	}
-	%>
-	
-	<%	
-	break;
+
 
 case "req_true":
 	String req_id = request.getParameter("id");
@@ -86,8 +58,7 @@ case "req_true":
 		</script>
 		<%
 	}
-	break;
-	
+	break;	
 	
 case "req_false":
 	req_id = request.getParameter("id");
@@ -122,7 +93,7 @@ case "noticewrite":
 	response.sendRedirect("./noticewrite.jsp");
 	break;
 case "noticewriteAf":
-	id = request.getParameter("id");
+	String id = request.getParameter("id");
 	String title = request.getParameter("title");
 	String content = request.getParameter("content");
 	NoticeBbsDto dto = new NoticeBbsDto(id,title,content);

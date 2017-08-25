@@ -48,12 +48,12 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- font awesome icon -->
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="./css/index.css" rel="stylesheet" type="text/css" />
+<link href="./css/index.css?ver=1" rel="stylesheet" type="text/css" />
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script src="http://malsup.github.com/jquery.cycle2.js"></script>
 </head>
 <body>
-<% MemberDTO dto = (MemberDTO)session.getAttribute("login"); %>
+<%MemberDTO dto = (MemberDTO)session.getAttribute("login");%>
 
 <div class="header">
 <%
@@ -69,8 +69,7 @@ if(dto == null){
 %>
 <a href="./noticebbs/noticeBbsController.jsp?command=list">공지사항</a>
 <a href="./reviewbbs/reviewBbsController.jsp?command=list">리뷰게시판</a>
-<a href="./admin/AdminController.jsp?command=enterregi">가맹점등록</a>
-<a href="./admin/AdminController.jsp?command=admin">가맹점요청목록</a>
+<a href="./member/memberController.jsp?command=enterregi">가맹점등록</a>
 <% 
 if(dto == null){
 	%>

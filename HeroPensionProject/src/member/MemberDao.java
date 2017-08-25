@@ -320,7 +320,7 @@ public class MemberDao implements IMemberDao {
 			System.out.println("2/6 S req_answer");
 			
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, auth);
+			psmt.setInt(1, auth); 
 			psmt.setString(2, id);
 			System.out.println("3/6 S req_answer");
 			

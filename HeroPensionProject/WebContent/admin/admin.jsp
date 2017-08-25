@@ -24,6 +24,10 @@
 	<%-- <jsp:include page="noticebbs.jsp"></jsp:include> --%>
 </div>
 
+
+<p>토탈 방문자 수 : </p>
+<p>일일 방문자 수 : </p>
+
 <div id="piechart"></div>
 
 <script type="text/javascript">

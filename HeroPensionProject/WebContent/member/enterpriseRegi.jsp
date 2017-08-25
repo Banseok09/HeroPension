@@ -9,7 +9,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="../css/regi.css" rel="stylesheet" type="text/css" />
+<link href="../css/ent_regi.css?ver=3" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
@@ -51,7 +51,7 @@
 	<input type="button" id="_btnEnterprise" value="가맹점등록" class="btn btn-primary btn-lg btn-block">
 </div>
 </form>
-<a href="./AdminController.jsp?command=enterlogin" >업체 로그인</a>
+<a href="./memberController.jsp?command=login" >로그인</a>
 </div>
 
 
@@ -77,7 +77,7 @@ $(document).ready(function(){
 		var regExp = /^[a-zA-Z][\w-]{6,14}$/;	
 		$.ajax({
 			type:"post",
-			url:"./entCheck.jsp?command=idCheck",
+			url:"./check.jsp?command=idCheck",
 			data:{"_userid":idText}
 		}).done(function(data){		
 			if($.trim(data) == 'YES'){	// 사용 가능 할때				
@@ -191,7 +191,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:"post",
-			url:"./entCheck.jsp?command=emailCheck",
+			url:"./check.jsp?command=emailCheck",
 			data:{"_email":emailText}
 		}).done(function(data){								
 			if($.trim(data) == 'YES'){		// 사용 가능할때
@@ -231,7 +231,7 @@ $(document).ready(function(){
 		
 		$.ajax({
 			type:"post",
-			url:"./entCheck.jsp?command=phoneCheck",
+			url:"./check.jsp?command=phoneCheck",
 			data:{"_phone":phoneText}
 		}).done(function(data){				
 			if($.trim(data) == 'YES'){
