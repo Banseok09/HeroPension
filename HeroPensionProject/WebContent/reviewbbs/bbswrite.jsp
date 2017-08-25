@@ -37,12 +37,19 @@ mem = (MemberDTO)ologin;
 %>
 <h1>리뷰 작성</h1>
 <%
-int seq_pen = Integer.parseInt(request.getParameter("seq_pen"));
-String pension_name = request.getParameter("pension_name");
+/* int seq_pen = Integer.parseInt(request.getParameter("seq_pen"));
+String pension_name = request.getParameter("pension_name"); */
+
+// test용 코드
+int seq_pen = 4;
+String pension_name = "가평 첫눈애 펜션";
+
 
 %>
 <div class="center">
-<form action="reviewBbsController.jsp?command=writeAf" method="POST" enctype="multipart/form-data">
+<form action="reviewBbsController.jsp?command=writeAf" method="POST">
+<input type="hidden" name="seq_pen" value="<%=seq_pen %>">
+<input type="hidden" name="id" value="<%=mem.getId() %>">
 	<table class="table table-bordered">
 	<col width="200"><col width="500">
 	<tr>
@@ -50,15 +57,26 @@ String pension_name = request.getParameter("pension_name");
 		<td><%=pension_name %></td>
 	</tr>
 	<tr>
-		<td><label for="id">아이디</label></td>
-		<td><input type="text" id="id" name="id" readonly="readonly"
-			 class="form-control" style="background-color: white"
-			 size="50" value="<%=mem.getId() %>" ></td>
+		<td>아이디</td>
+		<td><%=mem.getId() %></td>
 	</tr>
 	
 	<tr>
 		<td><label for="title">제목</label></td>
 		<td><input type="text" id="title" name="title" size="50" class="form-control"></td>
+	</tr>
+	<tr>
+		<td><label for="title">평점</label></td>
+		<td>
+			<select name="rate" class="form-control" style="font-family: FontAwesome; width:200px">
+				<!-- &#xf005; : 채워진 별   &#xf006; : 테두리만 있는 별-->
+				<option value="1">&#xf005;&#xf006;&#xf006;&#xf006;&#xf006;</option>
+				<option value="2">&#xf005;&#xf005;&#xf006;&#xf006;&#xf006;</option>
+				<option value="3">&#xf005;&#xf005;&#xf005;&#xf006;&#xf006;</option>
+				<option value="4">&#xf005;&#xf005;&#xf005;&#xf005;&#xf006;</option>
+				<option value="5">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
+			</select>
+		</td>
 	</tr>
 	<tr>
 		<td><label for="content">내용</label></td>
@@ -77,12 +95,12 @@ String pension_name = request.getParameter("pension_name");
 <a href="bbslist.jsp">글목록</a><br>
 
 <script>
-/* $(document).ready(function(){
+$(document).ready(function(){
 	$("#writeBtn").click(function(){
 		alert("hello");
 		return;
 	});
-}); */
+});
 </script>
 
 

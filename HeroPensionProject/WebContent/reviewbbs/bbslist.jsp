@@ -44,9 +44,7 @@ public String arrow(int depth){
 }
 %>
 
-<a href="memberController.jsp?command=logout">로그아웃</a>
-<a href="memberController.jsp?command=signout" id="signout">회원탈퇴</a>
-<hr>
+
 <%
 
 PagingBean paging = new PagingBean();
@@ -62,9 +60,10 @@ if(search_key==null) search_key="";
 
 IReviewBbsDao dao = ReviewBbsDao.getInstance();
 List<ReviewBbsDto> bbslist = dao.getBbsList(paging, search_type, search_key);
-System.out.println("bbslist" + bbslist.toString());
 
 %>
+<a href="../index.jsp">Home</a>
+<hr>
 <div class="center">
 <h1>리뷰 게시판</h1>
 <a href="bbswrite.jsp">글쓰기</a>

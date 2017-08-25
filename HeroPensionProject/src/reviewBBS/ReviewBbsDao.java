@@ -94,10 +94,10 @@ public class ReviewBbsDao implements IReviewBbsDao{
 	@Override public boolean writeBbs(ReviewBbsDto bbs) {
 		String sql = " INSERT INTO REVIEWBBS "
 				+ " (SEQ_REVIEW, ID, TITLE, CONTENT, RATE, "
-				+ " REF, STEP, DEPTH, SEQ_PEN, WDATE)"
-				+ " VALUES(REVIEWBBS_SEQ.NEXTVAL, ?, ?, ?, ? "	   // SEQ, ID, TITLE, CONTENT, RATE
-				+ " (SELECT NVL(MAX(REF), 0)+1 FROM BBS), 0, 0, "  // REF, STEP, DEPTH,
-				+ " ?, SYSDATE) ";	//  ROOM_SEQ, WDATE
+				+ " REF, STEP, DEPTH, SEQ_PEN, WDATE, DEL, READCOUNT)"
+				+ " VALUES(SEQ_REVIEW.NEXTVAL, ?, ?, ?, ?, "	   // SEQ, ID, TITLE, CONTENT, RATE
+				+ " (SELECT NVL(MAX(REF), 0)+1 FROM REVIEWBBS), 0, 0, "  // REF, STEP, DEPTH,
+				+ " ?, SYSDATE, 0, 0) ";	//  SEQ_PEN, WDATE, DEL, READCOUNT
 
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -106,24 +106,24 @@ public class ReviewBbsDao implements IReviewBbsDao{
 
 		try {
 			conn = DBConn.getConnection();
-			log("1/5 S DBConn writeBbs");
+			log("1/4 S DBConn writeBbs");
 
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, bbs.getId());
 			psmt.setString(2, bbs.getTitle());
 			psmt.setString(3, bbs.getContent());
 			psmt.setInt(4, bbs.getRate());
-			psmt.setInt(5, bbs.getSeq_pen());
-			log("2/5 S psmt set writeBbs");
+			psmt.setInt(5, bbs.getSeq_pen());  
+			log("2/4 S psmt set writeBbs");
 
 			count = psmt.executeUpdate();
-			log("3/5 S executeUpdate writeBbs");
+			log("3/4 S executeUpdate writeBbs");
 
 		}catch (SQLException e) {
 			log("SQL F writeBbs", e);
 		}finally {
 			DBConn.close(psmt, conn);
-			log("5/5 S writeBbs");
+			log("4/4 S writeBbs");
 		}
 		return count>0?true:false;
 	}
@@ -329,7 +329,7 @@ public class ReviewBbsDao implements IReviewBbsDao{
 						rs.getInt("REF"),
 						rs.getInt("STEP"),
 						rs.getInt("DEPTH"),
-						rs.getInt("ROOM_SEQ"),  
+						rs.getInt("SEQ_PEN"),  
 						rs.getString("WDATE"),
 						rs.getInt("DEL"),
 						rs.getInt("READCOUNT")
@@ -344,5 +344,39 @@ public class ReviewBbsDao implements IReviewBbsDao{
 			log("5/6 S getReviewBbsList");
 		}
 		return list;
+	}
+	
+	@Override public String getPensionName(int seq_pen){
+		Connection conn = null;
+		PreparedStatement psmt = null;
+		ResultSet rs = null;
+
+		String pension_name = null;
+
+		try {
+			conn = DBConn.getConnection();
+			log("1/5 S getPensionName");
+			
+			String sql = " SELECT NAME_PEN FROM PENSION "
+					   + " WHERE SEQ_PEN=? ";
+			
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, seq_pen);
+			log("2/5 S getPensionName");
+			
+			rs = psmt.executeQuery();
+			log("3/5 S getPensionName");
+
+			if(rs.next()) {
+				pension_name = rs.getString("NAME_PEN");
+			}
+			log("4/5 S getPensionName");
+		}catch (SQLException e) {
+			log("SQL F getBbs", e);
+		}finally {
+			DBConn.close(rs, psmt, conn);
+			log("5/5 S getPensionName");
+		}
+		return pension_name;
 	}
 }

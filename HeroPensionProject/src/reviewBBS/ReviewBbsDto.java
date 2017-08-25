@@ -36,6 +36,14 @@ public class ReviewBbsDto implements Serializable{
 		this.title = title;
 		this.content = content;
 	}
+	
+	public ReviewBbsDto(int seq_pen, String id, String title, String content, int rate) {
+		this.seq_pen = seq_pen;
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.rate = rate;
+	}
 	public int getSeq_review() {  return seq_review; }
 	public String getId() {  return id;  }
 	public String getTitle() { return title; }

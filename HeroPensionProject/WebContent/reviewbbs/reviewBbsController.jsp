@@ -10,6 +10,7 @@
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,29 +18,10 @@
 <title></title>
 </head>
 <body>
-<%!
-public String processUploadedFile(FileItem fileItem, String dir, JspWriter out) throws IOException{
-	String fileName = fileItem.getName();
-	long sizeInBytes = fileItem.getSize();
-	
-	// 업로드한 파일이 정상일 경우
-	if(sizeInBytes>0){    // c://temp\abc.jpg  c:\\temp/abc.jpg
-		int idx = fileName.lastIndexOf("\\"); // \가 있는 마지막 위치를 찾아옴
-		if(idx==-1){ //못찾았을 경우
-			idx = fileName.lastIndexOf("/");  // /가 있는 마지막 위치를 찾아옴
-		}
-		fileName = fileName.substring(idx+1); // idx값 이후부터 끝까지의 값
-		try{
-		File uploadedFile = new File(dir, fileName);
-		fileItem.write(uploadedFile);
-		}catch(Exception e){}
-	}
-	return fileName;
-}
-
-%>
 
 <%
+IReviewBbsDao reviewDao = ReviewBbsDao.getInstance();
+boolean isS;
 String command = request.getParameter("command");
 switch(command){
 case "list" :
@@ -49,15 +31,34 @@ case "write" :
 	response.sendRedirect("./bbswrite.jsp");
 	break; 
 case "writeAf" :
+	int seq_pen = Integer.parseInt(request.getParameter("seq_pen"));
+	String id = request.getParameter("id");
+	String title = request.getParameter("title");
+	String content = request.getParameter("content");
+	int rate = Integer.parseInt(request.getParameter("rate"));
 	
+	System.out.println("seq_pen::::" + seq_pen);
+	
+	ReviewBbsDto review = new ReviewBbsDto(seq_pen, id, title, content, rate);
+	isS = reviewDao.writeBbs(review);
+	if(isS){
+		response.sendRedirect("./bbslist.jsp");
+	}else{
+		response.sendRedirect("./bbslist.jsp");
+	}
 	break; 
 case "update" :
-	response.sendRedirect("./bbsupdate.jsp");
+	%>
+	<script>
+		alert("Hi");
+	</script>
+	<%
+	int seq = Integer.parseInt(request.getParameter("seq"));
+	response.sendRedirect("./bbsupdate.jsp?seq="+seq);
 	break; 
 case "detail" :
-	int seq = Integer.parseInt(request.getParameter("seq"));
+	seq = Integer.parseInt(request.getParameter("seq"));
 	response.sendRedirect("bbsdetail.jsp?seq="+ seq);
-	//pageContext.forward("bbsdetail.jsp?seq="+ seq);
 	break; 
 }
 %>
