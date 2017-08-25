@@ -8,12 +8,39 @@
 <html>
 <head>
 <link rel="shortcut icon" href="./image/favicon-96x96.png">
-<style>
-.mySlides {display:none;}
-</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>영웅펜션 - 실시간 최저가 예약 사이트</title>
 
+<style type="text/css">
+/* 상단 탐색에 검정색 배경색 추가 */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* 탐색 막대 안의 링크 스타일 지정 */
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* 마우스 오버시 링크 색상 변경 */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* 활성 / 현재 링크에 색상 추가 */
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
 
 <!-- ajax + jQeury -->
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
@@ -92,44 +119,57 @@ HERO Pension
 	</div>
 </div>
 
-<div class="w3-content w3-section" style="max-width:500px">
-  <img class="mySlides" src="image/tahiti01.jpg" style="width:100%">
-  <img class="mySlides" src="image/tahiti02.jpg" style="width:100%">
-  <img class="mySlides" src="image/tahiti03.jpg" style="width:100%">
+<!-- 메인 top header 시작  -->
+
+<div id="hotel" class="tabcontent">
+  <img src="./image/hotel1.jpg" width="1200px" height="300px">
 </div>
 
-<div class="w3-center">
-  <div class="w3-section">
-    <button class="w3-btn" onclick="plusDivs(-1)">❮ Prev</button>
-    <button class="w3-btn" onclick="plusDivs(1)">Next ❯</button>
-  </div>
-  <button class="w3-btn demo" onclick="currentDiv(1)">1</button> 
-  <button class="w3-btn demo" onclick="currentDiv(2)">2</button> 
-  <button class="w3-btn demo" onclick="currentDiv(3)">3</button> 
+<div id="child" class="tabcontent">
+  <img src="./image/child1.jpg" width="1200px" height="300px">
 </div>
 
+<div id="waterPark" class="tabcontent">
+  <img src="./image/waterPark1.jpg" width="1200px" height="300px">
+</div>
+
+<div id="GlamPing" class="tabcontent">
+  <img src="./image/glamping1.jpg" width="1200px" height="300px">
+</div> 
+<div class="tablinkgroup">
+	<button class="tablink" onclick="openCity('hotel', this, 'red')" id="defaultOpen">호텔급 펜션</button>
+	<button class="tablink" onclick="openCity('child', this, 'green')">유아용 수영장</button>
+	<button class="tablink" onclick="openCity('waterPark', this, 'blue')">워터파크</button>
+	<button class="tablink" onclick="openCity('GlamPing', this, 'orange')">글램핑&카라반</button>
+</div>
+<br>
 <script>
-var myIndex = 0;
-carousel();
-
-function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    var dots = document.getElementsByClassName("demo");
-    if (n > x.length) {slideIndex = 1}    
-    if (n < 1) {slideIndex = x.length} ;
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";  
+function openCity(option, elmnt, color) {
+    // 기본적으로 class = "tabcontent"인 모든 요소 숨기기
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
     }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}    
-    x[myIndex-1].style.display = "block";  
-    setTimeout(carousel, 2000); // Change image every 2 seconds
-}
-</script>
+    
+    // 모든 탭 / 단추의 배경색 제거
+    tablinks = document.getElementsByClassName("tablink");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+    }
 
-<div class="pension">
-</div>
+    // 특정 탭 콘텐츠 표시
+    document.getElementById(option).style.display = "block";
+
+    // 탭 내용을 여는 데 사용되는 버튼에 특정 색상 추가
+    elmnt.style.backgroundColor = color; 
+}
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+<!-- 메인 top header 끝  -->
+<br>
+
 
 
 
