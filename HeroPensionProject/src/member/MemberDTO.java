@@ -16,9 +16,10 @@ public class MemberDTO implements Serializable{
 	private String phone;
 	private int auth;
 	private int del;
+	private String regidate;
 	
 	
-	public MemberDTO(String id, String pw, String name, String email, String phone, int auth, int del) {
+	public MemberDTO(String id, String pw, String name, String email, String phone, int auth, int del, String regidate) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
@@ -26,8 +27,8 @@ public class MemberDTO implements Serializable{
 		this.phone = phone;
 		this.auth = auth;
 		this.del = del;
+		this.regidate = regidate;
 	}
-
 
 	public String getId() {	return id;}
 	public String getPw() {	return pw;}
@@ -36,6 +37,7 @@ public class MemberDTO implements Serializable{
 	public String getPhone() {return phone;}
 	public int getAuth() {return auth;}
 	public int getDel() {return del;}
+	public String getRegidate() { return regidate; }
 	
 	public void setId(String id) {this.id = id;}
 	public void setPw(String pw) {this.pw = pw;}
@@ -44,11 +46,12 @@ public class MemberDTO implements Serializable{
 	public void setPhone(String phone) {this.phone = phone;}
 	public void setAuth(int auth) {this.auth = auth;}
 	public void setDel(int del) {this.del = del;}
+	public void setRegidate(String regidate) { this.regidate = regidate; }
 	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", phone=" + phone
 				+ ", auth=" + auth + ", del=" + del + "]";
 	}
-	
+
 }

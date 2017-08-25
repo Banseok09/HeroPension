@@ -101,7 +101,7 @@ System.out.println("bbslist" + bbslist.toString());
 		<td class="title">
 			<%=arrow(bbs.getDepth())%>
 			<% if(bbs.getDel()==0){ %>
-			<a href="AdminController.jsp?command=reviewdetail&seq=<%=bbs.getReview_seq()%>"><%=bbs.getTitle() %> </a>
+			<a href="AdminController.jsp?command=reviewdetail&seq=<%=bbs.getSeq_review()%>"><%=bbs.getTitle() %> </a>
 			<%} else { %>
 				삭제된 글입니다.
 			<%} %>

@@ -34,7 +34,6 @@ th, td{
 
 <%
 Object ologin = session.getAttribute("login");
-System.out.println("class check:" + (ologin instanceof MemberDTO);
 MemberDTO mem = null;
 MemberDao.getInstance();
 if(ologin==null){%>
