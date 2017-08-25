@@ -74,7 +74,7 @@ case "regiAf" :
 	String email = request.getParameter("email");
 	String phone = request.getParameter("phone");
 	
-	MemberDTO mem = new MemberDTO(id, pw, name, email, phone, 3, 0);
+	MemberDTO mem = new MemberDTO(id, pw, name, email, phone, 3, 0, null);
 	
 	boolean isS = dao.addMember(mem);
 	if(isS){

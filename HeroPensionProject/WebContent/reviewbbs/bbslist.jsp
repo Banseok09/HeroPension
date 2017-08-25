@@ -32,18 +32,6 @@ th, td{
 </head>
 <body>
 
-<%
-Object ologin = session.getAttribute("login");
-MemberDTO mem = null;
-MemberDao.getInstance();
-if(ologin==null){%>
-	<script type="text/javascript">
-		alert("로그인 해주십시오");
-		location.href = "index.jsp";
-	</script>
-<%}else{
-	mem = (MemberDTO)ologin;
-} %>
 
 <%!
 public String arrow(int depth){
@@ -55,8 +43,6 @@ public String arrow(int depth){
 	return depth==0?"":ts+rs;
 }
 %>
-
-<h3>환영합니다<%=mem.getId() %>님 반갑습니다.</h3>
 
 <a href="memberController.jsp?command=logout">로그아웃</a>
 <a href="memberController.jsp?command=signout" id="signout">회원탈퇴</a>
@@ -75,7 +61,7 @@ if(search_type==null) search_type="";
 if(search_key==null) search_key=""; 
 
 IReviewBbsDao dao = ReviewBbsDao.getInstance();
-List<ReviewBbsDto> bbslist = dao.getBbsList(paging);
+List<ReviewBbsDto> bbslist = dao.getBbsList(paging, search_type, search_key);
 System.out.println("bbslist" + bbslist.toString());
 
 %>
@@ -100,7 +86,7 @@ System.out.println("bbslist" + bbslist.toString());
 		<td class="title">
 			<%=arrow(bbs.getDepth())%>
 			<% if(bbs.getDel()==0){ %>
-			<a href="reviewBbsController.jsp?command=detail&seq=<%=bbs.getReview_seq()%>"><%=bbs.getTitle() %> </a>
+			<a href="reviewBbsController.jsp?command=detail&seq=<%=bbs.getSeq_review()%>"><%=bbs.getTitle() %> </a>
 			<%} else { %>
 				삭제된 글입니다.
 			<%} %>
@@ -126,7 +112,6 @@ System.out.println("bbslist" + bbslist.toString());
 
 </table>
 
-
 <form action="bbslist.jsp" style="text-align: center" class="form-group">
 		<div class="form-inline">
 		<div class="form-group">
@@ -140,6 +125,7 @@ System.out.println("bbslist" + bbslist.toString());
 		</div>
 		</div>
 </form>
+
 </div>
 
 <script type="text/javascript">
